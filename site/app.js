@@ -120,7 +120,9 @@ function render() {
     return box;
   }));
   replaceTable("daily", chartRows.map(([day, ...values]) => [day, ...values.map(value => number.format(value))]));
-  replaceTable("releases", round.baselineReleases.map(release => [release.release, release.historyThrough, release.mase.toFixed(3)]));
+  replaceTable("releases", round.releases.map(release => [
+    release.release, release.archiveAt, release.historyThrough, release.scores[model].mase.toFixed(3),
+  ]));
   document.querySelectorAll(".round").forEach((button, i) => button.setAttribute("aria-pressed", String(roundIndex === i)));
   drawChart();
 }
@@ -148,7 +150,7 @@ replaceTable("schedule", report.rounds.map(round => [
 ]));
 select("checked").textContent = "最近一次来源检查 " + sourceStatus.checkedAt;
 const live = sourceStatus.passengers;
-select("passenger-status").textContent = "模拟快照覆盖 " + report.source.first_date + " 至 " + report.source.last_date
+select("passenger-status").textContent = "实绩核验数据覆盖 " + report.source.first_date + " 至 " + report.source.last_date
   + "。 " + (live ? "当前公开源可见到 " + live.through + "。" : "本次未取得更新的官方客流。");
 select("template-status").textContent = sourceStatus.organizerError ? "本次未核实发布状态。" :
   (sourceStatus.database ? "训练库已发布" : "训练库待发布") + "，已发布模板 " + templates.size + " / 5 轮。";
