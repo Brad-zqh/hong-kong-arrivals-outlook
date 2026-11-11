@@ -81,9 +81,11 @@ function drawChart() {
   chartRows.forEach((row, i) => ctx.lineTo(x(i), y(row[4])));
   for (let i = chartRows.length - 1; i >= 0; i--) ctx.lineTo(x(i), y(chartRows[i][3]));
   ctx.closePath();
-  ctx.fillStyle = "rgba(12, 156, 134, .20)";
+  const theme = getComputedStyle(canvas);
+  ctx.fillStyle = theme.getPropertyValue("--plot-band").trim();
   ctx.fill();
-  for (const [column, color] of [[2, "#007d71"], [1, "#14263a"]]) {
+  for (const [column, color] of [[2, theme.getPropertyValue("--plot-line").trim()],
+                                [1, theme.getPropertyValue("--ink").trim()]]) {
     ctx.strokeStyle = color;
     ctx.lineWidth = 2.2;
     ctx.beginPath();

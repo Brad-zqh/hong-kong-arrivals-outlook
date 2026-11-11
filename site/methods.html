@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IKUN 香港入境预测的变量定义、模型、历史归档和五轮评分方法。">
+  <title>预测原理与变量 · IKUN 香港入境预测</title>
+  <link rel="icon" href="assets/ikun-avatar.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap nav">
+      <a class="brand" href="./"><img class="team-avatar" src="assets/ikun-avatar.png" alt="" width="36" height="36"> IKUN</a>
+      <nav aria-label="主要导航">
+        <a href="./#forecast">历史模拟</a>
+        <a href="methods.html" aria-current="page">预测原理</a>
+        <a href="./#calendar">正式赛程</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-content">
+        <div>
+          <p class="eyebrow">IKUN · 五轮历史模拟</p>
+          <h1>预测原理与变量</h1>
+          <p class="intro">从历史客流和已公布日历，预测每个口岸未来 15 天的入境人次。</p>
+        </div>
+        <a class="button hero-button" href="./#forecast">查看预测图表 <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <div class="wrap content method-content">
+      <section aria-labelledby="target-title">
+        <div class="section-heading">
+          <div><h2 id="target-title">预测对象</h2><p>每条序列对应一个口岸和一种访客类别。</p></div>
+        </div>
+        <div class="card method-card">
+          <p><strong>因变量</strong>是口岸 <var>p</var>、客群 <var>g</var>、香港日历日 <var>d</var> 的入境访客人次。公开原始数据取入境记录中的内地访客和其他访客两列。赛前模拟用 2025-11-30 归档选定 10 个历史完整的代理口岸。正式口岸以组委会数据为准。</p>
+          <dl class="method-stats">
+            <div><dt>口岸 × 客群</dt><dd>10 × 2</dd></div>
+            <div><dt>每轮目标日期</dt><dd>15 天</dd></div>
+            <div><dt>每轮预测值</dt><dd>300 个</dd></div>
+          </dl>
+          <p class="method-links"><a href="https://data.gov.hk/en-data/dataset/hk-immd-set5-statistics-daily-passenger-traffic/resource/e06a2a45-fe05-4eb4-9302-237d74343d52">入境处数据与归档 ↗</a> <a href="https://tourismforecasting.net/tfc/rules.html">比赛规则 ↗</a></p>
+        </div>
+      </section>
+      <section aria-labelledby="input-title">
+        <div class="section-heading"><div><h2 id="input-title">自变量与历史输入</h2><p>每一版预测以当时已取得的客流归档和已公布日历为输入。</p></div></div>
+        <div class="card table-scroll">
+          <table class="method-table">
+            <thead><tr><th scope="col">变量</th><th scope="col">如何构造</th><th scope="col">用在哪里</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">历史入境客流</th><td>按口岸、客群和日期整理当轮截止日前的日入境人次。</td><td>基线取最近四个同星期日。Chronos-2 同时读取 20 条序列，历史长度最多 512 天。</td></tr>
+              <tr><th scope="row">星期</th><td>把星期用七日周期表示，保留星期日与星期一相邻的关系。</td><td>基线按星期匹配。Chronos-2 读取周期特征。</td></tr>
+              <tr><th scope="row">香港与内地假期</th><td>分别用 0 或 1 标识该日是否落在已公布的香港假日或内地放假期。</td><td>Chronos-2 同时看到历史日历和预测日历，识别相近的节庆模式。</td></tr>
+              <tr><th scope="row">内地调休补班</th><td>用 0 或 1 标记政府公告的补班日。</td><td>帮助 Chronos-2 区分普通周末与调休工作日。</td></tr>
+              <tr><th scope="row">节庆窗口</th><td>按节庆类别标记节庆时段及其前后两天，包括春节、国庆、复活节和圣诞节等。</td><td>为 Chronos-2 提供节庆类别和窗口信息，假日另有独立标记。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="method-links"><a href="https://www.gov.hk/en/about/abouthk/holiday/index.htm">香港公众假期 ↗</a> <a href="https://www.beijing.gov.cn/zhengce/zhengcefagui/202511/t20251104_4258873.html">内地假期与调休公告 ↗</a></p>
+      </section>
+      <section aria-labelledby="model-title">
+        <div class="section-heading"><div><h2 id="model-title">两种预测算法</h2><p>两种模型都输出逐口岸、逐客群、逐日的点预测及 70% 区间。</p></div></div>
+        <div class="method-models">
+          <article class="card method-card">
+            <h3>四周同星期均值</h3>
+            <p>预测下周六时，取数据截止前最近四个星期六的同口岸、同客群实绩求均值。</p>
+            <p class="formula"><strong>点预测</strong> = 最近四个同一星期几的平均人次</p>
+            <p>在截止前约半年内，每隔七天重做一组历史预测，以实绩减预测得到误差。将误差的第 15 和第 85 百分位数分别加到点预测上，得到区间上下限。低于零的下限设为零。</p>
+          </article>
+          <article class="card method-card">
+            <h3>Chronos-2 加日历</h3>
+            <p>用预训练时间序列 Transformer 同时读取 20 条客流序列及日历，直接生成每条序列未来各日的分位数预测。模型可以利用同一口岸和不同口岸之间的历史共变。</p>
+            <p class="formula"><strong>点预测</strong> = 第 50 百分位数<br><strong>70% 区间</strong> = 第 15 至第 85 百分位数</p>
+            <p>历史模拟使用当时已公开的模型权重做推理。输出人数取非负值。</p>
+            <p class="method-links"><a href="https://www.amazon.science/blog/introducing-chronos-2-from-univariate-to-universal-forecasting">模型原理 ↗</a> <a href="https://huggingface.co/amazon/chronos-2/tree/e19c427c73837c00b5e932da5fbfede2929677ce">使用的模型版本 ↗</a></p>
+          </article>
+        </div>
+      </section>
+      <section aria-labelledby="evaluation-title">
+        <div class="section-heading"><div><h2 id="evaluation-title">怎么验证预测</h2><p>正式赛程向前平移一年。五轮各有三份当日归档和同一个 15 天预测窗口。</p></div></div>
+        <ol class="method-flow">
+          <li><strong>取得归档</strong><span>按模拟日 12:00 前可见的数据取客流，历史止于前一日。</span></li>
+          <li><strong>生成预测</strong><span>根据每次发布更新。早期两版各多预测 2 天和 1 天，再对齐同一提交窗口。</span></li>
+          <li><strong>锁定第三版</strong><span>每轮用第三版模拟提交。冻结全部预测后，再读取实绩。</span></li>
+          <li><strong>独立评分</strong><span>第 2–15 天共 280 个目标。点和区间分别选各自得分最好的四轮。</span></li>
+        </ol>
+        <div class="card method-card">
+          <dl class="metric-list">
+            <div><dt>点预测 · MASE</dt><dd>将每个绝对预测误差除以对应序列的历史七日差分绝对值均值，再取平均。数值越低越好。</dd></div>
+            <div><dt>区间预测 · 平均缩放 Winkler</dt><dd>同时衡量区间宽度和实际值落在区间外时的罚分，再用同一尺度缩放。数值越低越好。</dd></div>
+            <div><dt>区间覆盖率</dt><dd>实绩落在 70% 预测区间内的比例，用来检查区间是否合适。Chronos-2 加日历本次五轮覆盖率为 66.4%。</dd></div>
+          </dl>
+          <p class="caption">网页展示的是历史模拟。组委会发布正式口岸、模板及最终评分指南后，正式预测按该口径执行。</p>
+        </div>
+      </section>
+      <section aria-labelledby="code-title">
+        <div class="section-heading"><div><h2 id="code-title">复现代码</h2><p>归档下载、两种预测算法、逐轮计分和练习表导出。</p></div></div>
+        <a class="button" href="https://github.com/Brad-zqh/hong-kong-arrivals-outlook/tree/main/reproduction">查看 GitHub 代码 <span aria-hidden="true">↗</span></a>
+      </section>
+      <details id="team-photo" class="card method-card team-photo">
+        <summary>蔡徐坤高清肖像</summary>
+        <figure>
+          <img src="assets/cai-xukun-2018.jpg" width="1152" height="1728" loading="lazy" decoding="async" alt="蔡徐坤身着灰色条纹西装出席 2018 时尚活动">
+          <figcaption class="caption">拍摄者 Rosethron丨蔡徐坤，裁切版本由 Masdggg 制作。 <a href="https://commons.wikimedia.org/wiki/File:Cai_Xukun_in_2018.jpg">原始文件</a> · <a href="https://creativecommons.org/licenses/by/2.5/">CC BY 2.5</a></figcaption>
+        </figure>
+      </details>
+    </div>
+  </main>
+  <footer><div class="wrap footer"><span>IKUN 参赛队</span><a href="./#forecast">返回预测结果 ↗</a></div></footer>
+</body>
+</html>
