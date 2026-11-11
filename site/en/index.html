@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IKUN forecasts Hong Kong visitor arrivals by checkpoint, with five archived rehearsals and an experiment using text, images and video.">
+  <title>IKUN · Hong Kong arrivals outlook</title>
+  <link rel="icon" href="../assets/ikun-avatar.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" hreflang="zh-Hans" href="../index.html">
+  <script defer src="../rehearsal.js"></script>
+  <script defer src="../multimodal.js"></script>
+  <script defer src="../sources.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap nav">
+      <a class="brand" href="#top"><img class="team-avatar" src="../assets/ikun-avatar.png" alt="" width="36" height="36"> IKUN</a>
+      <nav aria-label="Main navigation">
+        <a href="#forecast">Rehearsals</a>
+        <a href="#multimodal">Multimodal</a>
+        <a href="methods.html">Methods</a>
+        <a href="#calendar">Schedule</a>
+        <a class="language" href="../index.html" hreflang="zh-Hans" lang="zh-Hans">中文</a>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-content hero-dashboard">
+        <div class="hero-copy">
+          <p class="eyebrow">IKUN · TOURISM FORECASTING</p>
+          <h1>Hong Kong arrivals outlook</h1>
+          <p class="intro">Explore 15-day forecasts by checkpoint and visitor group. The five rehearsals use archived releases. A separate experiment measures what text, images and video add.</p>
+          <div class="hero-actions">
+            <a class="button hero-button" href="#forecast">Explore the rehearsals <span aria-hidden="true">↓</span></a>
+            <a class="button hero-outline" href="#multimodal">See the multimodal trial <span aria-hidden="true">↗</span></a>
+          </div>
+          <dl class="hero-stats">
+            <div><dt>Rehearsals</dt><dd>5<span> rounds</span></dd></div>
+            <div><dt>Proxy series</dt><dd>20</dd></div>
+            <div><dt>Horizon</dt><dd>15<span> days</span></dd></div>
+          </dl>
+        </div>
+        <div class="hero-result">
+          <p class="eyebrow">FIVE ARCHIVED REHEARSALS</p>
+          <h2>Chronos-2 + calendar</h2>
+          <dl class="hero-result-stats">
+            <div><dt>Best four · MASE</dt><dd id="hero-mase">—</dd></div>
+            <div><dt>Best four · Winkler</dt><dd id="hero-winkler">—</dd></div>
+          </dl>
+          <p>Point and interval forecasts are scored separately. <a href="methods.html#evaluation-title">Scoring ↗</a></p>
+        </div>
+      </div>
+    </section>
+    <div class="wrap content">
+      <section id="forecast" aria-labelledby="forecast-title">
+        <div class="section-heading">
+          <div><h2 id="forecast-title">Five archived rehearsals</h2><p>Replayed on corresponding dates in 2025–2026 using 15 same-day archives.</p></div>
+          <a id="workbook" class="button" download>Download round workbook <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="rounds" id="rounds" aria-label="Rehearsal rounds"></div>
+        <div class="card forecast">
+          <div class="filters">
+            <label>Checkpoint<select id="port"></select></label>
+            <label>Visitor group<select id="group"></select></label>
+            <label>Model<select id="model"></select></label>
+          </div>
+          <div class="chart-header">
+            <div><h3 id="chart-title"></h3><p id="chart-subtitle" aria-live="polite"></p></div>
+            <ul class="legend" aria-label="Chart legend">
+              <li><i class="forecast-key"></i>Forecast</li>
+              <li><i class="actual-key"></i>Observed</li>
+              <li><i class="interval-key"></i>70% interval</li>
+            </ul>
+          </div>
+          <div class="chart-surface">
+            <output class="chart-readout" id="chart-readout"></output>
+            <canvas id="chart" tabindex="0" role="img" aria-label="Daily arrivals and forecasts. Use the left and right arrow keys to change dates. Values are listed in the table below."></canvas>
+          </div>
+          <p class="caption">The pale vertical band marks day 1. Scoring uses days 2–15.</p>
+          <dl class="scores" id="scores" aria-live="polite"></dl>
+          <details>
+            <summary>Daily values for the selected series</summary>
+            <div class="table-scroll">
+              <table><thead><tr><th>Date</th><th>Observed</th><th>Point forecast</th><th>Lower</th><th>Upper</th></tr></thead><tbody id="daily"></tbody></table>
+            </div>
+          </details>
+          <details>
+            <summary>Three simulated data releases for this round</summary>
+            <p class="caption">Each archive is selected at the noon Beijing time cutoff. All three forecasts cover the same target dates. The third serves as the rehearsal submission.</p>
+            <div class="table-scroll">
+              <table><thead><tr><th>Release date</th><th>Archive timestamp</th><th>History through</th><th>MASE</th></tr></thead><tbody id="releases"></tbody></table>
+            </div>
+          </details>
+        </div>
+      </section>
+      <section id="multimodal" aria-labelledby="multimodal-title">
+        <div class="section-heading">
+          <div><h2 id="multimodal-title">Multimodal forecasting experiment</h2><p>The same checkpoint graph takes arrivals and calendar features, then adds text, then images and video.</p></div>
+          <a class="text-link" href="methods.html#multimodal-method">Model and evaluation ↗</a>
+        </div>
+        <div class="experiment-grid">
+          <article class="card forecast">
+            <div class="experiment-heading">
+              <div><p class="section-kicker">CONTENT AVAILABLE AT THE CUTOFF</p><h3>15-day trial forecast</h3></div>
+              <a class="text-link" id="media-export" href="../exports/multimodal-trial.csv" download>Download CSV ↓</a>
+            </div>
+            <div class="filters media-filters">
+              <label>Checkpoint<select id="media-port"></select></label>
+              <label>Visitor group<select id="media-group"></select></label>
+              <label>Inputs<select id="media-model"></select></label>
+            </div>
+            <div class="chart-header">
+              <div><h3 id="media-chart-title"></h3><p id="media-chart-subtitle"></p></div>
+              <ul class="legend" aria-label="Chart legend">
+                <li><i class="forecast-key"></i>Forecast</li><li><i class="interval-key"></i>70% interval</li>
+              </ul>
+            </div>
+            <div class="chart-surface">
+              <output class="chart-readout" id="media-readout"></output>
+              <canvas id="media-chart" tabindex="0" role="img" aria-label="Trial forecasts and intervals. Use the left and right arrow keys to change dates."></canvas>
+            </div>
+            <details>
+              <summary>Daily values for the selected series</summary>
+              <div class="table-scroll"><table><thead><tr><th>Date</th><th>Point forecast</th><th>Lower</th><th>Upper</th></tr></thead><tbody id="media-daily"></tbody></table></div>
+            </details>
+          </article>
+          <aside class="experiment-side">
+            <article class="card experiment-card">
+              <p class="section-kicker">FIVE HISTORICAL ROUNDS</p>
+              <h3>Retrospective comparison</h3>
+              <p id="media-score-note" class="caption"></p>
+              <div class="table-scroll">
+                <table class="experiment-scores"><thead><tr><th>Inputs</th><th>MASE ↓</th><th>Winkler ↓</th></tr></thead><tbody id="media-scores"></tbody></table>
+              </div>
+              <p class="caption">These exploratory scores use post dates to align content retrieved later. Historical versions of the text and media have yet to be verified.</p>
+            </article>
+            <article class="card experiment-card">
+              <p class="section-kicker">MEDIA INPUTS</p><h3 id="media-posts"></h3>
+              <dl class="media-counts" id="media-counts"></dl>
+              <p id="media-cutoff" class="caption"></p>
+            </article>
+          </aside>
+        </div>
+      </section>
+      <section id="calendar" aria-labelledby="calendar-title">
+        <div class="section-heading">
+          <div><h2 id="calendar-title">Competition schedule</h2><p>Beijing time. The final release each round is at 12:00 on submission day. The deadline is 23:59.</p></div>
+          <a class="text-link" href="https://tourismforecasting.net/tfc/rules.html">Competition rules ↗</a>
+        </div>
+        <div class="card table-scroll">
+          <table class="calendar"><thead><tr><th>Round</th><th>Three data releases</th><th>Deadline</th><th>Forecast dates</th><th>Template</th></tr></thead><tbody id="schedule"></tbody></table>
+        </div>
+        <p class="caption">The initial training data are scheduled for release on 30 November 2026 at 12:00. Official entries go to the organizers by email.</p>
+      </section>
+      <section id="sources" aria-labelledby="sources-title">
+        <div class="section-heading"><div><h2 id="sources-title">Data and methods</h2><p id="checked">Loading source status…</p></div></div>
+        <div class="sources">
+          <article class="card source-card"><h3>Public passenger counts</h3><p id="passenger-status"></p><a class="text-link" href="https://data.gov.hk/en-data/dataset/hk-immd-set5-statistics-daily-passenger-traffic">Hong Kong Immigration Department ↗</a></article>
+          <article class="card source-card"><h3>Training data and templates</h3><p id="template-status"></p><a class="text-link" href="https://tourismforecasting.net/tfc/data_release.html#submission-templates">Competition releases ↗</a></article>
+          <article class="card source-card"><h3>Forecasting methods</h3><p>Targets, predictors, model architecture and scoring across the five rounds.</p><a class="text-link" href="methods.html">Read the methods ↗</a></article>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer><div class="wrap footer"><span>Team IKUN</span><a href="methods.html#team-photo">Team portrait reference ↗</a></div></footer>
+</body>
+</html>
