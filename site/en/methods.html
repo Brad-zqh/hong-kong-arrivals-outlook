@@ -107,7 +107,7 @@
         <div class="method-models">
           <article class="card method-card">
             <h3>How posts enter the model</h3>
-            <p>We sampled 6,000 posts from X, Weibo, Instagram, Douyin and TikTok. Qwen3-Embedding-0.6B encodes post text. CLIP ViT-B/32 encodes attached photos, thumbnails and sampled frames from original videos. We average frame embeddings within each video.</p>
+            <p>The corpus comes from X, Weibo, Instagram, Douyin and TikTok. Qwen3-Embedding-0.6B encodes post text. We select one downloaded attachment per visual type per post. CLIP ViT-B/32 encodes photos, thumbnails and sampled frames from original videos. We average frame embeddings within each video. Counts are available on the experiment page.</p>
             <p>We pool posts in four seven-day windows before each cutoff. Posts that match a single checkpoint provide local inputs. The remaining posts provide a citywide signal. Cross-attention lets the arrivals and calendar features select information across modalities and windows.</p>
           </article>
           <article class="card method-card">

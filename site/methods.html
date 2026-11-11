@@ -107,7 +107,7 @@
         <div class="method-models">
           <article class="card method-card">
             <h3>帖子内容怎样进入模型</h3>
-            <p>从 X、微博、Instagram、抖音和 TikTok 抽取 6,000 条帖子。正文用 Qwen3-Embedding-0.6B 编码。配图、封面和原视频抽帧用 CLIP ViT-B/32 分别编码，每段视频取帧向量均值。</p>
+            <p>语料来自 X、微博、Instagram、抖音和 TikTok。正文用 Qwen3-Embedding-0.6B 编码。每帖每种视觉类型取一个已下载附件，配图、封面和原视频抽帧用 CLIP ViT-B/32 分别编码，每段视频取帧向量均值。编码数量见实验页。</p>
             <p>以预测发起时刻为截点，将此前 28 天的帖子按四个七天窗口聚合。能唯一匹配口岸的内容进入相应口岸，其余内容提供全市信号。客流和日历特征通过交叉注意力融合不同模态和发布时间窗口的信息。</p>
           </article>
           <article class="card method-card">

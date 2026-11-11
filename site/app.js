@@ -275,7 +275,25 @@ if (experiment) {
   select("media-score-note").textContent = t("每个模型按第 2–15 天评分，共 1,400 个目标。",
     "Days 2–15 were scored for 1,400 targets per model.");
   const postCount = number.format(experiment.posts);
-  select("media-posts").textContent = t(`${postCount} 条帖子已编码`, `${postCount} posts encoded`);
+  select("media-posts").textContent = t(`已处理 ${postCount} 条有日期的帖子`, `${postCount} dated posts processed`);
+  if (experiment.inventory) {
+    const { posts, photo, thumbnail, video } = Object.fromEntries(
+      Object.entries(experiment.inventory).map(([key, count]) => [key, number.format(count)]),
+    );
+    select("media-inventory").textContent = t(
+      `本地语料有 ${posts} 条去重帖子，按文件内容去重后有 ${photo} 张配图、${thumbnail} 张封面和 ${video} 段原视频。`,
+      `The local corpus holds ${posts} unique posts. Deduplication by file content yields ${photo} photos, ${thumbnail} thumbnails and ${video} original videos.`,
+    );
+  }
+  if (experiment.encoded) {
+    const { text, photo, thumbnail, video } = Object.fromEntries(
+      Object.entries(experiment.encoded).map(([key, count]) => [key, number.format(count)]),
+    );
+    select("media-encoded").textContent = t(
+      `按帖子计，成功生成 ${text} 条正文、${photo} 条配图、${thumbnail} 条封面和 ${video} 条原视频向量。`,
+      `Post-level embeddings cover ${text} texts, ${photo} photos, ${thumbnail} thumbnails and ${video} original videos.`,
+    );
+  }
   select("media-counts").replaceChildren(...[
     [t("正文", "Post text"), experiment.counts.text], [t("配图", "Photos"), experiment.counts.photo],
     [t("封面", "Thumbnails"), experiment.counts.thumbnail], [t("原视频", "Original videos"), experiment.counts.video],
