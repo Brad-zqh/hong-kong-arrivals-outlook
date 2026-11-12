@@ -1,158 +1,511 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
-<title id="title">香港入境客流预测 · Hong Kong visitor arrivals forecasting</title>
-<desc id="desc">Historical arrivals, calendar and multimodal content feed temporal representations and three alternative fusion positions. Group totals and checkpoint shares determine 15-day forecasts with 70 percent intervals.</desc>
-<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0l9 4.5L0 9z" fill="#355675"/></marker>
-<marker id="arrow-light" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0l8 4L0 8z" fill="#31719a"/></marker></defs>
-<style>text{font-family:Inter,"Microsoft YaHei","PingFang SC",Arial,sans-serif} .en{fill:#405a71} .sub{fill:#405a71} .line{stroke:#355675;stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round} .route{stroke:#31719a;stroke-width:1.8;fill:none;marker-end:url(#arrow-light)}</style>
-<rect x="0" y="0" width="1600" height="850" rx="0" fill="#fff" stroke="none"/>
-<text x="28" y="54" font-size="31" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">香港入境客流预测</text>
-<text x="28" y="75" font-size="20" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Hong Kong visitor arrivals forecasting</text>
-<text x="1570" y="60" font-size="19" font-weight="750" fill="#17457a" text-anchor="end">IKUN</text>
-<rect x="28" y="119" width="255" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
-<rect x="28" y="119" width="255" height="68" rx="15" fill="#0b3465" stroke="none"/>
-<rect x="28" y="166" width="255" height="21" rx="0" fill="#0b3465" stroke="none"/>
-<text x="46" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">数据输入</text>
-<text x="46" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Inputs</text>
-<rect x="313" y="119" width="315" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
-<rect x="313" y="119" width="315" height="68" rx="15" fill="#0b3465" stroke="none"/>
-<rect x="313" y="166" width="315" height="21" rx="0" fill="#0b3465" stroke="none"/>
-<text x="331" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">时序与媒体表征</text>
-<text x="331" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Temporal and media representations</text>
-<rect x="659" y="119" width="541" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
-<rect x="659" y="119" width="541" height="68" rx="15" fill="#0b3465" stroke="none"/>
-<rect x="659" y="166" width="541" height="21" rx="0" fill="#0b3465" stroke="none"/>
-<text x="677" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">融合与动态分流</text>
-<text x="677" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Fusion and dynamic routing</text>
-<rect x="1230" y="119" width="342" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
-<rect x="1230" y="119" width="342" height="68" rx="15" fill="#0b3465" stroke="none"/>
-<rect x="1230" y="166" width="342" height="21" rx="0" fill="#0b3465" stroke="none"/>
-<text x="1248" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">预测输出</text>
-<text x="1248" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Forecasts</text>
-<rect x="43" y="209" width="225" height="82" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="56" y="236" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">56 天客流</text>
-<text x="56" y="257" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">56 days of arrivals</text>
-<path class="line" d="M56 283l15-3 13 2 15-4 13 1 12-3 16 2 13-5 16 1 13-4 16 3 14-3 15 2 20-5" style="stroke:#4a83ad;stroke-width:1.8"/>
-<rect x="43" y="301" width="225" height="67" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="56" y="328" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">已公布日历</text>
-<text x="56" y="349" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Published calendar</text>
-<rect x="43" y="391" width="225" height="67" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
-<text x="56" y="418" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">社交媒体正文</text>
-<text x="56" y="439" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Social media text</text>
-<rect x="43" y="468" width="225" height="67" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
-<text x="56" y="495" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">配图与封面</text>
-<text x="56" y="516" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Photos and covers</text>
-<rect x="43" y="545" width="225" height="67" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
-<text x="56" y="572" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">视频采样帧</text>
-<text x="56" y="593" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Sampled video frames</text>
-<rect x="43" y="635" width="225" height="74" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="56" y="662" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">口岸间距离</text>
-<text x="56" y="683" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Checkpoint distances</text>
-<text x="45" y="742" font-size="14" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">按预测截点读取</text>
-<text x="45" y="763" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Inputs available at each cutoff</text>
-<rect x="328" y="216" width="285" height="122" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="341" y="243" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">日与周时序编码</text>
-<text x="341" y="264" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Daily and weekly encoding</text>
-<text x="342" y="302" font-size="13" font-weight="500" fill="#405a71" text-anchor="start">Daily Conv1D  ·  Weekly dilation</text>
-<rect x="342" y="311" width="13" height="13" rx="2" fill="#edf5ff" stroke="#7a9cbf"/>
-<rect x="360" y="311" width="13" height="13" rx="2" fill="#dce9f6" stroke="#7a9cbf"/>
-<rect x="378" y="311" width="13" height="13" rx="2" fill="#b9d1e9" stroke="#7a9cbf"/>
-<rect x="396" y="311" width="13" height="13" rx="2" fill="#95bddd" stroke="#7a9cbf"/>
-<rect x="414" y="311" width="13" height="13" rx="2" fill="#73a6d0" stroke="#7a9cbf"/>
-<rect x="432" y="311" width="13" height="13" rx="2" fill="#477fae" stroke="#7a9cbf"/>
-<rect x="328" y="386" width="285" height="112" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
-<text x="341" y="413" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">图文视频向量</text>
-<text x="341" y="434" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Text and visual embeddings</text>
-<text x="342" y="469" font-size="12" font-weight="500" fill="#405a71" text-anchor="start">Qwen3 text · CLIP photos, covers, frames</text>
-<rect x="498" y="474" width="13" height="13" rx="2" fill="#e0f2ed" stroke="#7a9cbf"/>
-<rect x="516" y="474" width="13" height="13" rx="2" fill="#c9e7de" stroke="#7a9cbf"/>
-<rect x="534" y="474" width="13" height="13" rx="2" fill="#abdbcf" stroke="#7a9cbf"/>
-<rect x="552" y="474" width="13" height="13" rx="2" fill="#84c5b9" stroke="#7a9cbf"/>
-<rect x="570" y="474" width="13" height="13" rx="2" fill="#55a49d" stroke="#7a9cbf"/>
-<rect x="588" y="474" width="13" height="13" rx="2" fill="#317b7c" stroke="#7a9cbf"/>
-<rect x="328" y="519" width="285" height="170" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
-<text x="341" y="546" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">旅游线索对齐</text>
-<text x="341" y="567" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Aligned travel cues</text>
-<text x="342" y="587" font-size="14" font-weight="650" fill="#102c49" text-anchor="start">预订、活动、路线与服务变化</text>
-<text x="342" y="607" font-size="12" font-weight="500" fill="#405a71" text-anchor="start">Bookings, events, routes and service changes</text>
-<rect x="341" y="628" width="258" height="42" rx="6" fill="#fff" stroke="#b7d5ce"/>
-<text x="352" y="645" font-size="14" font-weight="700" fill="#102c49" text-anchor="start">日期 × 客群 × 口岸</text>
-<text x="352" y="661" font-size="11" font-weight="500" fill="#405a71" text-anchor="start">Date × visitor group × checkpoint</text>
-<text x="328" y="734" font-size="14" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">保留各模态的首次取得时间</text>
-<text x="328" y="755" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">First retrieval tracked by modality</text>
-<path class="line" d="M268 245h17v25h42" marker-end="url(#arrow)"/>
-<path class="line" d="M268 331h17v-61"/>
-<path class="line" d="M268 425h23v18h36" marker-end="url(#arrow)"/>
-<path class="line" d="M268 501h23v-58M268 578h23v-77"/>
-<path class="line" d="M291 501v100h36" marker-end="url(#arrow)"/>
-<path class="line" d="M268 670h24v94h385v-93h264" marker-end="url(#arrow)"/>
-<text x="676" y="220" font-size="18" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">比较三个融合位置</text>
-<text x="676" y="241" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Three alternative fusion positions</text>
-<rect x="676" y="262" width="167" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="689" y="289" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">早期融合</text>
-<text x="689" y="310" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Early fusion</text>
-<text x="689" y="338" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">输入投影 → 激活</text>
-<text x="689" y="354" font-size="10" font-weight="500" fill="#405a71" text-anchor="start">Input projection → activation</text>
-<rect x="846" y="262" width="167" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="859" y="289" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">中期融合</text>
-<text x="859" y="310" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Intermediate fusion</text>
-<text x="859" y="338" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">独立编码 → 表示融合</text>
-<text x="859" y="354" font-size="10" font-weight="500" fill="#405a71" text-anchor="start">Encode → merge states</text>
-<rect x="1016" y="262" width="167" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="1029" y="289" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">后期融合</text>
-<text x="1029" y="310" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Late fusion</text>
-<text x="1029" y="338" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">生成预测 → 合并输出</text>
-<text x="1029" y="354" font-size="10" font-weight="500" fill="#405a71" text-anchor="start">Predict → combine outputs</text>
-<path class="line" d="M613 270h27v-19h457"/>
-<path class="line" d="M613 444h27v-174"/>
-<path class="line" d="M613 604h27v-160"/>
-<path class="line" d="M759 251v10" marker-end="url(#arrow)"/>
-<path class="line" d="M930 251v10" marker-end="url(#arrow)"/>
-<path class="line" d="M1097 251v10" marker-end="url(#arrow)"/>
-<path class="line" d="M759 365v28h338v-28M930 365v28M1097 393h82v72H786"/>
-<text x="676" y="428" font-size="18" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">客群总量与口岸分流</text>
-<text x="676" y="449" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Forecast demand and allocate checkpoint shares</text>
-<path class="line" d="M786 465v24" marker-end="url(#arrow)"/>
-<path class="line" d="M1057 465v24" marker-end="url(#arrow)"/>
-<rect x="676" y="490" width="239" height="144" rx="9" fill="#edf4fd" stroke="#ccdcea"/>
-<text x="689" y="517" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">客群总量</text>
-<text x="689" y="538" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Visitor group total</text>
-<text x="689" y="562" font-size="13" font-weight="600" fill="#102c49" text-anchor="start">同星期基线 × 学习到的总量调整</text>
-<text x="689" y="581" font-size="12" font-weight="500" fill="#405a71" text-anchor="start">Adjust the same-weekday total</text>
-<path class="line" d="M689 613l17-7 16 2 16-5 15 6 16-8 15 2 17-9 17 2 16-7 18 5 16-8" style="stroke:#3c7aa7;stroke-width:1.8"/>
-<rect x="942" y="490" width="241" height="181" rx="9" fill="#edf4fd" stroke="#ccdcea"/>
-<text x="955" y="517" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">有向口岸图</text>
-<text x="955" y="538" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Directed checkpoint graph</text>
-<text x="955" y="562" font-size="13" font-weight="600" fill="#102c49" text-anchor="start">随客群和日期变化的转移矩阵</text>
-<text x="955" y="580" font-size="11" font-weight="500" fill="#405a71" text-anchor="start">Transition matrix by group and date</text>
-<path class="route" d="M973 612l61 16"/>
-<path class="route" d="M1046 626l57-16"/>
-<path class="route" d="M1118 612l31 27"/>
-<path class="route" d="M1146 644l-97-13"/>
-<path class="route" d="M978 609l123-3"/>
-<circle cx="971" cy="611" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
-<circle cx="1042" cy="631" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
-<circle cx="1110" cy="607" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
-<circle cx="1153" cy="643" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
-<rect x="690" y="702" width="473" height="54" rx="8" fill="#ddecfc" stroke="#bdcfe4"/>
-<text x="709" y="724" font-size="15" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">客群总量 × 口岸份额</text>
-<text x="709" y="745" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Group total × checkpoint share</text>
-<path class="line" d="M786 635v66" marker-end="url(#arrow)"/>
-<path class="line" d="M1057 672v29" marker-end="url(#arrow)"/>
-<path class="line" d="M1164 729h50v-357h30" marker-end="url(#arrow)"/>
-<rect x="1245" y="209" width="312" height="89" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="1258" y="236" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">15 天 × 10 口岸 × 2 客群</text>
-<text x="1258" y="257" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">15 days × 10 checkpoints × 2 groups</text>
-<rect x="1245" y="319" width="312" height="234" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="1259" y="348" font-size="16" font-weight="700" fill="#102c49" text-anchor="start">点预测与 70% 区间</text>
-<text x="1259" y="369" font-size="13" font-weight="500" fill="#405a71" text-anchor="start">Point forecast and 70% interval</text>
-<path class="line" d="M1270 398v121h265" style="stroke:#9ab0c4;stroke-width:1.4"/>
-<path d="M1272 482l27-18 26 8 26-20 25 11 27-22 25 6 27-22 23 4 27-16 26 4v38l-26 3-27 11-23 1-27 11-25 2-27 10-25-5-26 12-26-4-27 9z" fill="#d9eafc"/>
-<path class="line" d="M1272 493l27-14 26 6 26-16 25 8 27-16 25 2 27-16 23 2 27-14 26 1" style="stroke:#1a64ae;stroke-width:2.6"/>
-<rect x="1245" y="577" width="312" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
-<text x="1258" y="604" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">五轮历史模拟</text>
-<text x="1258" y="625" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Five archived rehearsals</text>
-<text x="1258" y="652" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">MASE · Scaled Winkler · Coverage</text>
-<text x="1246" y="728" font-size="14" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">第 2–15 天计分</text>
-<text x="1246" y="749" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Evaluation uses days 2–15</text>
-<text x="29" y="822" font-size="14" font-weight="550" fill="#405a71" text-anchor="start">组内口岸份额之和为 1  ·  Checkpoint shares sum to 1 within each visitor group</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1840" height="1048" viewBox="0 0 1840 1048" role="img" aria-labelledby="title description">
+<title id="title">Multimodal architecture for Hong Kong visitor arrivals forecasting</title>
+<desc id="description">A frozen arrivals model queries dated and scoped modality tokens through masked attention with a null token. A bounded residual updates group totals and directed checkpoint allocation. A structured-state head predicts interval widths.</desc>
+<defs>
+<marker id="gray" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8.5 4L0 8Z" fill="#35485f"/></marker>
+<marker id="time" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8.5 4L0 8Z" fill="#7061a2"/></marker>
+<marker id="media" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8.5 4L0 8Z" fill="#347b6f"/></marker>
+<marker id="forecast" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8.5 4L0 8Z" fill="#316790"/></marker>
+<marker id="base" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8.5 4L0 8Z" fill="#9b592f"/></marker>
+</defs>
+<rect x="0" y="0" width="1840" height="1048" rx="0" fill="white" stroke="none" stroke-width="1.25"/>
+<rect x="18" y="18" width="641" height="705" rx="10" fill="#f7fafd" stroke="#c5cfd9" stroke-width="1.25"/>
+<text x="35" y="49" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="start">(a)  Temporal and media encoders</text>
+<path d="M35 63H642" fill="none" stroke="#316790" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="681" y="18" width="265" height="705" rx="10" fill="#f9f7fc" stroke="#c5cfd9" stroke-width="1.25"/>
+<text x="698" y="49" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="start">(b)  Residual fusion</text>
+<path d="M698 63H929" fill="none" stroke="#7061a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="970" y="18" width="852" height="705" rx="10" fill="#f6fbf9" stroke="#c5cfd9" stroke-width="1.25"/>
+<text x="987" y="49" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="start">(c)  Hierarchical prediction</text>
+<path d="M987 63H1805" fill="none" stroke="#347b6f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="34" y="80" width="607" height="237" rx="8" fill="#fdfcff" stroke="#d5cce7" stroke-width="1.25"/>
+<text x="47" y="106" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Structured stream</text>
+<rect x="47" y="124" width="147" height="100" rx="5" fill="white" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="57" y="146" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start">Daily arrivals</text>
+<path d="M58.0 183.6 L67.5 176.2 L77.1 181.4 L86.6 179.2 L96.2 172.5 L105.7 179.9 L115.2 169.6 L124.8 175.1 L134.3 172.9 L143.8 164.0 L153.4 174.8 L162.9 169.9 L172.5 168.1 L182.0 174.0" fill="none" stroke="#7061a2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="57" y="213" fill="#435467" font-family="Consolas, monospace" font-size="14" font-weight="500" text-anchor="start">X  [B, G, P, 56]</text>
+<path d="M194 169H209V147H223" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<path d="M209 169V198H223" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<path d="M209 198V249H223" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="224" y="126" width="133" height="42" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="290.5" y="145.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Causal Conv1D</text>
+<text x="290.5" y="165.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">kernel 3 · d = 1</text>
+<rect x="224" y="177" width="133" height="42" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="290.5" y="196.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Causal Conv1D</text>
+<text x="290.5" y="216.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">kernel 3 · d = 7</text>
+<rect x="224" y="228" width="133" height="42" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="290.5" y="247.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Linear skip</text>
+<text x="290.5" y="267.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">56 lags + level</text>
+<path d="M357 147H369V166H381" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<path d="M357 198H369V190H381" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="382" y="145" width="132" height="67" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="448.0" y="176.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Last + mean pool</text>
+<text x="448.0" y="196.5" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">7 and 28 days</text>
+<path d="M514 178H551" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<path d="M357 249H370V232H524V195H551" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<circle cx="565" cy="185" r="14" fill="white" stroke="#7061a2" stroke-width="1.5"/>
+<text x="565" y="190.5" fill="#7061a2" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="middle">+</text>
+<rect x="388" y="242" width="132" height="55" rx="5" fill="white" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="454.0" y="267.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Calendar + IDs</text>
+<text x="454.0" y="287.5" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">scope, group, lead</text>
+<path d="M520 271H565V200" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<text x="47" y="250" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="start">City aggregate</text>
+<text x="47" y="271" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Append summed history.</text>
+<text x="47" y="290" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Apply log centering.</text>
+<path d="M580 185H698" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="34" y="330" width="607" height="376" rx="8" fill="#f8fcfa" stroke="#c0d9d1" stroke-width="1.25"/>
+<text x="47" y="357" fill="#347b6f" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Media stream</text>
+<text x="247" y="357" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">28-day publication window</text>
+<rect x="47" y="375" width="145" height="75" rx="5" fill="white" stroke="#accbc2" stroke-width="1.25"/>
+<text x="57" y="396" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="start">Post text</text>
+<text x="57" y="418" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="start" font-style="italic">“Concert at Kai Tak”</text>
+<text x="57" y="436" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="500" text-anchor="start">Illustrative post</text>
+<rect x="47" y="460" width="145" height="74" rx="5" fill="white" stroke="#accbc2" stroke-width="1.25"/>
+<rect x="56" y="469" width="65" height="49" rx="3" fill="#e0edf4" stroke="#a4b7c6" stroke-width="0.8"/>
+<path d="M57 503.3L76.8 488.6L91.1 499.38L105.4 487.62L120 501.34000000000003V517H57Z" fill="#92b4b3"/>
+<path d="M58 505.26Q88.5 500.36 120 508.2V517H58Z" fill="#6096a7"/>
+<rect x="70.95" y="496.93" width="5.525" height="8.82" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="78.75" y="490.07" width="5.525" height="15.68" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="86.55" y="485.17" width="5.525" height="20.58" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="94.35" y="494.48" width="5.525" height="11.270000000000001" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<circle cx="105.4" cy="480.76" r="2.695" fill="#efc381" stroke="none" stroke-width="1.5"/>
+<text x="129" y="490" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="start">Photo</text>
+<text x="129" y="510" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="start">+ cover</text>
+<rect x="47" y="544" width="145" height="74" rx="5" fill="white" stroke="#accbc2" stroke-width="1.25"/>
+<rect x="55" y="568" width="39" height="34" rx="3" fill="#e0edf4" stroke="#a4b7c6" stroke-width="0.8"/>
+<path d="M56 591.8L67.48 581.6L76.06 589.08L84.64 580.92L93 590.44V601H56Z" fill="#92b4b3"/>
+<path d="M57 593.16Q74.5 589.76 93 595.2V601H57Z" fill="#6096a7"/>
+<rect x="63.97" y="587.38" width="3.3150000000000004" height="6.12" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="68.65" y="582.62" width="3.3150000000000004" height="10.88" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="73.33" y="579.22" width="3.3150000000000004" height="14.28" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="78.00999999999999" y="585.68" width="3.3150000000000004" height="7.82" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<circle cx="84.64" cy="576.16" r="2" fill="#efc381" stroke="none" stroke-width="1.5"/>
+<rect x="98" y="568" width="39" height="34" rx="3" fill="#e0edf4" stroke="#a4b7c6" stroke-width="0.8"/>
+<path d="M99 591.8L110.48 581.6L119.06 589.08L127.64 582.96L136 590.44V601H99Z" fill="#92b4b3"/>
+<path d="M100 593.16Q117.5 589.76 136 595.2V601H100Z" fill="#6096a7"/>
+<rect x="106.97" y="587.38" width="3.3150000000000004" height="6.12" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="111.65" y="582.62" width="3.3150000000000004" height="10.88" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="116.33" y="579.22" width="3.3150000000000004" height="14.28" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="121.00999999999999" y="585.68" width="3.3150000000000004" height="7.82" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<circle cx="125.3" cy="576.16" r="2" fill="#efc381" stroke="none" stroke-width="1.5"/>
+<rect x="141" y="568" width="39" height="34" rx="3" fill="#e0edf4" stroke="#a4b7c6" stroke-width="0.8"/>
+<path d="M142 591.8L153.48 581.6L162.06 589.08L170.64 585.0L179 590.44V601H142Z" fill="#92b4b3"/>
+<path d="M143 593.16Q160.5 589.76 179 595.2V601H143Z" fill="#6096a7"/>
+<rect x="149.97" y="587.38" width="3.3150000000000004" height="6.12" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="154.65" y="582.62" width="3.3150000000000004" height="10.88" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="159.32999999999998" y="579.22" width="3.3150000000000004" height="14.28" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<rect x="164.01" y="585.68" width="3.3150000000000004" height="7.82" rx="0" fill="#466e80" stroke="none" stroke-width="0"/>
+<circle cx="165.96" cy="576.16" r="2" fill="#efc381" stroke="none" stroke-width="1.5"/>
+<text x="56" y="562" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="start">Video frames</text>
+<path d="M192 413H213V410H226" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<path d="M192 493H207V467H226" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<path d="M192 583H207V493" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="227" y="389" width="114" height="42" rx="5" fill="#fcf0e6" stroke="#dbbdab" stroke-width="1.25"/>
+<text x="284.0" y="408.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Qwen3</text>
+<text x="284.0" y="428.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">text encoder</text>
+<rect x="227" y="445" width="114" height="42" rx="5" fill="#eaf2fb" stroke="#b7cfdf" stroke-width="1.25"/>
+<text x="284.0" y="464.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">CLIP</text>
+<text x="284.0" y="484.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">visual encoder</text>
+<path d="M341 411H354V420H373" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<path d="M341 467H354V442H373" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="389" y="396" width="65" height="52" rx="1" fill="#e1ede8" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="385" y="400" width="65" height="52" rx="1" fill="#e1ede8" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="381" y="404" width="13" height="13" rx="0" fill="#cce3d9" stroke="#fff" stroke-width="0.6"/>
+<rect x="394" y="404" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="407" y="404" width="13" height="13" rx="0" fill="#cce3d9" stroke="#fff" stroke-width="0.6"/>
+<rect x="420" y="404" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="433" y="404" width="13" height="13" rx="0" fill="#cce3d9" stroke="#fff" stroke-width="0.6"/>
+<rect x="381" y="417" width="13" height="13" rx="0" fill="#e1ede8" stroke="#fff" stroke-width="0.6"/>
+<rect x="394" y="417" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="407" y="417" width="13" height="13" rx="0" fill="#9acbb9" stroke="#fff" stroke-width="0.6"/>
+<rect x="420" y="417" width="13" height="13" rx="0" fill="#cce3d9" stroke="#fff" stroke-width="0.6"/>
+<rect x="433" y="417" width="13" height="13" rx="0" fill="#e1ede8" stroke="#fff" stroke-width="0.6"/>
+<rect x="381" y="430" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="394" y="430" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="407" y="430" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="420" y="430" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="433" y="430" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="381" y="443" width="13" height="13" rx="0" fill="#9acbb9" stroke="#fff" stroke-width="0.6"/>
+<rect x="394" y="443" width="13" height="13" rx="0" fill="#71b0a0" stroke="#fff" stroke-width="0.6"/>
+<rect x="407" y="443" width="13" height="13" rx="0" fill="#e1ede8" stroke="#fff" stroke-width="0.6"/>
+<rect x="420" y="443" width="13" height="13" rx="0" fill="#cce3d9" stroke="#fff" stroke-width="0.6"/>
+<rect x="433" y="443" width="13" height="13" rx="0" fill="#9acbb9" stroke="#fff" stroke-width="0.6"/>
+<rect x="381" y="404" width="65" height="52" rx="1" fill="none" stroke="#7e8c9b" stroke-width="0.8"/>
+<path d="M454 429H473" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="475" y="398" width="145" height="65" rx="5" fill="#e9f5f0" stroke="#accbc2" stroke-width="1.25"/>
+<text x="547.5" y="428.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Direct embeddings</text>
+<text x="547.5" y="448.5" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">support-weighted pool</text>
+<text x="379" y="478" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="start">Scope × platform × role × age</text>
+<text x="468" y="500" fill="#435467" font-family="Consolas, monospace" font-size="13" font-weight="500" text-anchor="start">4 × 48 context channels</text>
+<path d="M213 414V555H226" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<path d="M354 467V531H365V556H373" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="227" y="535" width="114" height="50" rx="5" fill="#fcf0e6" stroke="#dbbdab" stroke-width="1.25"/>
+<text x="284.0" y="558.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Extract cues</text>
+<text x="284.0" y="578.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">seven cue types</text>
+<path d="M341 560H373" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="375" y="531" width="100" height="57" rx="5" fill="#e9f5f0" stroke="#accbc2" stroke-width="1.25"/>
+<text x="425.0" y="557.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="middle">Align</text>
+<text x="425.0" y="577.5" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">day · group · port</text>
+<path d="M475 560H489" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="504" y="529" width="60" height="48" rx="1" fill="#f5faf8" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="500" y="533" width="60" height="48" rx="1" fill="#f5faf8" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="496" y="537" width="12" height="12" rx="0" fill="#8dc5b5" stroke="#fff" stroke-width="0.6"/>
+<rect x="508" y="537" width="12" height="12" rx="0" fill="#b5dbce" stroke="#fff" stroke-width="0.6"/>
+<rect x="520" y="537" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="532" y="537" width="12" height="12" rx="0" fill="#d8ebe4" stroke="#fff" stroke-width="0.6"/>
+<rect x="544" y="537" width="12" height="12" rx="0" fill="#f5faf8" stroke="#fff" stroke-width="0.6"/>
+<rect x="496" y="549" width="12" height="12" rx="0" fill="#f5faf8" stroke="#fff" stroke-width="0.6"/>
+<rect x="508" y="549" width="12" height="12" rx="0" fill="#d8ebe4" stroke="#fff" stroke-width="0.6"/>
+<rect x="520" y="549" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="532" y="549" width="12" height="12" rx="0" fill="#b5dbce" stroke="#fff" stroke-width="0.6"/>
+<rect x="544" y="549" width="12" height="12" rx="0" fill="#8dc5b5" stroke="#fff" stroke-width="0.6"/>
+<rect x="496" y="561" width="12" height="12" rx="0" fill="#d8ebe4" stroke="#fff" stroke-width="0.6"/>
+<rect x="508" y="561" width="12" height="12" rx="0" fill="#8dc5b5" stroke="#fff" stroke-width="0.6"/>
+<rect x="520" y="561" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="532" y="561" width="12" height="12" rx="0" fill="#f5faf8" stroke="#fff" stroke-width="0.6"/>
+<rect x="544" y="561" width="12" height="12" rx="0" fill="#b5dbce" stroke="#fff" stroke-width="0.6"/>
+<rect x="496" y="573" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="508" y="573" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="520" y="573" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="532" y="573" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="544" y="573" width="12" height="12" rx="0" fill="#e0efe8" stroke="#fff" stroke-width="0.6"/>
+<rect x="496" y="537" width="60" height="48" rx="1" fill="none" stroke="#7e8c9b" stroke-width="0.8"/>
+<text x="501" y="607" fill="#435467" font-family="Consolas, monospace" font-size="13" font-weight="500" text-anchor="middle">C  [B,G,S,H,56]</text>
+<text x="228" y="638" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">4 media roles × 2 timing classes × 7 cue types</text>
+<text x="228" y="660" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Dated cues map to their stated forecast day.</text>
+<text x="228" y="681" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Pooled context is optional for supported roles.</text>
+<text x="47" y="654" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="start">As-of filter</text>
+<text x="47" y="677" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="start">Publication / retrieval</text>
+<path d="M620 429H628V480H650" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+<path d="M563 560H628V480" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M628 473L635 480L628 487L621 480Z" fill="white" stroke="#347b6f" stroke-width="1.5"/>
+<path d="M650 480H698" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="699" y="117" width="229" height="109" rx="6" fill="white" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="711" y="142" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start">Frozen historical state</text>
+<rect x="711" y="155" width="13" height="13" rx="2" fill="#e9e3f6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="728" y="155" width="13" height="13" rx="2" fill="#d8c9ed" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="745" y="155" width="13" height="13" rx="2" fill="#bca8dc" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="762" y="155" width="13" height="13" rx="2" fill="#9a83c5" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="779" y="155" width="13" height="13" rx="2" fill="#816eb4" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="796" y="155" width="13" height="13" rx="2" fill="#d6c9ed" stroke="#8294a5" stroke-width="0.85"/>
+<text x="711" y="193" fill="#435467" font-family="Consolas, monospace" font-size="15" font-weight="500" text-anchor="start">Hₛ  [B,G,S,H,D]</text>
+<text x="711" y="215" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="start">GELU of structured preactivation</text>
+<path d="M809 226V281" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<circle cx="809" cy="297" r="14" fill="white" stroke="#7061a2" stroke-width="1.5"/>
+<text x="809" y="302.5" fill="#7061a2" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="middle">+</text>
+<path d="M824 297H1003" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<text x="887" y="286" fill="#7061a2" font-family="Cambria Math, Cambria, Georgia, serif" font-size="18" font-weight="500" text-anchor="start" font-style="italic">Z</text>
+<text x="816" y="338" fill="#347b6f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="16" font-weight="500" text-anchor="start" font-style="italic">λ · Δ</text>
+<path d="M809 366V313" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="708" y="366" width="210" height="64" rx="5" fill="#e9f5f0" stroke="#accbc2" stroke-width="1.25"/>
+<text x="813.0" y="396.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="middle">Masked modality attention</text>
+<text x="813.0" y="416.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">details in panel (d)</text>
+<path d="M716 226V340H736V365" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<path d="M809 457V431" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="699" y="457" width="229" height="76" rx="6" fill="white" stroke="#accbc2" stroke-width="1.25"/>
+<text x="711" y="480" fill="#347b6f" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start">Role-specific tokens</text>
+<rect x="711" y="494" width="13" height="13" rx="2" fill="#f3d9c5" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="728" y="494" width="13" height="13" rx="2" fill="#b5d1e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="745" y="494" width="13" height="13" rx="2" fill="#cbdcb4" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="762" y="494" width="13" height="13" rx="2" fill="#8dc7ba" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="699" y="574" width="229" height="104" rx="6" fill="#f4f1fa" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="711" y="599" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start">Structured-state bypass</text>
+<text x="711" y="624" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Hₛ feeds the</text>
+<text x="711" y="646" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">interval-width head.</text>
+<path d="M928 634H990" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)" stroke-dasharray="5 4"/>
+<rect x="992" y="84" width="537" height="138" rx="7" fill="white" stroke="#bad9cf" stroke-width="1.25"/>
+<text x="1005" y="110" fill="#347b6f" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Group total</text>
+<rect x="1006" y="142" width="10" height="13" rx="2" fill="#e2d9f2" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="1020" y="142" width="10" height="13" rx="2" fill="#cab8e5" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="1034" y="142" width="10" height="13" rx="2" fill="#a58fc9" stroke="#8294a5" stroke-width="0.85"/>
+<text x="1006" y="181" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">City token</text>
+<path d="M1056 149H1073" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="1074" y="127" width="93" height="45" rx="5" fill="#e9f5f0" stroke="#bad9cf" stroke-width="1.25"/>
+<text x="1120.5" y="155.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="middle">LN → Linear</text>
+<path d="M1167 149H1180" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="1181" y="127" width="152" height="45" rx="5" fill="#e9f5f0" stroke="#bad9cf" stroke-width="1.25"/>
+<text x="1257.0" y="155.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">exp(0.60 tanh(·))</text>
+<path d="M1333 149H1361" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<circle cx="1376" cy="149" r="14" fill="white" stroke="#347b6f" stroke-width="1.5"/>
+<text x="1376" y="154.5" fill="#347b6f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="middle">×</text>
+<path d="M1376 185V165" fill="none" stroke="#9b592f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#base)"/>
+<text x="1376" y="202" fill="#9b592f" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">Same-weekday total T⁰</text>
+<path d="M1391 149H1539" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<text x="1454" y="138" fill="#347b6f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="18" font-weight="500" text-anchor="middle" font-style="italic">T</text>
+<rect x="992" y="237" width="537" height="347" rx="7" fill="white" stroke="#bad9cf" stroke-width="1.25"/>
+<text x="1005" y="263" fill="#347b6f" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Directed checkpoint allocation</text>
+<circle cx="1004" cy="297" r="3.5" fill="#7061a2" stroke="#7061a2" stroke-width="1.5"/>
+<path d="M1004 297V124H1013V140" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<path d="M1008 297H1019" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="1020" y="291" width="9" height="13" rx="2" fill="#e2d9f2" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="1033" y="291" width="9" height="13" rx="2" fill="#cab8e5" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="1046" y="291" width="9" height="13" rx="2" fill="#a58fc9" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="1059" y="291" width="9" height="13" rx="2" fill="#e2d9f2" stroke="#8294a5" stroke-width="0.85"/>
+<text x="1019" y="329" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Port states Zᵢ</text>
+<path d="M1075 297H1093" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="1094" y="276" width="113" height="45" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="1150.5" y="304.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Sender / receiver</text>
+<path d="M1207 297H1220" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="1235" y="274" width="40" height="40" rx="1" fill="#e0eef8" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="1231" y="278" width="40" height="40" rx="1" fill="#e0eef8" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="1227" y="282" width="10" height="10" rx="0" fill="#77a3c5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1237" y="282" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1247" y="282" width="10" height="10" rx="0" fill="#77a3c5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1257" y="282" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1227" y="292" width="10" height="10" rx="0" fill="#9cbfd9" stroke="#fff" stroke-width="0.6"/>
+<rect x="1237" y="292" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1247" y="292" width="10" height="10" rx="0" fill="#b9d4e7" stroke="#fff" stroke-width="0.6"/>
+<rect x="1257" y="292" width="10" height="10" rx="0" fill="#77a3c5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1227" y="302" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1237" y="302" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1247" y="302" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1257" y="302" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1227" y="312" width="10" height="10" rx="0" fill="#b9d4e7" stroke="#fff" stroke-width="0.6"/>
+<rect x="1237" y="312" width="10" height="10" rx="0" fill="#e0eef8" stroke="#fff" stroke-width="0.6"/>
+<rect x="1247" y="312" width="10" height="10" rx="0" fill="#9cbfd9" stroke="#fff" stroke-width="0.6"/>
+<rect x="1257" y="312" width="10" height="10" rx="0" fill="#77a3c5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1227" y="282" width="40" height="40" rx="1" fill="none" stroke="#7e8c9b" stroke-width="0.8"/>
+<text x="1209" y="341" fill="#18263a" font-family="Cambria Math, Cambria, Georgia, serif" font-size="14" font-weight="500" text-anchor="start">uᵢᵀvⱼ / √D</text>
+<path d="M1275 301H1294" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<circle cx="1308" cy="301" r="13" fill="white" stroke="#316790" stroke-width="1.5"/>
+<text x="1308" y="306.5" fill="#316790" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="middle">+</text>
+<path d="M1308 345V315" fill="none" stroke="#9b592f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#base)"/>
+<text x="1308" y="365" fill="#9b592f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="14" font-weight="500" text-anchor="middle">−0.35 log(1 + dᵢⱼ)</text>
+<text x="1308" y="382" fill="#9b592f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="14" font-weight="500" text-anchor="middle">+ log sⱼ⁰ + bⱼ</text>
+<path d="M1322 301H1334" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="1335" y="279" width="170" height="45" rx="5" fill="#eaf2fb" stroke="#b7cfdf" stroke-width="1.25"/>
+<text x="1420.0" y="307.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Off-diagonal softmax</text>
+<path d="M1420 325V351" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<rect x="1422" y="352" width="48" height="48" rx="1" fill="#dbeaf6" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="1418" y="356" width="48" height="48" rx="1" fill="#dbeaf6" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="1414" y="360" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1426" y="360" width="12" height="12" rx="0" fill="#c9ddeb" stroke="#fff" stroke-width="0.6"/>
+<rect x="1438" y="360" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1450" y="360" width="12" height="12" rx="0" fill="#9bbdd9" stroke="#fff" stroke-width="0.6"/>
+<rect x="1414" y="372" width="12" height="12" rx="0" fill="#e5eff7" stroke="#fff" stroke-width="0.6"/>
+<rect x="1426" y="372" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1438" y="372" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1450" y="372" width="12" height="12" rx="0" fill="#c9ddeb" stroke="#fff" stroke-width="0.6"/>
+<rect x="1414" y="384" width="12" height="12" rx="0" fill="#9bbdd9" stroke="#fff" stroke-width="0.6"/>
+<rect x="1426" y="384" width="12" height="12" rx="0" fill="#dbeaf6" stroke="#fff" stroke-width="0.6"/>
+<rect x="1438" y="384" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1450" y="384" width="12" height="12" rx="0" fill="#e5eff7" stroke="#fff" stroke-width="0.6"/>
+<rect x="1414" y="396" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1426" y="396" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1438" y="396" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1450" y="396" width="12" height="12" rx="0" fill="#fff" stroke="#fff" stroke-width="0.6"/>
+<rect x="1414" y="360" width="48" height="48" rx="1" fill="none" stroke="#7e8c9b" stroke-width="0.8"/>
+<text x="1467" y="388" fill="#316790" font-family="Cambria Math, Cambria, Georgia, serif" font-size="18" font-weight="500" text-anchor="start" font-style="italic">R</text>
+<path d="M1046 307V386H1093" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="1094" y="367" width="118" height="42" rx="5" fill="#e9f5f0" stroke="#bad9cf" stroke-width="1.25"/>
+<text x="1153.0" y="393.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Departure gate</text>
+<text x="1006" y="459" fill="#435467" font-family="Cambria Math, Cambria, Georgia, serif" font-size="14" font-weight="500" text-anchor="start">aᵢ = 0.60 σ(Linear(LN(Zᵢ)) − 3)</text>
+<path d="M1212 387H1223V452H1247" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<path d="M1438 408V437" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<rect x="1248" y="438" width="212" height="48" rx="5" fill="#eaf2fb" stroke="#b7cfdf" stroke-width="1.25"/>
+<text x="1354.0" y="467.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">A = diag(1 − a) + diag(a) R</text>
+<path d="M1354 486V504" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<rect x="1334" y="502" width="44" height="44" rx="1" fill="#f0f7fc" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="1330" y="506" width="44" height="44" rx="1" fill="#f0f7fc" stroke="#8996a4" stroke-width="0.8"/>
+<rect x="1326" y="510" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1337" y="510" width="11" height="11" rx="0" fill="#a8c8de" stroke="#fff" stroke-width="0.6"/>
+<rect x="1348" y="510" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1359" y="510" width="11" height="11" rx="0" fill="#cce0ef" stroke="#fff" stroke-width="0.6"/>
+<rect x="1326" y="521" width="11" height="11" rx="0" fill="#80adcb" stroke="#fff" stroke-width="0.6"/>
+<rect x="1337" y="521" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1348" y="521" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1359" y="521" width="11" height="11" rx="0" fill="#a8c8de" stroke="#fff" stroke-width="0.6"/>
+<rect x="1326" y="532" width="11" height="11" rx="0" fill="#cce0ef" stroke="#fff" stroke-width="0.6"/>
+<rect x="1337" y="532" width="11" height="11" rx="0" fill="#f0f7fc" stroke="#fff" stroke-width="0.6"/>
+<rect x="1348" y="532" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1359" y="532" width="11" height="11" rx="0" fill="#80adcb" stroke="#fff" stroke-width="0.6"/>
+<rect x="1326" y="543" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1337" y="543" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1348" y="543" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1359" y="543" width="11" height="11" rx="0" fill="#598db5" stroke="#fff" stroke-width="0.6"/>
+<rect x="1326" y="510" width="44" height="44" rx="1" fill="none" stroke="#7e8c9b" stroke-width="0.8"/>
+<text x="1348" y="572" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="middle">Row-stochastic A</text>
+<path d="M1030 511L1068 490" fill="none" stroke="#316790" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<path d="M1084 490L1128 511" fill="none" stroke="#316790" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<path d="M1032 519L1082 539" fill="none" stroke="#316790" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<path d="M1129 519L1098 539" fill="none" stroke="#316790" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<circle cx="1025" cy="515" r="5.5" fill="#eaf2fb" stroke="#316790" stroke-width="1.5"/>
+<circle cx="1076" cy="487" r="5.5" fill="#eaf2fb" stroke="#316790" stroke-width="1.5"/>
+<circle cx="1136" cy="515" r="5.5" fill="#eaf2fb" stroke="#316790" stroke-width="1.5"/>
+<circle cx="1090" cy="543" r="5.5" fill="#eaf2fb" stroke="#316790" stroke-width="1.5"/>
+<text x="1080" y="569" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="middle">Directed port graph</text>
+<circle cx="1429" cy="533" r="13" fill="white" stroke="#316790" stroke-width="1.5"/>
+<text x="1429" y="538.5" fill="#316790" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="middle">×</text>
+<path d="M1378 533H1415" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<path d="M1429 568V547" fill="none" stroke="#9b592f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#base)"/>
+<text x="1460" y="568" fill="#9b592f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="16" font-weight="500" text-anchor="start" font-style="italic">s⁰</text>
+<path d="M1443 533H1539" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<text x="1502" y="522" fill="#316790" font-family="Cambria Math, Cambria, Georgia, serif" font-size="18" font-weight="500" text-anchor="start" font-style="italic">s</text>
+<rect x="992" y="601" width="537" height="104" rx="7" fill="white" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="1005" y="626" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" text-anchor="start">Asymmetric interval widths</text>
+<path d="M992 634H998V663H1005" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)" stroke-dasharray="5 4"/>
+<rect x="1006" y="643" width="113" height="40" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="1062.5" y="668.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">LN → Linear</text>
+<path d="M1119 663H1134" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="1135" y="643" width="105" height="40" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="1187.5" y="668.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Softplus</text>
+<path d="M1240 663H1255" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="1256" y="643" width="122" height="40" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="1317.0" y="668.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">× port scale</text>
+<path d="M1378 663H1539" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<text x="1440" y="652" fill="#7061a2" font-family="Cambria Math, Cambria, Georgia, serif" font-size="17" font-weight="500" text-anchor="start" font-style="italic">w₋, w₊</text>
+<rect x="1541" y="84" width="264" height="621" rx="7" fill="#f9fcff" stroke="#bccfe1" stroke-width="1.25"/>
+<text x="1555" y="109" fill="#316790" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Forecasts</text>
+<text x="1555" y="154" fill="#347b6f" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="start">Group total T</text>
+<text x="1555" y="537" fill="#316790" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="start">Checkpoint share s</text>
+<path d="M1542 149H1549V190H1635" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<path d="M1542 533H1549V515H1564V206H1637" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<circle cx="1650" cy="196" r="14" fill="white" stroke="#316790" stroke-width="1.5"/>
+<text x="1650" y="201.5" fill="#316790" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="middle">×</text>
+<path d="M1665 196H1681" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)"/>
+<text x="1689" y="201" fill="#316790" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="start">ŷ = T · s</text>
+<text x="1580" y="242" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" text-anchor="start">15 days · 10 checkpoints · 2 groups</text>
+<rect x="1580" y="257" width="203" height="66" rx="4" fill="white" stroke="#c0cdd8" stroke-width="1.25"/>
+<path d="M1591 280.25h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1591 290.5h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1591 300.75h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1591.00,291.32 1613.62,285.13 1636.25,286.32 1658.88,281.77 1681.50,287.06 1704.12,280.05 1726.75,280.82 1749.38,277.09 1772.00,279.10 1772.00,292.88 1749.38,289.97 1726.75,292.80 1704.12,291.12 1681.50,297.22 1658.88,291.03 1636.25,294.68 1613.62,292.59 1591.00,297.88" fill="#316790" opacity=".22"/>
+<path d="M1591.0 294.6 L1613.6 288.9 L1636.2 290.5 L1658.9 286.4 L1681.5 292.1 L1704.1 285.6 L1726.8 286.8 L1749.4 283.5 L1772.0 286.0" fill="none" stroke="#316790" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1580" y="332" width="203" height="66" rx="4" fill="white" stroke="#c0cdd8" stroke-width="1.25"/>
+<path d="M1591 355.25h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1591 365.5h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1591 375.75h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1591.00,363.86 1613.62,367.92 1636.25,366.65 1658.88,360.05 1681.50,357.96 1704.12,360.79 1726.75,353.36 1749.38,357.83 1772.00,355.74 1772.00,369.52 1749.38,370.71 1726.75,365.34 1704.12,371.86 1681.50,368.12 1658.88,369.31 1636.25,375.01 1613.62,375.38 1591.00,370.42" fill="#347b6f" opacity=".22"/>
+<path d="M1591.0 367.1 L1613.6 371.6 L1636.2 370.8 L1658.9 364.7 L1681.5 363.0 L1704.1 366.3 L1726.8 359.4 L1749.4 364.3 L1772.0 362.6" fill="none" stroke="#347b6f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1580" y="407" width="203" height="66" rx="4" fill="white" stroke="#c0cdd8" stroke-width="1.25"/>
+<path d="M1591 430.25h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1591 440.5h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1591 450.75h181" fill="none" stroke="#e8edf3" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1591.00,442.14 1613.62,437.18 1636.25,440.01 1658.88,439.15 1681.50,430.50 1704.12,435.38 1726.75,432.87 1749.38,429.55 1772.00,431.15 1772.00,444.93 1749.38,442.43 1726.75,444.85 1704.12,446.44 1681.50,440.66 1658.88,448.41 1636.25,448.37 1613.62,444.64 1591.00,448.70" fill="#7061a2" opacity=".22"/>
+<path d="M1591.0 445.4 L1613.6 440.9 L1636.2 444.2 L1658.9 443.8 L1681.5 435.6 L1704.1 440.9 L1726.8 438.9 L1749.4 436.0 L1772.0 438.0" fill="none" stroke="#7061a2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1580" y="494" fill="#316790" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="start">Point forecast and nominal 70% interval</text>
+<rect x="1555" y="552" width="235" height="136" rx="5" fill="white" stroke="#c6d5e2" stroke-width="1.25"/>
+<text x="1566" y="575" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="start">Forecast triplet</text>
+<text x="1566" y="600" fill="#18263a" font-family="Cambria Math, Cambria, Georgia, serif" font-size="15" font-weight="500" text-anchor="start">Lower   max(0, ŷ − w₋)</text>
+<text x="1566" y="624" fill="#18263a" font-family="Cambria Math, Cambria, Georgia, serif" font-size="15" font-weight="500" text-anchor="start">Point    ŷ</text>
+<text x="1566" y="648" fill="#18263a" font-family="Cambria Math, Cambria, Georgia, serif" font-size="15" font-weight="500" text-anchor="start">Upper  ŷ + w₊</text>
+<text x="1566" y="674" fill="#435467" font-family="Consolas, monospace" font-size="14" font-weight="500" text-anchor="start">[B, P×G, H, 3]</text>
+<path d="M1541 663H1554" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<path d="M1774 197H1797V620H1791" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#forecast)" stroke-dasharray="5 4"/>
+<rect x="18" y="740" width="1804" height="282" rx="10" fill="#faf9fd" stroke="#c5cfd9" stroke-width="1.25"/>
+<text x="35" y="771" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="start">(d)  Cue-masked attention adapter</text>
+<path d="M35 785H1805" fill="none" stroke="#7061a2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="34" y="802" width="550" height="189" rx="7" fill="white" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="47" y="827" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Project each media role</text>
+<rect x="607" y="802" width="608" height="189" rx="7" fill="white" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="620" y="827" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Query and mask by scope, group and day</text>
+<rect x="1238" y="802" width="567" height="189" rx="7" fill="white" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="1251" y="827" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" text-anchor="start">Gate and scale the residual</text>
+<text x="52" y="851" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="start">Aligned cues</text>
+<text x="217" y="851" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="start">Separate linear maps</text>
+<text x="438" y="851" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="start">Role tokens</text>
+<text x="53" y="878" fill="#9b592f" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Text</text>
+<rect x="112" y="866" width="9" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="125" y="866" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="138" y="866" width="9" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="151" y="866" width="9" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="164" y="866" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M179 873H211" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="212" y="863" width="107" height="20" rx="5" fill="#fcf0e6" stroke="#9b592f" stroke-width="1.25"/>
+<text x="265.5" y="878.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="middle">Linear</text>
+<path d="M319 873H379" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="384" y="866" width="11" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="399" y="866" width="11" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="414" y="866" width="11" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="429" y="866" width="11" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="444" y="866" width="11" height="13" rx="2" fill="#fcf0e6" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M465 873H540" fill="none" stroke="#9b592f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="53" y="904" fill="#316790" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Photo</text>
+<rect x="112" y="892" width="9" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="125" y="892" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="138" y="892" width="9" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="151" y="892" width="9" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="164" y="892" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M179 899H211" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="212" y="889" width="107" height="20" rx="5" fill="#eaf2fb" stroke="#316790" stroke-width="1.25"/>
+<text x="265.5" y="904.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="middle">Linear</text>
+<path d="M319 899H379" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="384" y="892" width="11" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="399" y="892" width="11" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="414" y="892" width="11" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="429" y="892" width="11" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="444" y="892" width="11" height="13" rx="2" fill="#eaf2fb" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M465 899H540" fill="none" stroke="#316790" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="53" y="930" fill="#6b854c" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Cover</text>
+<rect x="112" y="918" width="9" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="125" y="918" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="138" y="918" width="9" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="151" y="918" width="9" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="164" y="918" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M179 925H211" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="212" y="915" width="107" height="20" rx="5" fill="#eff4e7" stroke="#6b854c" stroke-width="1.25"/>
+<text x="265.5" y="930.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="middle">Linear</text>
+<path d="M319 925H379" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="384" y="918" width="11" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="399" y="918" width="11" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="414" y="918" width="11" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="429" y="918" width="11" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="444" y="918" width="11" height="13" rx="2" fill="#eff4e7" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M465 925H540" fill="none" stroke="#6b854c" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="53" y="956" fill="#347b6f" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Video</text>
+<rect x="112" y="944" width="9" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="125" y="944" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="138" y="944" width="9" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="151" y="944" width="9" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="164" y="944" width="9" height="13" rx="2" fill="white" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M179 951H211" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="212" y="941" width="107" height="20" rx="5" fill="#e9f5f0" stroke="#347b6f" stroke-width="1.25"/>
+<text x="265.5" y="956.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" text-anchor="middle">Linear</text>
+<path d="M319 951H379" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="384" y="944" width="11" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="399" y="944" width="11" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="414" y="944" width="11" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="429" y="944" width="11" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<rect x="444" y="944" width="11" height="13" rx="2" fill="#e9f5f0" stroke="#8294a5" stroke-width="0.85"/>
+<path d="M465 951H540" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M540 873V951" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M540 925H625" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<text x="52" y="979" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Optional context enters only when its role has an aligned cue.</text>
+<rect x="626" y="843" width="102" height="40" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="677.0" y="868.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="middle">Hₛ → Q</text>
+<path d="M728 862H760" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<rect x="626" y="906" width="102" height="36" rx="5" fill="#e9f5f0" stroke="#accbc2" stroke-width="1.25"/>
+<text x="677.0" y="929.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Tokens → K</text>
+<path d="M728 924H744V884H759" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="760" y="854" width="104" height="50" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="812.0" y="884.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" text-anchor="middle">QKᵀ / √D</text>
+<path d="M864 879H885" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="886" y="854" width="138" height="50" rx="5" fill="#e9f5f0" stroke="#accbc2" stroke-width="1.25"/>
+<text x="955.0" y="877.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Masked softmax</text>
+<text x="955.0" y="897.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">incl. zero null token</text>
+<path d="M1024 879H1050" fill="none" stroke="#35485f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#gray)"/>
+<rect x="1051" y="854" width="145" height="50" rx="5" fill="#e9f5f0" stroke="#accbc2" stroke-width="1.25"/>
+<text x="1123.5" y="877.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Weighted sum</text>
+<text x="1123.5" y="897.0" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">of role tokens</text>
+<path d="M728 936H1123V905" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<text x="887" y="930" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">logit = −∞ for absent roles</text>
+<text x="626" y="979" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">With no eligible role, the null token returns a zero residual.</text>
+<path d="M1196 879H1257" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="1258" y="856" width="130" height="47" rx="5" fill="#e9f5f0" stroke="#accbc2" stroke-width="1.25"/>
+<text x="1323.0" y="885.0" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Linear → tanh</text>
+<path d="M1388 879H1428" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<circle cx="1442" cy="879" r="13" fill="white" stroke="#347b6f" stroke-width="1.5"/>
+<text x="1442" y="884.5" fill="#347b6f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="20" font-weight="700" text-anchor="middle">×</text>
+<path d="M1442 929V893" fill="none" stroke="#7061a2" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#time)"/>
+<text x="1260" y="933" fill="#7061a2" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" text-anchor="start">City or port gate</text>
+<text x="1460" y="934" fill="#7061a2" font-family="Cambria Math, Cambria, Georgia, serif" font-size="15" font-weight="500" text-anchor="start">0.25 · σ(g(Hₛ))</text>
+<path d="M1456 879H1487" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<rect x="1488" y="856" width="153" height="47" rx="5" fill="#f0edf8" stroke="#c8bbdf" stroke-width="1.25"/>
+<text x="1564.5" y="877.5" fill="#18263a" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Validation weight λ</text>
+<text x="1564.5" y="897.5" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="middle">{0, 0.25, 0.5, 1}</text>
+<path d="M1641 879H1674" fill="none" stroke="#347b6f" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#media)"/>
+<text x="1682" y="884" fill="#347b6f" font-family="Cambria Math, Cambria, Georgia, serif" font-size="18" font-weight="500" text-anchor="start" font-style="italic">λ · Δ</text>
+<text x="1258" y="979" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">Train the adapter with the arrivals-only backbone frozen.</text>
+<text x="35" y="1012" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="start">B  batch     G  visitor groups     P  checkpoints     S = P + 1  scopes     H  forecast days     D  hidden width</text>
+<text x="1800" y="1012" fill="#435467" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" text-anchor="end">Plots are schematic.</text>
 </svg>

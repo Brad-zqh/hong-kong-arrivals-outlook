@@ -108,8 +108,8 @@
           <a class="text-link" href="index.html#multimodal">查看实验结果 ↗<span lang="en" class="translation inline">View experiment ↗</span></a>
         </div>
         <figure class="architecture-figure" id="architecture">
-          <a href="assets/forecast-architecture.svg"><img src="assets/forecast-architecture.svg" alt="输入、两类多模态表征、三种融合位置、口岸分流与预测输出。 Inputs, media representations, fusion stages, routing and forecasts." width="1600" height="850" loading="lazy"></a>
-          <figcaption>模型结构 <span class="translation inline" lang="en">Model architecture</span></figcaption>
+          <a href="assets/forecast-architecture.svg"><img src="assets/forecast-architecture.svg" alt="时序与多模态编码、线索掩码注意力、动态口岸分流与预测区间。 Temporal and media encoders, cue-masked attention, directed checkpoint allocation and prediction intervals." width="1840" height="1048" loading="lazy"></a>
+          <figcaption>线索掩码注意力架构 <span class="translation inline" lang="en">Cue-masked attention architecture</span></figcaption>
         </figure>
         <ol class="method-flow">
           <li><strong>时序编码<span lang="en" class="translation">Encode history</span></strong><span>56 天日客流、周周期及截点已知日历。<span lang="en" class="translation">56 days of arrivals, weekly patterns and the calendar known at cutoff.</span></span></li>
@@ -127,7 +127,7 @@
           <article class="card method-card">
             <h3>两类表征，三个融合位置<span lang="en" class="translation">Two representations, three fusion positions</span></h3>
             <p>在同一个日与周时序骨干上，比较直接输入图文视频向量和输入对齐线索。分别在输入层、中间表示或预测后融合。历史社媒按发帖日对齐，按实际取得时间核对可见性。<span lang="en" class="translation">Using the same daily and weekly encoder, compare direct media embeddings and aligned cues at the input, intermediate representation and forecast stages. Historical media are aligned by posting date, with retrieval times used to audit availability.</span></p>
-
+            <p>线索掩码注意力以冻结的客流状态为查询，选择有效模态并学习有界修正。五轮平均 MASE 为 0.962，同批客流加日历为 0.959，早期融合为 0.971。<span lang="en" class="translation">Cue-masked attention queries eligible media roles from the frozen arrivals state and learns a bounded residual. Five-round mean MASE was 0.962, compared with 0.959 for arrivals and calendar and 0.971 for early fusion.</span></p>
           </article>
         </div>
       </section>
