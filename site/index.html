@@ -7,6 +7,7 @@
   <title>IKUN · 香港入境预测</title>
   <link rel="icon" href="assets/ikun-avatar.png" type="image/png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="atlas.css">
   <link rel="alternate" hreflang="en" href="en/index.html">
   <script defer src="rehearsal.js"></script>
   <script defer src="multimodal.js"></script>
@@ -20,6 +21,7 @@
       <nav aria-label="主要导航">
         <a href="#forecast">归档模拟</a>
         <a href="#multimodal">多模态实验</a>
+        <a href="#evidence">数据证据</a>
         <a href="methods.html">预测原理</a>
         <a href="#calendar">正式赛程</a>
         <a class="language" href="en/index.html" hreflang="en" lang="en">English</a>
@@ -27,38 +29,40 @@
     </div>
   </header>
   <main id="top">
-    <section class="hero">
-      <div class="wrap hero-content hero-dashboard">
+    <section class="hero atlas-hero" aria-labelledby="page-title">
+      <div class="wrap atlas-grid">
         <div class="hero-copy">
-          <p class="eyebrow">HONG KONG · VISITOR ARRIVALS</p>
-          <h1>香港入境预测</h1>
-          <p class="intro">逐口岸、逐客群查看未来 15 天预测。五轮历史模拟以真实发布归档复演，图文视频模型另做对照。</p>
+          <p class="eyebrow"><span class="atlas-dot" aria-hidden="true"></span> IKUN / HONG KONG ARRIVALS</p>
+          <h1 id="page-title">香港入境<br>客流预测</h1>
+          <p class="intro">逐口岸、逐客群查看 15 天预测、实况和 70% 区间。用五轮历史归档检验模型，再比较图文视频能否提前提供出行线索。</p>
           <div class="hero-actions">
             <a class="button hero-button" href="#forecast">查看历史预测 <span aria-hidden="true">↓</span></a>
-            <a class="button hero-outline" href="#multimodal">查看多模态实验 <span aria-hidden="true">↗</span></a>
+            <a class="atlas-secondary" href="#multimodal">查看多模态实验 <span aria-hidden="true">↗</span></a>
           </div>
-          <dl class="hero-stats">
-            <div><dt>历史模拟</dt><dd>5<span> 轮</span></dd></div>
-            <div><dt>代理序列</dt><dd>20<span> 条</span></dd></div>
-            <div><dt>预测长度</dt><dd>15<span> 天</span></dd></div>
-          </dl>
         </div>
-        <div class="hero-result">
-          <p class="eyebrow">五轮归档模拟</p>
-          <h2>Chronos-2 加日历</h2>
-          <dl class="hero-result-stats">
-            <div><dt>最佳四轮 MASE</dt><dd id="hero-mase">—</dd></div>
-            <div><dt>最佳四轮 Winkler</dt><dd id="hero-winkler">—</dd></div>
-          </dl>
-          <p>点预测与区间分别计分。<a href="methods.html#evaluation-title">评分方法 ↗</a></p>
-        </div>
+        <figure class="atlas-figure">
+          <img src="assets/arrival-network.svg" width="600" height="350" alt="">
+          <figcaption><span>FIG. 01</span> 口岸网络概念图</figcaption>
+        </figure>
+      </div>
+      <div class="wrap atlas-band">
+        <dl>
+          <div><dt>归档模拟</dt><dd>05</dd></div>
+          <div><dt>代理序列</dt><dd>20</dd></div>
+          <div><dt>预测天数</dt><dd>15</dd></div>
+        </dl>
+        <p>公开研究预览 · 历史模拟</p>
       </div>
     </section>
     <div class="wrap content">
       <section id="forecast" aria-labelledby="forecast-title">
         <div class="section-heading">
-          <div><h2 id="forecast-title">五轮归档模拟</h2><p>按 2025–2026 年对应赛程和 15 份当日归档复演。</p></div>
+          <div><p class="section-index">01 / 归档预测</p><h2 id="forecast-title">五轮归档模拟</h2><p>按 2025–2026 年对应赛程和 15 份当日归档复演。</p></div>
           <a id="workbook" class="button" download>下载本轮练习 Excel <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="archive-strip">
+          <span>外部基准 · Chronos-2 加日历</span>
+          <span>最佳四轮 <b id="hero-mase">—</b> MASE <b id="hero-winkler">—</b> Winkler</span>
         </div>
         <div class="rounds" id="rounds" aria-label="模拟轮次"></div>
         <div class="card forecast">
@@ -98,16 +102,18 @@
       </section>
       <section id="multimodal" aria-labelledby="multimodal-title">
         <div class="section-heading">
-          <div><h2 id="multimodal-title">多模态预测实验</h2><p>同一口岸图模型分别使用客流与日历、加入正文，以及加入完整图文视频。</p></div>
-          <a class="text-link" href="methods.html#multimodal-method">模型与评估口径 ↗</a>
+          <div><p class="section-index">02 / 多模态</p><h2 id="multimodal-title">图文视频能提前告诉我们什么？</h2>
+          <p>在同一自研时空模型中，比较旅游文本线索及图片、封面和视频帧的增量。</p></div>
+          <a class="text-link" href="methods.html#multimodal-method">算法与变量 ↗</a>
         </div>
         <div class="experiment-grid">
           <article class="card forecast">
             <div class="experiment-heading">
-              <div><p class="section-kicker">截至发布时实际取得的内容</p><h3>15 天试验预测</h3></div>
-              <a class="text-link" id="media-export" href="exports/multimodal-trial.csv" download>下载预测 CSV ↓</a>
+              <div><p class="section-kicker">五轮历史回采</p><h3>自研模型逐日预测</h3></div>
+              <a class="text-link" href="exports/multimodal-historical.csv" download>下载历史 CSV ↓</a>
             </div>
             <div class="filters media-filters">
+              <label>轮次<select id="media-round"></select></label>
               <label>口岸<select id="media-port"></select></label>
               <label>客群<select id="media-group"></select></label>
               <label>输入组合<select id="media-model"></select></label>
@@ -115,42 +121,71 @@
             <div class="chart-header">
               <div><h3 id="media-chart-title"></h3><p id="media-chart-subtitle"></p></div>
               <ul class="legend" aria-label="图例">
-                <li><i class="forecast-key"></i>预测</li><li><i class="interval-key"></i>70% 区间</li>
+                <li><i class="forecast-key"></i>预测</li><li><i class="actual-key"></i>实况</li><li><i class="interval-key"></i>70% 区间</li>
               </ul>
             </div>
             <div class="chart-surface">
               <output class="chart-readout" id="media-readout"></output>
-              <canvas id="media-chart" tabindex="0" role="img" aria-label="多模态试验预测和区间。用左右方向键切换日期。"></canvas>
+              <canvas id="media-chart" tabindex="0" role="img" aria-label="多模态历史预测和实况。用左右方向键切换日期。"></canvas>
             </div>
+            <p class="caption">图表和 CSV 的各预测值及区间端点分别取三个种子的平均。</p>
             <details>
-              <summary>查看所选序列的逐日明细</summary>
-              <div class="table-scroll"><table><thead><tr><th>日期</th><th>点预测</th><th>下限</th><th>上限</th></tr></thead><tbody id="media-daily"></tbody></table></div>
+              <summary>查看逐日明细</summary>
+              <div class="table-scroll"><table><thead><tr><th>日期</th><th>实况</th><th>点预测</th><th>下限</th><th>上限</th></tr></thead><tbody id="media-daily"></tbody></table></div>
             </details>
           </article>
           <aside class="experiment-side">
             <article class="card experiment-card">
-              <p class="section-kicker">五轮对照</p>
-              <h3>回采内容的历史回测</h3>
-              <p id="media-score-note" class="caption"></p>
+              <p class="section-kicker">截至 2026.11.12</p>
+              <h3>客流和日历仍然领先</h3>
+              <p class="caption">每个种子、每轮分别对第 2–15 天评分，再取平均。</p>
               <div class="table-scroll">
                 <table class="experiment-scores"><thead><tr><th>输入</th><th>MASE ↓</th><th>Winkler ↓</th></tr></thead><tbody id="media-scores"></tbody></table>
               </div>
-              <p class="caption">历史内容按发帖时间对齐，正文和媒体的历史版本未逐条核验。这五轮为探索性结果。</p>
-            </article>
-            <article class="card experiment-card">
-              <p class="section-kicker">媒体输入</p><h3 id="media-posts"></h3>
-              <p id="media-inventory" class="caption"></p>
-              <p id="media-encoded" class="caption"></p>
-              <p class="section-kicker">近 28 天预测输入</p>
-              <dl class="media-counts" id="media-counts"></dl>
-              <p id="media-cutoff" class="caption"></p>
+              <p class="caption">社媒按发帖日重建；这些内容实际在更晚采集，结果仅用于探索。</p>
             </article>
           </aside>
         </div>
       </section>
+      <section id="evidence" aria-labelledby="evidence-title">
+        <div class="section-heading">
+          <div><p class="section-index">03 / 数据证据</p><h2 id="evidence-title">从一条内容到一条预测线索</h2>
+          <p>每条线索保留来源、可见时间、事件日期及可核验的口岸。</p></div>
+          <a class="text-link" href="methods.html#cue-method">数据字段与处理 ↗</a>
+        </div>
+        <dl class="evidence-inventory">
+          <div><dt>入模语料帖子</dt><dd>29,958</dd></div>
+          <div><dt>配图向量</dt><dd>12,230</dd></div>
+          <div><dt>视频聚合向量</dt><dd>3,257</dd></div>
+          <div><dt>旅游线索记录</dt><dd>661</dd></div>
+        </dl>
+        <p class="caption evidence-caption">X、微博、抖音、Instagram、TikTok。不同模态可来自同一帖子。以下为授权开放的演示素材，不计入上述语料统计。</p>
+        <div class="evidence-grid">
+          <article class="evidence-text">
+            <p class="section-index">01 / 正文</p>
+            <h3>日期和口岸分别核验</h3>
+            <blockquote>「12 月 20 日去香港看演出，计划从深圳湾入境。」</blockquote>
+            <p>示例文本。若提前取得，活动日期可以支持对应预测日；口岸提及只进入深圳湾线索。</p>
+          </article>
+          <figure class="evidence-media">
+            <img src="assets/wan-chai-venue.webp" alt="从维港水面望向湾仔的香港会议展览中心" loading="lazy" width="1000" height="750">
+            <figcaption><p class="section-index">02 / 图像</p><h3>照片补充场景证据</h3>
+            <p>湾仔会展中心的历史照片。画面可帮助识别场馆，单凭照片不能确定活动日期、出行人数或入境口岸。</p>
+            <small><a href="https://commons.wikimedia.org/wiki/File:Hong_Kong_Convention_and_Exhibition_Centre_28-05-2016(2).jpg">LN9267 ↗</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> · 转为 WebP</small></figcaption>
+          </figure>
+          <figure class="evidence-media">
+            <video controls muted preload="none" poster="assets/light-rail.webp" aria-label="香港轻铁轨道道岔切换的无声视频">
+              <source src="assets/light-rail.webm" type="video/webm">
+            </video>
+            <figcaption><p class="section-index">03 / 视频</p><h3>抽帧识别交通场景</h3>
+            <p>香港轻铁道岔的历史片段，用于演示抽帧。它本身不提供入境口岸线索。</p>
+            <small><a href="https://commons.wikimedia.org/wiki/File:MTR_LRT_railway_switch_blades.ogv">Devilreborn ↗</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> · 转码、静音并抽帧</small></figcaption>
+          </figure>
+        </div>
+      </section>
       <section id="calendar" aria-labelledby="calendar-title">
         <div class="section-heading">
-          <div><h2 id="calendar-title">正式赛程</h2><p>北京时间。每轮最后一次数据发布为当天 12:00，提交截止为 23:59。</p></div>
+          <div><p class="section-index">04 / 比赛发布</p><h2 id="calendar-title">正式赛程</h2><p>北京时间。每轮最后一次数据发布为当天 12:00，提交截止为 23:59。</p></div>
           <a class="text-link" href="https://tourismforecasting.net/tfc/rules.html">比赛规则 ↗</a>
         </div>
         <div class="card table-scroll">
@@ -159,7 +194,7 @@
         <p class="caption">首次训练库计划于 2026-11-30 12:00 发布。官方提交材料通过组委会指定邮箱提交。</p>
       </section>
       <section id="sources" aria-labelledby="sources-title">
-        <div class="section-heading"><div><h2 id="sources-title">数据与方法</h2><p id="checked">读取来源状态…</p></div></div>
+        <div class="section-heading"><div><p class="section-index">05 / 来源</p><h2 id="sources-title">数据与方法</h2><p id="checked">读取来源状态…</p></div></div>
         <div class="sources">
           <article class="card source-card"><h3>公开历史客流</h3><p id="passenger-status"></p><a class="text-link" href="https://data.gov.hk/en-data/dataset/hk-immd-set5-statistics-daily-passenger-traffic">香港入境事务处 ↗</a></article>
           <article class="card source-card"><h3>训练库与提交模板</h3><p id="template-status"></p><a class="text-link" href="https://tourismforecasting.net/tfc/data_release.html#submission-templates">组委会数据发布页 ↗</a></article>
@@ -168,6 +203,6 @@
       </section>
     </div>
   </main>
-  <footer><div class="wrap footer"><span>IKUN 参赛队</span><a href="methods.html#team-photo">高清肖像 ↗</a></div></footer>
+  <footer><div class="wrap footer"><span>IKUN 参赛队</span><a href="https://github.com/Brad-zqh/hong-kong-arrivals-outlook">网站源码 ↗</a></div></footer>
 </body>
 </html>

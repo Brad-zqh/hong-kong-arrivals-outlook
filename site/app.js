@@ -172,7 +172,7 @@ function chartControl(canvasId, readoutId, historical) {
 }
 
 const setHistoricalChart = chartControl("chart", "chart-readout", true);
-const setMediaChart = chartControl("media-chart", "media-readout", false);
+const setMediaChart = chartControl("media-chart", "media-readout", true);
 
 function render() {
   const round = report.rounds[roundIndex];
@@ -246,23 +246,27 @@ for (const metric of ["mase", "winkler"]) {
   select("hero-" + metric).textContent = (best.reduce((a, b) => a + b, 0) / 4).toFixed(3);
 }
 
-function renderExperiment() {
-  const port = select("media-port").value;
-  const group = select("media-group").value;
-  const model = select("media-model").value;
-  const seriesIndex = experiment.series.findIndex(([p, g]) => p === port && g === group);
-  const rows = experiment.data.filter(row => row[1] === seriesIndex).map(([day, , values]) => [day, null, ...values[model]]);
-  select("media-chart-title").textContent = portName(port) + " · " + groupNames[group];
-  select("media-chart-subtitle").textContent = dateRange(experiment.start, experiment.end) + " · " + mediaModels[model];
-  replaceTable("media-daily", rows.map(([day, , ...values]) => [day, ...values.map(value => number.format(value))]));
-  setMediaChart(rows);
-}
-
 if (experiment) {
+  function renderExperiment() {
+    const round = select("media-round").value;
+    const port = select("media-port").value;
+    const group = select("media-group").value;
+    const model = select("media-model").value;
+    const seriesIndex = experiment.series.findIndex(([p, g]) => p === port && g === group);
+    const rows = experiment.data[round].filter(row => row[1] === seriesIndex)
+      .map(([day, , actual, values]) => [day, actual, ...values[model]]);
+    select("media-chart-title").textContent = portName(port) + " · " + groupNames[group];
+    select("media-chart-subtitle").textContent = dateRange(rows[0][0], rows.at(-1)[0]) + " · " + mediaModels[model];
+    replaceTable("media-daily", rows.map(([day, ...values]) => [day, ...values.map(value => number.format(value))]));
+    setMediaChart(rows);
+  }
+  fillOptions("media-round", report.rounds.map(({ number }) => [String(number), roundName(number)]));
   fillOptions("media-port", portOptions);
   fillOptions("media-group", Object.entries(groupNames));
-  fillOptions("media-model", Object.entries(mediaModels).reverse());
-  for (const id of ["media-port", "media-group", "media-model"]) select(id).addEventListener("change", renderExperiment);
+  fillOptions("media-model", Object.entries(mediaModels));
+  for (const id of ["media-round", "media-port", "media-group", "media-model"]) {
+    select(id).addEventListener("change", renderExperiment);
+  }
   const metrics = Object.entries(experiment.metrics);
   replaceTable("media-scores", metrics.map(([key, score]) => [
     mediaModels[key], score.mase.toFixed(3), score.winkler.toFixed(3),
@@ -272,39 +276,6 @@ if (experiment) {
     const bestIndex = metrics.findIndex(([, score]) => score[metric] === best);
     select("media-scores").rows[bestIndex].cells[index + 1].classList.add("best-score");
   }
-  select("media-score-note").textContent = t("每个模型按第 2–15 天评分，共 1,400 个目标。",
-    "Days 2–15 were scored for 1,400 targets per model.");
-  const postCount = number.format(experiment.posts);
-  select("media-posts").textContent = t(`已处理 ${postCount} 条有日期的帖子`, `${postCount} dated posts processed`);
-  if (experiment.inventory) {
-    const { posts, photo, thumbnail, video } = Object.fromEntries(
-      Object.entries(experiment.inventory).map(([key, count]) => [key, number.format(count)]),
-    );
-    select("media-inventory").textContent = t(
-      `本地语料有 ${posts} 条去重帖子，按文件内容去重后有 ${photo} 张配图、${thumbnail} 张封面和 ${video} 段原视频。`,
-      `The local corpus holds ${posts} unique posts. Deduplication by file content yields ${photo} photos, ${thumbnail} thumbnails and ${video} original videos.`,
-    );
-  }
-  if (experiment.encoded) {
-    const { text, photo, thumbnail, video } = Object.fromEntries(
-      Object.entries(experiment.encoded).map(([key, count]) => [key, number.format(count)]),
-    );
-    select("media-encoded").textContent = t(
-      `按帖子计，成功生成 ${text} 条正文、${photo} 条配图、${thumbnail} 条封面和 ${video} 条原视频向量。`,
-      `Post-level embeddings cover ${text} texts, ${photo} photos, ${thumbnail} thumbnails and ${video} original videos.`,
-    );
-  }
-  select("media-counts").replaceChildren(...[
-    [t("正文", "Post text"), experiment.counts.text], [t("配图", "Photos"), experiment.counts.photo],
-    [t("封面", "Thumbnails"), experiment.counts.thumbnail], [t("原视频", "Original videos"), experiment.counts.video],
-  ].map(([label, count]) => {
-    const box = document.createElement("div");
-    box.append(element("dt", label), element("dd", number.format(count)));
-    return box;
-  }));
-  const cutoff = experiment.cutoff.slice(0, 16).replace("T", " ");
-  select("media-cutoff").textContent = t(`明细覆盖北京时间 ${cutoff} 前已取得的近 28 天内容。`,
-    `Counts cover the 28 days of content available before ${cutoff} Beijing time.`);
   renderExperiment();
 } else {
   select("multimodal").hidden = true;
