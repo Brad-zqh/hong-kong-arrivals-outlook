@@ -4,8 +4,7 @@ const report = window.REHEARSAL;
 const sourceStatus = window.SOURCES;
 const experiment = window.MULTIMODAL;
 const select = id => document.getElementById(id);
-const english = document.documentElement.lang === "en";
-const t = (chinese, translation) => english ? translation : chinese;
+const t = (chinese, translation) => chinese === translation ? chinese : chinese + " / " + translation;
 const siteRoot = new URL(".", document.currentScript.src);
 const portNames = {
   "Airport": "香港国际机场",
@@ -23,15 +22,16 @@ const groupNames = {
   "Mainland Visitors": t("内地访客", "Mainland visitors"),
   "Other Visitors": t("其他访客", "Other visitors"),
 };
-const historicalModels = english ? {
-  chronos_joint_calendar: "Chronos-2 + calendar",
-  weekday_mean4: "Four-week same-weekday mean",
-} : report.models;
-const mediaModels = experiment && (english ? experiment.labelsEn : experiment.labels);
-const number = new Intl.NumberFormat(t("zh-CN", "en-HK"), { maximumFractionDigits: 0 });
-const compact = new Intl.NumberFormat(t("zh-CN", "en-HK"), { notation: "compact", maximumFractionDigits: 1 });
-const portName = name => english ? name : portNames[name] || name;
-const dateRange = (start, end) => start + t(" 至 ", " to ") + end;
+const historicalModels = {
+  chronos_joint_calendar: t("Chronos-2 + 日历", "Calendar"),
+  weekday_mean4: t("四周同星期均值", "Four-week weekday mean"),
+};
+const mediaModels = experiment && Object.fromEntries(Object.entries(experiment.labels)
+  .map(([key, label]) => [key, t(label, experiment.labelsEn[key])]));
+const number = new Intl.NumberFormat("en-HK", { maximumFractionDigits: 0 });
+const compact = new Intl.NumberFormat("en-HK", { notation: "compact", maximumFractionDigits: 1 });
+const portName = name => t(portNames[name] || name, name);
+const dateRange = (start, end) => start + " – " + end;
 const roundName = n => t(`第 ${n} 轮`, `Round ${n}`);
 let roundIndex = 0;
 
@@ -144,10 +144,17 @@ function chartControl(canvasId, readoutId, historical) {
   function update() {
     if (!rows.length) return;
     const [day, actual, point, low, high] = rows[selected];
-    const parts = [day, t("点预测 ", "Forecast ") + number.format(point)];
-    if (historical) parts.push(t("实况 ", "Observed ") + number.format(actual));
-    parts.push(t("70% 区间 ", "70% interval ") + number.format(low) + "–" + number.format(high));
-    readout.textContent = parts.join(" · ");
+    const date = element("time", day);
+    date.dateTime = day;
+    const parts = [[t("预测", "Forecast"), number.format(point)]];
+    if (historical) parts.push([t("实况", "Observed"), number.format(actual)]);
+    parts.push([t("70% 区间", "70% interval"), number.format(low) + "–" + number.format(high)]);
+    const values = parts.map(([label, value]) => {
+      const item = element("span", label);
+      item.append(element("strong", value));
+      return item;
+    });
+    readout.replaceChildren(date, ...values);
     drawChart(canvas, rows, selected, historical);
   }
   function pointAt(event) {
@@ -161,10 +168,11 @@ function chartControl(canvasId, readoutId, historical) {
   canvas.addEventListener("pointerdown", pointAt);
   canvas.addEventListener("pointermove", event => { if (event.pointerType === "mouse") pointAt(event); });
   canvas.addEventListener("keydown", event => {
-    if (!rows.length || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+    if (!rows.length || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
-    const delta = event.key === "ArrowRight" ? 1 : -1;
-    selected = Math.max(0, Math.min(rows.length - 1, selected + delta));
+    if (event.key === "Home") selected = 0;
+    else if (event.key === "End") selected = rows.length - 1;
+    else selected = Math.max(0, Math.min(rows.length - 1, selected + (event.key === "ArrowRight" ? 1 : -1)));
     update();
   });
   new ResizeObserver(update).observe(canvas);
@@ -181,8 +189,10 @@ function render() {
   const model = select("model").value;
   const index = report.series.findIndex(([p, g]) => p === port && g === group);
   const chartRows = round.data.filter(row => row[1] === index).map(([day, , actual, values]) => [day, actual, ...values[model]]);
-  select("chart-title").textContent = portName(port) + " · " + groupNames[group];
+  select("chart-title").textContent = portName(port);
   select("chart-subtitle").textContent = dateRange(round.origin, round.end) + " · " + historicalModels[model];
+  const historyEnd = round.releases.at(-1).historyThrough;
+  select("chart-data-cutoff").textContent = groupNames[group] + " · " + t("客流输入截至", "Arrivals through") + " " + historyEnd;
   select("workbook").href = new URL(`exports/rehearsal-round-${round.number}.xlsx`, siteRoot).href;
   select("workbook").title = t("练习 Excel 含该轮 Chronos-2 + 日历的全部 20 条序列",
     "Workbook with all 20 series from Chronos-2 + calendar");
@@ -214,7 +224,12 @@ report.rounds.forEach((round, i) => {
   button.type = "button";
   button.className = "round";
   button.setAttribute("aria-label", roundName(round.number) + ", " + round.origin);
-  button.append(element("b", roundName(round.number)), element("span", round.origin.slice(5)));
+  const label = element("b", `第 ${round.number} 轮`);
+  const translation = element("span", `Round ${round.number}`);
+  translation.lang = "en";
+  translation.className = "round-translation";
+  label.append(translation);
+  button.append(label, element("span", round.origin));
   button.addEventListener("click", () => { roundIndex = i; render(); });
   select("rounds").append(button);
 });
@@ -228,17 +243,16 @@ replaceTable("schedule", report.rounds.map(round => [
   templates.has(round.number) ? t("已发布", "Published") :
     sourceStatus.organizerError ? t("本次未核实", "Unverified") : t("待发布", "Pending"),
 ]));
-select("checked").textContent = t("最近一次来源检查 ", "Sources last checked ") + sourceStatus.checkedAt;
+select("checked").textContent = t("更新检查", "Last checked") + " · " + sourceStatus.checkedAt;
 const live = sourceStatus.passengers;
 const coverageDates = dateRange(report.source.first_date, report.source.last_date);
-select("passenger-status").textContent = t(`实绩核验数据覆盖 ${coverageDates}。`, `The validation data cover ${coverageDates}.`)
-  + (live ? t(` 当前公开源可见到 ${live.through}。`, ` Public records currently run through ${live.through}.`)
-    : t(" 本次未取得更新的官方客流。", " Updated official counts were unavailable at the last check."));
+select("passenger-status").textContent = t("核验数据", "Validation data") + " · " + coverageDates
+  + (live ? " · " + t("公开源截至", "Public data through") + " " + live.through : "");
 const templateCount = templates.size;
 select("template-status").textContent = sourceStatus.organizerError
-  ? t("本次未核实发布状态。", "Release status could not be verified at the last check.")
-  : (sourceStatus.database ? t("训练库已发布。", "Training data published.") : t("训练库待发布。", "Training data pending."))
-    + t(` 已发布模板 ${templateCount} / 5 轮。`, ` Templates published for ${templateCount} of 5 rounds.`);
+  ? t("发布状态待核实", "Release status unverified")
+  : (sourceStatus.database ? t("训练库已发布", "Training data published") : t("训练库待发布", "Training data pending"))
+    + " · " + t("模板", "Templates") + " " + templateCount + "/5";
 render();
 
 for (const metric of ["mase", "winkler"]) {

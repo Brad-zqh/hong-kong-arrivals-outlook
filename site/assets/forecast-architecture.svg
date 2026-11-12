@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
+<title id="title">香港入境客流预测 · Hong Kong visitor arrivals forecasting</title>
+<desc id="desc">Historical arrivals, calendar and multimodal content feed temporal representations and three alternative fusion positions. Group totals and checkpoint shares determine 15-day forecasts with 70 percent intervals.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0l9 4.5L0 9z" fill="#355675"/></marker>
+<marker id="arrow-light" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0l8 4L0 8z" fill="#31719a"/></marker></defs>
+<style>text{font-family:Inter,"Microsoft YaHei","PingFang SC",Arial,sans-serif} .en{fill:#405a71} .sub{fill:#405a71} .line{stroke:#355675;stroke-width:2;fill:none;stroke-linejoin:round;stroke-linecap:round} .route{stroke:#31719a;stroke-width:1.8;fill:none;marker-end:url(#arrow-light)}</style>
+<rect x="0" y="0" width="1600" height="850" rx="0" fill="#fff" stroke="none"/>
+<text x="28" y="54" font-size="31" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">香港入境客流预测</text>
+<text x="28" y="75" font-size="20" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Hong Kong visitor arrivals forecasting</text>
+<text x="1570" y="60" font-size="19" font-weight="750" fill="#17457a" text-anchor="end">IKUN</text>
+<rect x="28" y="119" width="255" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
+<rect x="28" y="119" width="255" height="68" rx="15" fill="#0b3465" stroke="none"/>
+<rect x="28" y="166" width="255" height="21" rx="0" fill="#0b3465" stroke="none"/>
+<text x="46" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">数据输入</text>
+<text x="46" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Inputs</text>
+<rect x="313" y="119" width="315" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
+<rect x="313" y="119" width="315" height="68" rx="15" fill="#0b3465" stroke="none"/>
+<rect x="313" y="166" width="315" height="21" rx="0" fill="#0b3465" stroke="none"/>
+<text x="331" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">时序与媒体表征</text>
+<text x="331" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Temporal and media representations</text>
+<rect x="659" y="119" width="541" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
+<rect x="659" y="119" width="541" height="68" rx="15" fill="#0b3465" stroke="none"/>
+<rect x="659" y="166" width="541" height="21" rx="0" fill="#0b3465" stroke="none"/>
+<text x="677" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">融合与动态分流</text>
+<text x="677" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Fusion and dynamic routing</text>
+<rect x="1230" y="119" width="342" height="670" rx="15" fill="#f7faff" stroke="#d4e0ed"/>
+<rect x="1230" y="119" width="342" height="68" rx="15" fill="#0b3465" stroke="none"/>
+<rect x="1230" y="166" width="342" height="21" rx="0" fill="#0b3465" stroke="none"/>
+<text x="1248" y="147" font-size="19" font-weight="700" fill="#fff" text-anchor="start" xml:lang="zh-Hans">预测输出</text>
+<text x="1248" y="168" font-size="13" font-weight="500" fill="#dcecff" text-anchor="start" xml:lang="en">Forecasts</text>
+<rect x="43" y="209" width="225" height="82" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="56" y="236" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">56 天客流</text>
+<text x="56" y="257" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">56 days of arrivals</text>
+<path class="line" d="M56 283l15-3 13 2 15-4 13 1 12-3 16 2 13-5 16 1 13-4 16 3 14-3 15 2 20-5" style="stroke:#4a83ad;stroke-width:1.8"/>
+<rect x="43" y="301" width="225" height="67" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="56" y="328" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">已公布日历</text>
+<text x="56" y="349" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Published calendar</text>
+<rect x="43" y="391" width="225" height="67" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
+<text x="56" y="418" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">社交媒体正文</text>
+<text x="56" y="439" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Social media text</text>
+<rect x="43" y="468" width="225" height="67" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
+<text x="56" y="495" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">配图与封面</text>
+<text x="56" y="516" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Photos and covers</text>
+<rect x="43" y="545" width="225" height="67" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
+<text x="56" y="572" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">视频采样帧</text>
+<text x="56" y="593" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Sampled video frames</text>
+<rect x="43" y="635" width="225" height="74" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="56" y="662" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">口岸间距离</text>
+<text x="56" y="683" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Checkpoint distances</text>
+<text x="45" y="742" font-size="14" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">按预测截点读取</text>
+<text x="45" y="763" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Inputs available at each cutoff</text>
+<rect x="328" y="216" width="285" height="122" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="341" y="243" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">日与周时序编码</text>
+<text x="341" y="264" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Daily and weekly encoding</text>
+<text x="342" y="302" font-size="13" font-weight="500" fill="#405a71" text-anchor="start">Daily Conv1D  ·  Weekly dilation</text>
+<rect x="342" y="311" width="13" height="13" rx="2" fill="#edf5ff" stroke="#7a9cbf"/>
+<rect x="360" y="311" width="13" height="13" rx="2" fill="#dce9f6" stroke="#7a9cbf"/>
+<rect x="378" y="311" width="13" height="13" rx="2" fill="#b9d1e9" stroke="#7a9cbf"/>
+<rect x="396" y="311" width="13" height="13" rx="2" fill="#95bddd" stroke="#7a9cbf"/>
+<rect x="414" y="311" width="13" height="13" rx="2" fill="#73a6d0" stroke="#7a9cbf"/>
+<rect x="432" y="311" width="13" height="13" rx="2" fill="#477fae" stroke="#7a9cbf"/>
+<rect x="328" y="386" width="285" height="112" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
+<text x="341" y="413" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">图文视频向量</text>
+<text x="341" y="434" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Text and visual embeddings</text>
+<text x="342" y="469" font-size="12" font-weight="500" fill="#405a71" text-anchor="start">Qwen3 text · CLIP photos, covers, frames</text>
+<rect x="498" y="474" width="13" height="13" rx="2" fill="#e0f2ed" stroke="#7a9cbf"/>
+<rect x="516" y="474" width="13" height="13" rx="2" fill="#c9e7de" stroke="#7a9cbf"/>
+<rect x="534" y="474" width="13" height="13" rx="2" fill="#abdbcf" stroke="#7a9cbf"/>
+<rect x="552" y="474" width="13" height="13" rx="2" fill="#84c5b9" stroke="#7a9cbf"/>
+<rect x="570" y="474" width="13" height="13" rx="2" fill="#55a49d" stroke="#7a9cbf"/>
+<rect x="588" y="474" width="13" height="13" rx="2" fill="#317b7c" stroke="#7a9cbf"/>
+<rect x="328" y="519" width="285" height="170" rx="9" fill="#eaf8f5" stroke="#ccdcea"/>
+<text x="341" y="546" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">旅游线索对齐</text>
+<text x="341" y="567" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Aligned travel cues</text>
+<text x="342" y="587" font-size="14" font-weight="650" fill="#102c49" text-anchor="start">预订、活动、路线与服务变化</text>
+<text x="342" y="607" font-size="12" font-weight="500" fill="#405a71" text-anchor="start">Bookings, events, routes and service changes</text>
+<rect x="341" y="628" width="258" height="42" rx="6" fill="#fff" stroke="#b7d5ce"/>
+<text x="352" y="645" font-size="14" font-weight="700" fill="#102c49" text-anchor="start">日期 × 客群 × 口岸</text>
+<text x="352" y="661" font-size="11" font-weight="500" fill="#405a71" text-anchor="start">Date × visitor group × checkpoint</text>
+<text x="328" y="734" font-size="14" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">保留各模态的首次取得时间</text>
+<text x="328" y="755" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">First retrieval tracked by modality</text>
+<path class="line" d="M268 245h17v25h42" marker-end="url(#arrow)"/>
+<path class="line" d="M268 331h17v-61"/>
+<path class="line" d="M268 425h23v18h36" marker-end="url(#arrow)"/>
+<path class="line" d="M268 501h23v-58M268 578h23v-77"/>
+<path class="line" d="M291 501v100h36" marker-end="url(#arrow)"/>
+<path class="line" d="M268 670h24v94h385v-93h264" marker-end="url(#arrow)"/>
+<text x="676" y="220" font-size="18" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">比较三个融合位置</text>
+<text x="676" y="241" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Three alternative fusion positions</text>
+<rect x="676" y="262" width="167" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="689" y="289" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">早期融合</text>
+<text x="689" y="310" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Early fusion</text>
+<text x="689" y="338" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">输入投影 → 激活</text>
+<text x="689" y="354" font-size="10" font-weight="500" fill="#405a71" text-anchor="start">Input projection → activation</text>
+<rect x="846" y="262" width="167" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="859" y="289" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">中期融合</text>
+<text x="859" y="310" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Intermediate fusion</text>
+<text x="859" y="338" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">独立编码 → 表示融合</text>
+<text x="859" y="354" font-size="10" font-weight="500" fill="#405a71" text-anchor="start">Encode → merge states</text>
+<rect x="1016" y="262" width="167" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="1029" y="289" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">后期融合</text>
+<text x="1029" y="310" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Late fusion</text>
+<text x="1029" y="338" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">生成预测 → 合并输出</text>
+<text x="1029" y="354" font-size="10" font-weight="500" fill="#405a71" text-anchor="start">Predict → combine outputs</text>
+<path class="line" d="M613 270h27v-19h457"/>
+<path class="line" d="M613 444h27v-174"/>
+<path class="line" d="M613 604h27v-160"/>
+<path class="line" d="M759 251v10" marker-end="url(#arrow)"/>
+<path class="line" d="M930 251v10" marker-end="url(#arrow)"/>
+<path class="line" d="M1097 251v10" marker-end="url(#arrow)"/>
+<path class="line" d="M759 365v28h338v-28M930 365v28M1097 393h82v72H786"/>
+<text x="676" y="428" font-size="18" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">客群总量与口岸分流</text>
+<text x="676" y="449" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Forecast demand and allocate checkpoint shares</text>
+<path class="line" d="M786 465v24" marker-end="url(#arrow)"/>
+<path class="line" d="M1057 465v24" marker-end="url(#arrow)"/>
+<rect x="676" y="490" width="239" height="144" rx="9" fill="#edf4fd" stroke="#ccdcea"/>
+<text x="689" y="517" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">客群总量</text>
+<text x="689" y="538" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Visitor group total</text>
+<text x="689" y="562" font-size="13" font-weight="600" fill="#102c49" text-anchor="start">同星期基线 × 学习到的总量调整</text>
+<text x="689" y="581" font-size="12" font-weight="500" fill="#405a71" text-anchor="start">Adjust the same-weekday total</text>
+<path class="line" d="M689 613l17-7 16 2 16-5 15 6 16-8 15 2 17-9 17 2 16-7 18 5 16-8" style="stroke:#3c7aa7;stroke-width:1.8"/>
+<rect x="942" y="490" width="241" height="181" rx="9" fill="#edf4fd" stroke="#ccdcea"/>
+<text x="955" y="517" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">有向口岸图</text>
+<text x="955" y="538" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Directed checkpoint graph</text>
+<text x="955" y="562" font-size="13" font-weight="600" fill="#102c49" text-anchor="start">随客群和日期变化的转移矩阵</text>
+<text x="955" y="580" font-size="11" font-weight="500" fill="#405a71" text-anchor="start">Transition matrix by group and date</text>
+<path class="route" d="M973 612l61 16"/>
+<path class="route" d="M1046 626l57-16"/>
+<path class="route" d="M1118 612l31 27"/>
+<path class="route" d="M1146 644l-97-13"/>
+<path class="route" d="M978 609l123-3"/>
+<circle cx="971" cy="611" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
+<circle cx="1042" cy="631" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
+<circle cx="1110" cy="607" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
+<circle cx="1153" cy="643" r="6" fill="#fff" stroke="#31719a" stroke-width="2"/>
+<rect x="690" y="702" width="473" height="54" rx="8" fill="#ddecfc" stroke="#bdcfe4"/>
+<text x="709" y="724" font-size="15" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">客群总量 × 口岸份额</text>
+<text x="709" y="745" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Group total × checkpoint share</text>
+<path class="line" d="M786 635v66" marker-end="url(#arrow)"/>
+<path class="line" d="M1057 672v29" marker-end="url(#arrow)"/>
+<path class="line" d="M1164 729h50v-357h30" marker-end="url(#arrow)"/>
+<rect x="1245" y="209" width="312" height="89" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="1258" y="236" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">15 天 × 10 口岸 × 2 客群</text>
+<text x="1258" y="257" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">15 days × 10 checkpoints × 2 groups</text>
+<rect x="1245" y="319" width="312" height="234" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="1259" y="348" font-size="16" font-weight="700" fill="#102c49" text-anchor="start">点预测与 70% 区间</text>
+<text x="1259" y="369" font-size="13" font-weight="500" fill="#405a71" text-anchor="start">Point forecast and 70% interval</text>
+<path class="line" d="M1270 398v121h265" style="stroke:#9ab0c4;stroke-width:1.4"/>
+<path d="M1272 482l27-18 26 8 26-20 25 11 27-22 25 6 27-22 23 4 27-16 26 4v38l-26 3-27 11-23 1-27 11-25 2-27 10-25-5-26 12-26-4-27 9z" fill="#d9eafc"/>
+<path class="line" d="M1272 493l27-14 26 6 26-16 25 8 27-16 25 2 27-16 23 2 27-14 26 1" style="stroke:#1a64ae;stroke-width:2.6"/>
+<rect x="1245" y="577" width="312" height="103" rx="9" fill="#fff" stroke="#ccdcea"/>
+<text x="1258" y="604" font-size="16" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">五轮历史模拟</text>
+<text x="1258" y="625" font-size="13" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Five archived rehearsals</text>
+<text x="1258" y="652" font-size="12" font-weight="600" fill="#102c49" text-anchor="start">MASE · Scaled Winkler · Coverage</text>
+<text x="1246" y="728" font-size="14" font-weight="700" fill="#102c49" text-anchor="start" xml:lang="zh-Hans">第 2–15 天计分</text>
+<text x="1246" y="749" font-size="12" font-weight="500" fill="#405a71" text-anchor="start" xml:lang="en">Evaluation uses days 2–15</text>
+<text x="29" y="822" font-size="14" font-weight="550" fill="#405a71" text-anchor="start">组内口岸份额之和为 1  ·  Checkpoint shares sum to 1 within each visitor group</text>
+</svg>
