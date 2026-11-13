@@ -35,27 +35,35 @@ html[lang="en"] .copy-zh, html[lang="zh-Hans"] .copy-en { display: none; }
 .skip-link { position: fixed; z-index: 9; inset: 12px auto auto 12px; padding: 12px; background: #fff; transform: translateY(-180%); }
 .skip-link:focus { transform: none; }
 
-.masthead { position: sticky; top: 0; z-index: 3; background: #fff; border-bottom: 1px solid var(--line); }
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  color: #fff;
+  background: linear-gradient(105deg, var(--navy), var(--accent) 56%, #0b4f96);
+  border-bottom: 1px solid #1c5e9e;
+}
+.masthead :focus-visible { outline-color: #d0e6ff; }
 .nav { display: flex; align-items: center; gap: 16px; min-height: 76px; }
 .nav nav { margin-left: auto; }
-.affiliations { display: flex; align-items: center; gap: 13px; border-left: 1px solid var(--line); padding-left: 16px; }
+.affiliations { display: flex; align-items: center; gap: 12px; padding-inline: 11px; border-radius: 6px; background: #fff; }
 .affiliations a { display: flex; align-items: center; justify-content: center; gap: 4px; min-height: 44px; text-decoration: none; }
 .affiliations .affiliations-label { color: var(--muted); font-size: .69rem; line-height: 1.15; max-width: 9ch; }
-.affiliations a:hover { text-decoration: underline; }
+.affiliations a:focus-visible { outline-color: var(--accent); outline-offset: -3px; }
 .affiliations img { display: block; width: auto; object-fit: contain; }
 .affiliations .zju-mark { height: 32px; }
 .affiliations .surrey-mark { height: 30px; }
 .affiliations .polyu-mark { height: 24px; }
-.language-toggle { min-width: 74px; min-height: 40px; padding: 6px 9px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: var(--accent); background: white; border: 1px solid #acbdd1; border-radius: 6px; font-size: .83rem; font-weight: 650; white-space: nowrap; }
-.language-toggle:hover { background: var(--tint); }
+.language-toggle { min-width: 74px; min-height: 40px; padding: 6px 9px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: inherit; background: #fff1; border: 1px solid #fff7; border-radius: 6px; font-size: .83rem; font-weight: 650; white-space: nowrap; }
+.language-toggle:hover { background: #fff3; }
 .language-icon { font-size: 1.05rem; }
-.brand { display: inline-flex; align-items: center; gap: 11px; min-height: 44px; text-decoration: none; font-size: 19px; font-weight: 780; letter-spacing: .1em; }
+.brand { display: inline-flex; align-items: center; gap: 11px; min-height: 44px; color: inherit; text-decoration: none; font-size: 19px; font-weight: 780; letter-spacing: .1em; }
 .team-avatar { display: block; object-fit: cover; border-radius: 7px; border: 1px solid var(--line); }
 .nav nav { display: flex; gap: clamp(2px, .55vw, 10px); }
-.nav nav a { display: block; padding: 10px 8px; border-radius: 6px; color: var(--ink); font-size: 13px; font-weight: 650; text-decoration: none; line-height: 1.2; white-space: nowrap; }
-.nav nav a:hover, .nav nav a[aria-current="page"] { color: var(--accent); background: var(--tint); }
+.nav nav a { display: block; padding: 10px 8px; border-radius: 6px; color: inherit; font-size: 13px; font-weight: 650; text-decoration: none; line-height: 1.2; white-space: nowrap; }
+.nav nav a:hover, .nav nav a[aria-current="page"] { background: #fff2; }
 
-.hero { background: #f3f6fa; border-bottom: 1px solid var(--line); }
+.hero { background: linear-gradient(125deg, #e4effb, #f7faff 82%); border-bottom: 1px solid var(--line); }
 .hero-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.12fr); align-items: center; gap: clamp(24px, 5vw, 76px); padding-block: clamp(34px, 5.1vw, 75px) clamp(29px, 4vw, 52px); }
 .hero-copy { min-width: 0; }
 .project-label { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; color: var(--accent); font-size: .76rem; }
@@ -218,7 +226,7 @@ footer { background: var(--navy); color: white; font-size: .86rem; }
 @media (max-width: 1150px) {
   html { scroll-padding-top: 124px; }
   .nav { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0 12px; padding-top: 4px; }
-  .affiliations { justify-content: center; padding: 0; border: 0; }
+  .affiliations { justify-content: center; justify-self: center; }
   .language-toggle { grid-column: 3; grid-row: 1; }
   .nav nav { grid-column: 1 / -1; width: 100%; justify-content: center; }
 
@@ -234,8 +242,10 @@ footer { background: var(--navy); color: white; font-size: .86rem; }
   .wrap { width: calc(100% - 32px); }
   .nav { gap: 0 5px; padding-block: 3px; }
   .brand { font-size: .83rem; gap: 5px; }
-  .affiliations { position: relative; gap: 5px; }
-  .affiliations .affiliations-label { position: absolute; top: 36px; max-width: none; font-size: .62rem; white-space: nowrap; }
+  .affiliations { position: relative; isolation: isolate; gap: 5px; padding-inline: 4px; background: transparent; }
+  .affiliations::before { position: absolute; z-index: -1; inset: 7px 0 9px; border-radius: 5px; background: #fff; content: ""; }
+  .affiliations .affiliations-label { position: absolute; top: 37px; max-width: none; color: #e2efff; font-size: .62rem; white-space: nowrap; }
+  .affiliations a:focus-visible { outline-color: #d0e6ff; }
   .affiliations .zju-mark { height: 21px; }
   .affiliations .surrey-mark { height: 20px; }
   .affiliations .polyu-mark { height: 15px; }
