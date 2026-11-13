@@ -8,6 +8,11 @@ const hasRehearsals = Boolean(select("forecast"));
 const hasSchedule = Boolean(select("schedule"));
 const t = siteLanguage.text;
 const siteRoot = new URL(".", document.currentScript.src);
+if (!hasRehearsals && location.hash === "#forecast") {
+  const rehearsals = new URL("rehearsals.html", siteRoot);
+  rehearsals.search = location.search;
+  location.replace(rehearsals);
+}
 const portNames = {
   "Airport": "香港国际机场",
   "Express Rail Link West Kowloon": "西九龙高铁站",
