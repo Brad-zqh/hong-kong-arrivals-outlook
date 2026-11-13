@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1406 742" width="1406" height="742" font-family="Arial, sans-serif">
+  <rect width="1406" height="742" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow-default" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#555555"/>
+    </marker>
+    <marker id="arrow-c0" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-c1" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#10B981"/>
+    </marker>
+    <marker id="arrow-c2" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-c3" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#EA580C"/>
+    </marker>
+    <marker id="arrow-c4" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#C62828"/>
+    </marker>
+    <marker id="arrow-c5" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#0D47A1"/>
+    </marker>
+    <marker id="arrow-c6" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#1B5E20"/>
+    </marker>
+    <marker id="arrow-c7" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#4A148C"/>
+    </marker>
+    <marker id="arrow-c8" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#BF360C"/>
+    </marker>
+    <marker id="arrow-c9" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 4, 0 8" fill="#37474F"/>
+    </marker>
+  </defs>
+  <path d="M 299.5,194.0 L 369.5,194.0" stroke="#4e78ad" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 664.5,194.0 L 727.0,194.0" stroke="#4e78ad" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 1017.0,216.2 L 1088.0,227.1" stroke="#4e78ad" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 299.5,294.0 L 369.5,294.0" stroke="#4c827b" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 664.5,294.0 L 727.0,294.0" stroke="#4c827b" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 1017.0,317.8 L 1088.0,329.5" stroke="#4c827b" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 299.5,394.0 L 369.5,394.0" stroke="#75629e" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 664.5,394.0 L 727.0,394.0" stroke="#75629e" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 1017.0,377.4 L 1088.0,369.3" stroke="#75629e" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 1231.0,319.5 L 1231.0,282.5" stroke="#4b6687" stroke-width="2" fill="none" marker-end="url(#arrow-default)"/>
+  <path d="M 299.5,595.0 L 369.5,595.0" stroke="#a37549" stroke-width="2" fill="none" marker-end="url(#arrow-default)" stroke-dasharray="8,4"/>
+  <path d="M 664.5,595.0 L 727.0,595.0" stroke="#a37549" stroke-width="2" fill="none" marker-end="url(#arrow-default)" stroke-dasharray="8,4"/>
+  <path d="M 1017.0,595.0 L 1088.0,595.0" stroke="#a37549" stroke-width="2" fill="none" marker-end="url(#arrow-default)" stroke-dasharray="8,4"/>
+  <rect x="32.5" y="160.5" width="267.0" height="67.0" fill="#eaf2ff" stroke="#98b5dd" stroke-width="2" rx="8"/>
+  <text x="166.0" y="190.4" font-size="17" fill="#143b66" text-anchor="middle" font-weight="bold">Daily arrivals and calendar</text>
+  <text x="166.0" y="209.4" font-size="14" fill="#888888" text-anchor="middle">Checkpoint × visitor group</text>
+  <rect x="369.5" y="160.5" width="295.0" height="67.0" fill="#eaf2ff" stroke="#98b5dd" stroke-width="2" rx="8"/>
+  <text x="517.0" y="190.4" font-size="17" fill="#143b66" text-anchor="middle" font-weight="bold">Historical arrivals encoder</text>
+  <text x="517.0" y="209.4" font-size="14" fill="#888888" text-anchor="middle">History and known calendar</text>
+  <rect x="727.0" y="160.5" width="290.0" height="67.0" fill="#eaf2ff" stroke="#98b5dd" stroke-width="2" rx="8"/>
+  <text x="872.0" y="190.4" font-size="17" fill="#143b66" text-anchor="middle" font-weight="bold">Group demand</text>
+  <text x="872.0" y="209.4" font-size="14" fill="#888888" text-anchor="middle">Daily total across checkpoints</text>
+  <rect x="1088.0" y="215.5" width="286.0" height="67.0" fill="#ffffff" stroke="#c4cfdd" stroke-width="2" rx="8"/>
+  <text x="1231.0" y="245.4" font-size="17" fill="#142f52" text-anchor="middle" font-weight="bold">Point forecast + 70% interval</text>
+  <text x="1231.0" y="264.4" font-size="14" fill="#888888" text-anchor="middle">10 checkpoints × 2 groups × 15 days</text>
+  <rect x="32.5" y="260.5" width="267.0" height="67.0" fill="#e9f4f2" stroke="#8dbbb6" stroke-width="2" rx="8"/>
+  <text x="166.0" y="290.4" font-size="17" fill="#174c47" text-anchor="middle" font-weight="bold">Posts, photos and video</text>
+  <text x="166.0" y="309.4" font-size="14" fill="#888888" text-anchor="middle">Text, images and decoded frames</text>
+  <rect x="369.5" y="260.5" width="295.0" height="67.0" fill="#e9f4f2" stroke="#8dbbb6" stroke-width="2" rx="8"/>
+  <text x="517.0" y="290.4" font-size="17" fill="#174c47" text-anchor="middle" font-weight="bold">Multimodal attention</text>
+  <text x="517.0" y="309.4" font-size="14" fill="#888888" text-anchor="middle">Match time, place and modality</text>
+  <rect x="727.0" y="260.5" width="290.0" height="67.0" fill="#e9f4f2" stroke="#8dbbb6" stroke-width="2" rx="8"/>
+  <text x="872.0" y="290.4" font-size="17" fill="#174c47" text-anchor="middle" font-weight="bold">Visual residual</text>
+  <text x="872.0" y="309.4" font-size="14" fill="#888888" text-anchor="middle">Adjust checkpoint shares</text>
+  <rect x="32.5" y="360.5" width="267.0" height="67.0" fill="#f1eef8" stroke="#ac9bc9" stroke-width="2" rx="8"/>
+  <text x="166.0" y="390.4" font-size="17" fill="#45366a" text-anchor="middle" font-weight="bold">Checkpoint transport data</text>
+  <text x="166.0" y="409.4" font-size="14" fill="#888888" text-anchor="middle">Distance, mode and service notices</text>
+  <rect x="369.5" y="360.5" width="295.0" height="67.0" fill="#f1eef8" stroke="#ac9bc9" stroke-width="2" rx="8"/>
+  <text x="517.0" y="390.4" font-size="17" fill="#45366a" text-anchor="middle" font-weight="bold">Directed checkpoint graph</text>
+  <text x="517.0" y="409.4" font-size="14" fill="#888888" text-anchor="middle">Edge weights by group and lead time</text>
+  <rect x="727.0" y="360.5" width="290.0" height="67.0" fill="#f1eef8" stroke="#ac9bc9" stroke-width="2" rx="8"/>
+  <text x="872.0" y="390.4" font-size="17" fill="#45366a" text-anchor="middle" font-weight="bold">Graph allocation</text>
+  <text x="872.0" y="409.4" font-size="14" fill="#888888" text-anchor="middle">Redistribute shares within a group</text>
+  <rect x="1088.0" y="319.5" width="286.0" height="67.0" fill="#ffffff" stroke="#c4cfdd" stroke-width="2" rx="8"/>
+  <text x="1231.0" y="349.4" font-size="17" fill="#142f52" text-anchor="middle" font-weight="bold">Checkpoint shares</text>
+  <text x="1231.0" y="368.4" font-size="14" fill="#888888" text-anchor="middle">Nonnegative and sum to one</text>
+  <rect x="32.5" y="561.5" width="267.0" height="67.0" fill="#fcf1e6" stroke="#d3ad85" stroke-width="2" rx="8"/>
+  <text x="166.0" y="591.5" font-size="17" fill="#69471c" text-anchor="middle" font-weight="bold">Identify the event and venue</text>
+  <text x="166.0" y="610.5" font-size="14" fill="#888888" text-anchor="middle">Dated source, route cue and evidence</text>
+  <rect x="369.5" y="561.5" width="295.0" height="67.0" fill="#fcf1e6" stroke="#d3ad85" stroke-width="2" rx="8"/>
+  <text x="517.0" y="591.5" font-size="17" fill="#69471c" text-anchor="middle" font-weight="bold">Link venues to transport stops</text>
+  <text x="517.0" y="610.5" font-size="14" fill="#888888" text-anchor="middle">Official route data and access points</text>
+  <rect x="727.0" y="561.5" width="290.0" height="67.0" fill="#fcf1e6" stroke="#d3ad85" stroke-width="2" rx="8"/>
+  <text x="872.0" y="591.5" font-size="17" fill="#69471c" text-anchor="middle" font-weight="bold">Find reachable checkpoints</text>
+  <text x="872.0" y="610.5" font-size="14" fill="#888888" text-anchor="middle">Direction, transfers and service windows</text>
+  <rect x="1088.0" y="561.5" width="286.0" height="67.0" fill="#fcf1e6" stroke="#d3ad85" stroke-width="2" rx="8"/>
+  <text x="1231.0" y="591.5" font-size="17" fill="#69471c" text-anchor="middle" font-weight="bold">Condition the share head</text>
+  <text x="1231.0" y="610.5" font-size="14" fill="#888888" text-anchor="middle">Event × checkpoint × lead time</text>
+  <text x="32.0" y="48.0" font-size="33" fill="#102d50" text-anchor="start">MM-PortFlow</text>
+  <text x="32.0" y="79.0" font-size="17" fill="#49617b" text-anchor="start">Multimodal spatiotemporal forecasting for Hong Kong visitor arrivals</text>
+  <text x="32.0" y="132.0" font-size="19" fill="#173f6b" text-anchor="start">A  |  Inputs at the cutoff</text>
+  <text x="369.0" y="132.0" font-size="19" fill="#173f6b" text-anchor="start">B  |  Evidence and context</text>
+  <text x="724.0" y="132.0" font-size="19" fill="#173f6b" text-anchor="start">C  |  Forecast components</text>
+  <text x="1086.0" y="132.0" font-size="19" fill="#173f6b" text-anchor="start">D  |  Competition output</text>
+  <text x="32.0" y="464.0" font-size="16" fill="#49617b" text-anchor="start">Media and checkpoint graph adjustments were evaluated in separate replays.</text>
+  <text x="32.0" y="523.0" font-size="22" fill="#69471c" text-anchor="start">Event and venue graph  |  Design for the next replay</text>
+  <text x="32.0" y="682.0" font-size="16" fill="#49617b" text-anchor="start">For each group and target day, multiply its total by its checkpoint shares to obtain the point forecasts.</text>
+  <text x="32.0" y="712.0" font-size="14" fill="#49617b" text-anchor="start">Solid arrows show evaluated components. Dashed arrows show the proposed event-conditioned graph.</text>
+</svg>
