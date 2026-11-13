@@ -1,11 +1,3 @@
-.forecast-guide {
-  --guide-ink: #163451;
-  --guide-muted: #4a6178;
-  --guide-line: #cfdeef;
-  --guide-blue: #164f86;
-  color: var(--guide-ink);
-}
-
 .guide-heading {
   max-width: 60rem;
   margin-bottom: 1.45rem;
@@ -17,21 +9,7 @@
   line-height: 1.2;
 }
 
-.forecast-guide [lang="en"] {
-  display: block;
-  margin-top: .2em;
-  color: var(--guide-muted);
-  font-size: .86em;
-  line-height: 1.45;
-}
-
-.guide-heading h2 [lang="en"] {
-  font-size: .68em;
-  letter-spacing: -.025em;
-  font-weight: 600;
-}
-
-.guide-heading p { margin-top: .65rem; }
+.guide-heading p { margin-top: .65rem; color: var(--muted); }
 
 .guide-grid {
   display: grid;
@@ -42,15 +20,15 @@
 .guide-figure {
   margin: 0;
   padding: clamp(1rem, 2.2vw, 1.6rem);
-  border: 1px solid var(--guide-line);
-  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   background: #fff;
 }
 
-.guide-data { background: #f2f7fe; }
+.guide-data { background: linear-gradient(150deg, var(--paper), #fff 85%); }
 
 .guide-figure figcaption {
-  border-bottom: 1px solid var(--guide-line);
+  border-bottom: 1px solid var(--line);
   padding-bottom: .8rem;
 }
 
@@ -67,11 +45,11 @@
 }
 
 .guide-figure dt, .guide-flow li strong {
-  color: var(--guide-blue);
+  color: var(--accent);
   font-weight: 680;
 }
 
-.guide-figure dd, .guide-flow li p { margin: .3rem 0 0; }
+.guide-figure dd, .guide-flow li p { margin: .2rem 0 0; color: var(--muted); font-size: .91rem; }
 
 .guide-data dl > div {
   border-left: 2px solid #93b4da;
@@ -84,8 +62,6 @@
   font-size: .86rem;
   font-weight: 650;
 }
-
-.guide-figure a [lang="en"] { display: inline; }
 
 .guide-flow ol {
   list-style: none;
@@ -107,8 +83,9 @@
   width: 1.65rem;
   height: 1.65rem;
   border-radius: 50%;
-  color: #fff;
-  background: var(--guide-blue);
+  color: var(--accent);
+  background: var(--tint);
+  font-weight: 680;
   font-size: .78rem;
   font-variant-numeric: tabular-nums;
   content: counter(guide-step);
@@ -119,7 +96,7 @@
   top: 1.8rem;
   bottom: -.65rem;
   left: .8rem;
-  border-left: 1px solid var(--guide-line);
+  border-left: 1px solid var(--line);
   content: "";
 }
 
@@ -130,20 +107,20 @@
   gap: .35rem;
   margin-top: .95rem;
   padding: .65rem .5rem;
-  border: 1px solid var(--guide-line);
-  border-radius: 6px;
-  background: #f2f7fe;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
   text-align: center;
 }
 
 .guide-equation b {
-  color: var(--guide-blue);
+  color: var(--accent);
   font-size: 1.12rem;
   font-variant-numeric: tabular-nums;
 }
 
 .guide-equation small { display: block; font-size: .75rem; }
-.guide-equation > span { color: var(--guide-muted); }
+.guide-equation > span { color: var(--muted); }
 
 .guide-example {
   display: grid;
@@ -152,8 +129,10 @@
   align-items: center;
   margin-top: 1rem;
   padding: 1rem;
-  border-left: 2px solid #3872a6;
-  background: #f7faff;
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--paper);
   font-size: .91rem;
 }
 
@@ -183,16 +162,16 @@
 .guide-itinerary > div {
   min-width: 0;
   padding: .4rem .55rem;
-  border-top: 1px solid var(--guide-line);
+  border-top: 1px solid var(--line);
 }
 
 .guide-itinerary dt {
-  color: var(--guide-muted);
+  color: var(--muted);
   font-size: .79rem;
 }
 
 .guide-itinerary dd { font-weight: 650; }
-.guide-example-note { color: var(--guide-muted); }
+.guide-example-note { color: var(--muted); }
 
 @media (max-width: 740px) {
   .guide-grid, .guide-example { grid-template-columns: minmax(0, 1fr); }

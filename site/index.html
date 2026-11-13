@@ -7,8 +7,8 @@
   <title>Hong Kong Visitor Arrivals | IKUN</title>
   <link rel="icon" href="assets/ikun-avatar.png" type="image/png">
   <script src="language.js?v=rehearsals"></script>
-  <link rel="stylesheet" href="style.css?v=blue-masthead">
-  <link rel="stylesheet" href="guide.css">
+  <link rel="stylesheet" href="style.css?v=white-header">
+  <link rel="stylesheet" href="guide.css?v=white-header">
   <script defer src="rehearsal.js"></script>
   <script defer src="multimodal.js"></script>
   <script defer src="sources.js"></script>
@@ -40,7 +40,7 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <p class="project-label"><strong>MM-PortFlow</strong><span><span class="copy-en">Working title</span><span class="copy-zh">论文工作名</span></span></p>
-          <h1 id="page-title"><span class="copy-en">Forecasting<br class="hero-break"> Hong&nbsp;Kong<br class="hero-break"> Visitor Arrivals</span><span class="copy-zh">香港入境客流预测</span></h1>
+          <h1 id="page-title"><span class="copy-en">Forecasting Hong&nbsp;Kong Visitor Arrivals</span><span class="copy-zh">香港入境客流预测</span></h1>
           <p class="intro"><span class="copy-en">Explore 15-day forecasts of inbound tourism by checkpoint and visitor group, with prediction intervals and observed arrivals.</span><span class="copy-zh">查看香港各口岸的 15 天入境访客预测，比较预测区间和实际客流。</span></p>
           <div class="hero-actions">
             <a class="button" href="rehearsals.html"><span><span class="copy-en">Explore forecasts</span><span class="copy-zh">探索历史预测</span></span><span aria-hidden="true">↗</span></a>
@@ -61,50 +61,50 @@
       </dl>
     </div>
     <div class="wrap content">
-      <section class="forecast-guide" id="guide" aria-labelledby="guide-title" lang="zh-Hans">
+      <section class="forecast-guide" id="guide" aria-labelledby="guide-title">
         <header class="guide-heading">
-          <h2 id="guide-title">香港未来 15 天会迎来多少访客？<span lang="en">How many visitors will arrive over the next 15 days?</span></h2>
-          <p>我们分别预测内地访客和其他访客每天从各口岸入境的人次。<span lang="en">We forecast daily arrivals at each checkpoint for mainland and other visitors.</span></p>
+          <h2 id="guide-title"><span class="copy-en">How many visitors will arrive over the next 15 days?</span><span class="copy-zh">香港未来 15 天会迎来多少访客？</span></h2>
+          <p><span class="copy-en">We forecast daily arrivals at each checkpoint for mainland and other visitors.</span><span class="copy-zh">我们分别预测内地访客和其他访客每天从各口岸入境的人次。</span></p>
         </header>
         <div class="guide-grid">
           <figure class="guide-figure guide-data">
-            <figcaption><strong>预测用到哪些数据？</strong><span lang="en">What goes into a forecast?</span></figcaption>
+            <figcaption><strong><span class="copy-en">What goes into a forecast?</span><span class="copy-zh">预测用到哪些数据？</span></strong></figcaption>
             <dl>
-              <div><dt>过去有多少人到港<span lang="en">Past arrivals</span></dt><dd>香港入境处每天公布分口岸、分客群的入境人次。<span lang="en">Hong Kong Immigration Department counts by checkpoint and visitor group.</span></dd></div>
-              <div><dt>未来哪些日期可能更忙<span lang="en">Dates when travel may pick up</span></dt><dd>基础预测使用周末和节假日日历。活动公告的日期和场馆也在测试中。<span lang="en">The baseline uses weekends and holidays. We also test dates and venues from event listings.</span></dd></div>
-              <div><dt>游客计划去哪、怎么去<span lang="en">Where visitors plan to go</span></dt><dd>我们测试帖子、照片和视频里的行程、地点和交通线索。<span lang="en">We test whether planned dates, places and routes in posts, photos and videos help.</span></dd></div>
+              <div><dt><span class="copy-en">Past arrivals</span><span class="copy-zh">过去有多少人到港</span></dt><dd><span class="copy-en">Hong Kong Immigration Department counts by checkpoint and visitor group.</span><span class="copy-zh">香港入境处每天公布分口岸、分客群的入境人次。</span></dd></div>
+              <div><dt><span class="copy-en">Dates when travel may pick up</span><span class="copy-zh">未来哪些日期可能更忙</span></dt><dd><span class="copy-en">The baseline uses weekends and holidays. We also test dates and venues from event listings.</span><span class="copy-zh">基础预测使用周末和节假日日历。活动公告的日期和场馆也在测试中。</span></dd></div>
+              <div><dt><span class="copy-en">Where visitors plan to go</span><span class="copy-zh">游客计划去哪、怎么去</span></dt><dd><span class="copy-en">We test whether planned dates, places and routes in posts, photos and videos help.</span><span class="copy-zh">我们测试帖子、照片和视频里的行程、地点和交通线索。</span></dd></div>
             </dl>
-            <a href="methods.html#input-title">查看变量和数据来源 <span lang="en">Data sources and variables</span> <span aria-hidden="true">↗</span></a>
+            <a href="methods.html#input-title"><span class="copy-en">Data sources and variables</span><span class="copy-zh">查看变量和数据来源</span> <span aria-hidden="true">↗</span></a>
           </figure>
           <figure class="guide-figure guide-flow">
-            <figcaption><strong>模型怎么做出预测？</strong><span lang="en">How does the model forecast arrivals?</span></figcaption>
+            <figcaption><strong><span class="copy-en">How does the model forecast arrivals?</span><span class="copy-zh">模型怎么做出预测？</span></strong></figcaption>
             <ol>
-              <li><strong>估算当天总人数<span lang="en">Estimate the daily total</span></strong><p>模型从过去客流和日历学习平日、周末和假期的变化。<span lang="en">The model learns how arrivals change across weekdays, weekends and holidays.</span></p></li>
-              <li><strong>把总人数分到各口岸<span lang="en">Allocate arrivals across checkpoints</span></strong><p>结合近期客流和口岸之间的联系，估计每个口岸的访客份额。<span lang="en">Recent arrivals and links between checkpoints help estimate each checkpoint's share.</span></p></li>
-              <li><strong>给出人数和预测区间<span lang="en">Show the estimate and forecast range</span></strong><p>每个口岸、客群和日期都有一个人数估计。图里的浅蓝色带是预测区间，目标是覆盖约七成实际结果。<span lang="en">Each checkpoint, group and date gets a count. The blue band is a forecast range designed to cover about seven in ten outcomes.</span></p></li>
+              <li><strong><span class="copy-en">Estimate the daily total</span><span class="copy-zh">估算当天总人数</span></strong><p><span class="copy-en">The model learns how arrivals change across weekdays, weekends and holidays.</span><span class="copy-zh">模型从过去客流和日历学习平日、周末和假期的变化。</span></p></li>
+              <li><strong><span class="copy-en">Allocate arrivals across checkpoints</span><span class="copy-zh">把总人数分到各口岸</span></strong><p><span class="copy-en">Recent arrivals and links between checkpoints help estimate each checkpoint's share.</span><span class="copy-zh">结合近期客流和口岸之间的联系，估计每个口岸的访客份额。</span></p></li>
+              <li><strong><span class="copy-en">Show the estimate and forecast range</span><span class="copy-zh">给出人数和预测区间</span></strong><p><span class="copy-en">Each checkpoint, group and date gets a count. The blue band is a forecast range designed to cover about seven in ten outcomes.</span><span class="copy-zh">每个口岸、客群和日期都有一个人数估计。图里的浅蓝色带是预测区间，目标是覆盖约七成实际结果。</span></p></li>
             </ol>
-            <div class="guide-equation" aria-label="示意计算 · Illustrative calculation">
-              <div><b>1,000</b><small>当天总人数<span lang="en">Daily total</span></small></div>
+            <div class="guide-equation" aria-label="Illustrative calculation" data-zh-aria="示意计算">
+              <div><b>1,000</b><small><span class="copy-en">Daily total</span><span class="copy-zh">当天总人数</span></small></div>
               <span aria-hidden="true">×</span>
-              <div><b>30%</b><small>某口岸份额<span lang="en">Checkpoint share</span></small></div>
+              <div><b>30%</b><small><span class="copy-en">Checkpoint share</span><span class="copy-zh">某口岸份额</span></small></div>
               <span aria-hidden="true">=</span>
-              <div><b>300</b><small>该口岸人次<span lang="en">Estimated arrivals</span></small></div>
+              <div><b>300</b><small><span class="copy-en">Estimated arrivals</span><span class="copy-zh">该口岸人次</span></small></div>
             </div>
-            <a href="methods.html#multimodal-method">查看模型结构 <span lang="en">Explore the model</span> <span aria-hidden="true">↗</span></a>
+            <a href="methods.html#multimodal-method"><span class="copy-en">Explore the model</span><span class="copy-zh">查看模型结构</span> <span aria-hidden="true">↗</span></a>
           </figure>
         </div>
         <aside class="guide-example">
           <div class="guide-example-copy">
-            <p><strong>举个例子</strong> “周六坐高铁到西九龙，再去启德看比赛。”<span lang="en"><strong>Example.</strong> “I’m taking the train to West Kowloon on Saturday, then heading to Kai Tak for a match.”</span></p>
+            <p><span class="copy-en"><strong>Example.</strong> “I’m taking the train to West Kowloon on Saturday, then heading to Kai Tak for a match.”</span><span class="copy-zh"><strong>举个例子</strong> “周六坐高铁到西九龙，再去启德看比赛。”</span></p>
             <dl class="guide-itinerary">
-              <div><dt>到访日期<span lang="en">Arrival date</span></dt><dd>周六<span lang="en">Saturday</span></dd></div>
-              <div><dt>入境口岸<span lang="en">Checkpoint</span></dt><dd>西九龙<span lang="en">West Kowloon</span></dd></div>
-              <div><dt>目的地<span lang="en">Destination</span></dt><dd>启德体育园<span lang="en">Kai Tak Sports Park</span></dd></div>
+              <div><dt><span class="copy-en">Arrival date</span><span class="copy-zh">到访日期</span></dt><dd><span class="copy-en">Saturday</span><span class="copy-zh">周六</span></dd></div>
+              <div><dt><span class="copy-en">Checkpoint</span><span class="copy-zh">入境口岸</span></dt><dd><span class="copy-en">West Kowloon</span><span class="copy-zh">西九龙</span></dd></div>
+              <div><dt><span class="copy-en">Destination</span><span class="copy-zh">目的地</span></dt><dd><span class="copy-en">Kai Tak Sports Park</span><span class="copy-zh">启德体育园</span></dd></div>
             </dl>
-            <p class="guide-example-note">我们用这样的线索测试各口岸的访客份额预测。<span lang="en">We test whether clues like these improve forecasts of each checkpoint's share.</span></p>
+            <p class="guide-example-note"><span class="copy-en">We test whether clues like these improve forecasts of each checkpoint's share.</span><span class="copy-zh">我们用这样的线索测试各口岸的访客份额预测。</span></p>
           </div>
           <figure>
-            <img src="assets/west-kowloon.webp" width="1000" height="750" loading="lazy" alt="香港西九龙站西翼入口">
+            <img src="assets/west-kowloon.webp" width="1000" height="750" loading="lazy" alt="West entrance of Hong Kong West Kowloon Station" data-zh-alt="香港西九龙站西翼入口">
             <figcaption><a href="https://commons.wikimedia.org/wiki/File:Hong_Kong_West_Kowloon_Station_exterior%EF%BC%88West%EF%BC%892021_08_part2.jpg">Qwer132477</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption>
           </figure>
         </aside>
