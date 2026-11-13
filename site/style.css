@@ -43,10 +43,9 @@ html[lang="en"] .copy-zh, html[lang="zh-Hans"] .copy-en { display: none; }
 .affiliations .affiliations-label { color: var(--muted); font-size: .69rem; line-height: 1.15; max-width: 9ch; }
 .affiliations a:hover { text-decoration: underline; }
 .affiliations img { display: block; width: auto; object-fit: contain; }
-.affiliations .zju-mark { height: 33px; }
-.affiliations .surrey-mark { height: 29px; padding: 3px 5px; border-radius: 3px; background: #356ef0; }
+.affiliations .zju-mark { height: 32px; }
+.affiliations .surrey-mark { height: 30px; }
 .affiliations .polyu-mark { height: 24px; }
-.zju-name { max-width: 8ch; font-size: .71rem; font-weight: 650; line-height: 1.1; color: var(--accent); }
 .language-toggle { min-width: 74px; min-height: 40px; padding: 6px 9px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: var(--accent); background: white; border: 1px solid #acbdd1; border-radius: 6px; font-size: .83rem; font-weight: 650; white-space: nowrap; }
 .language-toggle:hover { background: var(--tint); }
 .language-icon { font-size: 1.05rem; }
@@ -235,14 +234,14 @@ footer { background: var(--navy); color: white; font-size: .86rem; }
   .wrap { width: calc(100% - 32px); }
   .nav { gap: 0 5px; padding-block: 3px; }
   .brand { font-size: .83rem; gap: 5px; }
-  .affiliations { gap: 5px; }
-  .affiliations .affiliations-label, .affiliations .zju-name { display: none; }
-  .affiliations .zju-mark { height: 28px; }
-  .affiliations .surrey-mark { height: 23px; padding: 2px 4px; }
-  .affiliations .polyu-mark { height: 17px; }
+  .affiliations { position: relative; gap: 5px; }
+  .affiliations .affiliations-label { position: absolute; top: 36px; max-width: none; font-size: .62rem; white-space: nowrap; }
+  .affiliations .zju-mark { height: 21px; }
+  .affiliations .surrey-mark { height: 20px; }
+  .affiliations .polyu-mark { height: 15px; }
   .language-toggle { min-width: 51px; min-height: 36px; font-size: .76rem; padding-inline: 5px; }
   .language-icon { display: none; }
-  .nav nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; }
+  .nav nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; margin-top: 8px; }
   .nav nav a { display: grid; place-content: center; min-height: 41px; padding: 5px 1px; text-align: center; font-size: .74rem; white-space: normal; }
   .team-avatar { width: 31px; height: 31px; }
   .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 19px; padding-block: 24px 19px; }
@@ -288,9 +287,8 @@ footer { background: var(--navy); color: white; font-size: .86rem; }
 }
 @media (max-width: 380px) {
   .brand > span { display: none; }
-  .affiliations .zju-mark { height: 25px; }
-  .affiliations .surrey-mark { height: 20px; }
-  .affiliations .polyu-mark { height: 16px; }
+  .affiliations .zju-mark, .affiliations .surrey-mark { height: 19px; }
+  .affiliations .polyu-mark { height: 14px; }
   .nav nav a { font-size: .7rem; }
 
   .wrap { width: calc(100% - 24px); }
