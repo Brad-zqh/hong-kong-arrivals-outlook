@@ -4,7 +4,7 @@ const report = window.REHEARSAL;
 const sourceStatus = window.SOURCES;
 const experiment = window.MULTIMODAL;
 const select = id => document.getElementById(id);
-const t = (chinese, translation) => chinese === translation ? chinese : chinese + " / " + translation;
+const t = siteLanguage.text;
 const siteRoot = new URL(".", document.currentScript.src);
 const portNames = {
   "Airport": "香港国际机场",
@@ -19,18 +19,18 @@ const portNames = {
   "China Ferry Terminal": "中国客运码头",
 };
 const groupNames = {
-  "Mainland Visitors": t("内地访客", "Mainland visitors"),
-  "Other Visitors": t("其他访客", "Other visitors"),
+  "Mainland Visitors": ["内地访客", "Mainland visitors"],
+  "Other Visitors": ["其他访客", "Other visitors"],
 };
 const historicalModels = {
-  chronos_joint_calendar: t("Chronos-2 + 日历", "Chronos-2 + calendar"),
-  weekday_mean4: t("四周同星期均值", "Four-week weekday mean"),
+  chronos_joint_calendar: ["Chronos-2 + 日历", "Chronos-2 + calendar"],
+  weekday_mean4: ["四周同星期均值", "Four-week weekday mean"],
 };
 const mediaModels = experiment && Object.fromEntries(Object.entries(experiment.labels)
-  .map(([key, label]) => [key, t(label, experiment.labelsEn[key])]));
+  .map(([key, label]) => [key, [label, experiment.labelsEn[key]]]));
 const number = new Intl.NumberFormat("en-HK", { maximumFractionDigits: 0 });
 const compact = new Intl.NumberFormat("en-HK", { notation: "compact", maximumFractionDigits: 1 });
-const portName = name => t(portNames[name] || name, name);
+const portName = name => t(portNames[name] || name, name === "Airport" ? "Hong Kong International Airport" : name);
 const dateRange = (start, end) => start + " – " + end;
 const roundName = n => t(`第 ${n} 轮`, `Round ${n}`);
 let roundIndex = 0;
@@ -41,16 +41,23 @@ function element(tag, content) {
   return node;
 }
 
-function translation(content) {
-  const span = element("span", content);
-  span.className = "translation";
-  span.lang = "en";
-  return span;
+function localized(node, zh, en) {
+  const english = element("span", en);
+  const chinese = element("span", zh);
+  english.className = "copy-en";
+  chinese.className = "copy-zh";
+  node.append(english, chinese);
+  return node;
 }
 
 function fillOptions(id, entries) {
-  select(id).replaceChildren(...entries.map(([value, label]) => new Option(label, value)));
+  const input = select(id);
+  const value = input.value;
+  input.replaceChildren(...entries.map(([key, label]) => new Option(label, key)));
+  if (entries.some(([key]) => key === value)) input.value = value;
 }
+
+const labels = entries => Object.entries(entries).map(([key, pair]) => [key, t(...pair)]);
 
 function replaceTable(id, rows) {
   select(id).replaceChildren(...rows.map(cells => {
@@ -187,9 +194,9 @@ function chartControl(canvasId, readoutId, inputId) {
     update();
   });
   new ResizeObserver(() => drawChart(canvas, rows, selected)).observe(canvas);
-  return data => {
+  return (data, preserveDate) => {
     rows = data;
-    selected = 0;
+    if (!preserveDate) selected = 0;
     input.max = rows.length - 1;
     update();
   };
@@ -198,7 +205,7 @@ function chartControl(canvasId, readoutId, inputId) {
 const setHistoricalChart = chartControl("chart", "chart-readout", "chart-day");
 const setMediaChart = chartControl("media-chart", "media-readout", "media-day");
 
-function render() {
+function render(preserveDate) {
   const round = report.rounds[roundIndex];
   const port = select("port").value;
   const group = select("group").value;
@@ -206,22 +213,20 @@ function render() {
   const index = report.series.findIndex(([p, g]) => p === port && g === group);
   const chartRows = round.data.filter(row => row[1] === index).map(([day, , actual, values]) => [day, actual, ...values[model]]);
   select("chart-title").textContent = portName(port);
-  select("chart-subtitle").textContent = dateRange(round.origin, round.end) + " · " + historicalModels[model];
+  select("chart-subtitle").textContent = dateRange(round.origin, round.end) + " · " + t(...historicalModels[model]);
   const historyEnd = round.releases.at(-1).historyThrough;
-  select("chart-data-cutoff").textContent = groupNames[group] + " · " + t("客流输入截至", "Arrivals through") + " " + historyEnd;
+  select("chart-data-cutoff").textContent = t(...groupNames[group]) + " · " + t("客流输入截至", "Arrivals through") + " " + historyEnd;
   select("workbook").href = new URL(`exports/rehearsal-round-${round.number}.xlsx`, siteRoot).href;
   select("workbook").title = t("练习 Excel 含该轮 Chronos-2 + 日历的全部 20 条序列",
     "Workbook with all 20 series from Chronos-2 + calendar");
   const scores = round.scores[model];
   select("scores").replaceChildren(...[
-    ["MASE", "", scores.mase.toFixed(3)],
+    ["MASE", "MASE", scores.mase.toFixed(3)],
     ["缩放 Winkler", "Scaled Winkler", scores.winkler.toFixed(3)],
     ["区间覆盖率", "Interval coverage", (scores.coverage * 100).toFixed(1) + "%"],
   ].map(([label, english, value]) => {
     const box = document.createElement("div");
-    const term = element("dt", label);
-    if (english) term.append(translation(english));
-    box.append(term, element("dd", value));
+    box.append(element("dt", t(label, english)), element("dd", value));
     return box;
   }));
   replaceTable("daily", chartRows.map(([day, ...values]) => [day, ...values.map(value => number.format(value))]));
@@ -229,21 +234,29 @@ function render() {
     release.release, release.archiveAt, release.historyThrough, release.scores[model].mase.toFixed(3),
   ]));
   document.querySelectorAll(".round").forEach((button, i) => button.setAttribute("aria-pressed", String(roundIndex === i)));
-  setHistoricalChart(chartRows);
+  setHistoricalChart(chartRows, preserveDate === true);
 }
 
-const portOptions = [...new Set(report.series.map(([port]) => port))].map(port => [port, portName(port)]);
-fillOptions("port", portOptions);
-fillOptions("group", Object.entries(groupNames));
-fillOptions("model", Object.entries(historicalModels));
+const ports = [...new Set(report.series.map(([port]) => port))];
+function renderOptions() {
+  const portOptions = ports.map(port => [port, portName(port)]);
+  fillOptions("port", portOptions);
+  fillOptions("group", labels(groupNames));
+  fillOptions("model", labels(historicalModels));
+  if (experiment) {
+    fillOptions("media-round", report.rounds.map(({ number }) => [String(number), roundName(number)]));
+    fillOptions("media-port", portOptions);
+    fillOptions("media-group", labels(groupNames));
+    fillOptions("media-model", labels(mediaModels));
+  }
+}
+renderOptions();
 for (const id of ["port", "group", "model"]) select(id).addEventListener("change", render);
 report.rounds.forEach((round, i) => {
   const button = element("button", "");
   button.type = "button";
   button.className = "round";
-  button.setAttribute("aria-label", roundName(round.number) + ", " + round.origin);
-  const label = element("b", `第 ${round.number} 轮`);
-  label.append(translation(`Round ${round.number}`));
+  const label = localized(document.createElement("b"), `第 ${round.number} 轮`, `Round ${round.number}`);
   const date = element("time", round.origin);
   date.dateTime = round.origin;
   button.append(label, date);
@@ -252,53 +265,60 @@ report.rounds.forEach((round, i) => {
 });
 
 const templates = new Set(sourceStatus.templateRounds);
-select("schedule").replaceChildren(...report.rounds.map(round => {
-  const row = document.createElement("tr");
-  row.setAttribute("role", "row");
-  const heading = element("th", `第 ${round.number} 轮`);
-  heading.scope = "row";
-  heading.setAttribute("role", "rowheader");
-  heading.append(translation(`Round ${round.number}`));
-  row.append(heading);
-  const dates = document.createElement("span");
-  dates.className = "schedule-release";
-  round.officialReleases.forEach(day => {
-    const time = element("time", day);
-    time.dateTime = `${day}T12:00+08:00`;
-    dates.append(time);
-  });
-  const deadline = element("time", round.official + " 23:59");
-  deadline.dateTime = `${round.official}T23:59+08:00`;
-  const forecastDates = document.createElement("span");
-  forecastDates.className = "schedule-window";
-  forecastDates.append(element("time", round.official), " – ", element("time", round.officialEnd));
-  const template = templates.has(round.number) ? t("已发布", "Published") :
-    sourceStatus.organizerError ? t("本次未核实", "Unverified") : t("待发布", "Pending");
-  for (const [label, value] of [
-    [t("数据发布", "Releases"), dates], [t("提交截止", "Deadline"), deadline],
-    [t("预测日期", "Forecast dates"), forecastDates], [t("模板", "Template"), template],
-  ]) {
-    const cell = document.createElement("td");
-    cell.setAttribute("role", "cell");
-    const mobileLabel = element("span", label);
-    mobileLabel.className = "schedule-label";
-    mobileLabel.setAttribute("aria-hidden", "true");
-    cell.append(mobileLabel, value);
-    row.append(cell);
-  }
-  return row;
-}));
-select("checked").textContent = t("更新检查", "Last checked") + " · " + sourceStatus.checkedAt;
-const live = sourceStatus.passengers;
-const coverageDates = dateRange(report.source.first_date, report.source.last_date);
-select("passenger-status").textContent = t("核验数据", "Validation data") + " · " + coverageDates
-  + (live ? " · " + t("公开源截至", "Public data through") + " " + live.through : "");
-const templateCount = templates.size;
-select("template-status").textContent = sourceStatus.organizerError
-  ? t("发布状态待核实", "Release status unverified")
-  : (sourceStatus.database ? t("训练库已发布", "Training data published") : t("训练库待发布", "Training data pending"))
-    + " · " + t("模板", "Templates") + " " + templateCount + "/5";
+function renderSchedule() {
+  select("schedule").replaceChildren(...report.rounds.map(round => {
+    const row = document.createElement("tr");
+    row.setAttribute("role", "row");
+    const heading = element("th", roundName(round.number));
+    heading.scope = "row";
+    heading.setAttribute("role", "rowheader");
+    row.append(heading);
+    const dates = document.createElement("span");
+    dates.className = "schedule-release";
+    round.officialReleases.forEach(day => {
+      const time = element("time", day);
+      time.dateTime = `${day}T12:00+08:00`;
+      dates.append(time);
+    });
+    const deadline = element("time", round.official + " 23:59");
+    deadline.dateTime = `${round.official}T23:59+08:00`;
+    const forecastDates = document.createElement("span");
+    forecastDates.className = "schedule-window";
+    forecastDates.append(element("time", round.official), " – ", element("time", round.officialEnd));
+    const template = templates.has(round.number) ? t("已发布", "Published") :
+      sourceStatus.organizerError ? t("本次未核实", "Unverified") : t("待发布", "Pending");
+    for (const [label, value] of [
+      [t("数据发布", "Releases"), dates], [t("提交截止", "Deadline"), deadline],
+      [t("预测日期", "Forecast dates"), forecastDates], [t("模板", "Template"), template],
+    ]) {
+      const cell = document.createElement("td");
+      cell.setAttribute("role", "cell");
+      const mobileLabel = element("span", label);
+      mobileLabel.className = "schedule-label";
+      mobileLabel.setAttribute("aria-hidden", "true");
+      cell.append(mobileLabel, value);
+      row.append(cell);
+    }
+    return row;
+  }));
+  select("checked").textContent = t("更新检查", "Last checked") + " · " + sourceStatus.checkedAt;
+  const live = sourceStatus.passengers;
+  const coverageDates = dateRange(report.source.first_date, report.source.last_date);
+  select("passenger-status").textContent = t("核验数据", "Validation data") + " · " + coverageDates
+    + (live ? " · " + t("公开源截至", "Public data through") + " " + live.through : "");
+  const templateCount = templates.size;
+  select("template-status").textContent = sourceStatus.organizerError
+    ? t("发布状态待核实", "Release status unverified")
+    : (sourceStatus.database ? t("训练库已发布", "Training data published") : t("训练库待发布", "Training data pending"))
+      + " · " + t("模板", "Templates") + " " + templateCount + "/5";
+}
+renderSchedule();
 render();
+document.addEventListener("site-language-change", () => {
+  renderOptions();
+  renderSchedule();
+  render(true);
+});
 
 for (const metric of ["mase", "winkler"]) {
   const best = report.rounds.map(r => r.scores.chronos_joint_calendar[metric]).sort((a, b) => a - b).slice(0, 4);
@@ -307,7 +327,7 @@ for (const metric of ["mase", "winkler"]) {
 
 if (experiment) {
   const modelChoices = [];
-  function renderExperiment() {
+  function renderExperiment(preserveDate) {
     const round = select("media-round").value;
     const port = select("media-port").value;
     const group = select("media-group").value;
@@ -315,16 +335,12 @@ if (experiment) {
     const seriesIndex = experiment.series.findIndex(([p, g]) => p === port && g === group);
     const rows = experiment.data[round].filter(row => row[1] === seriesIndex)
       .map(([day, , actual, values]) => [day, actual, ...values[model]]);
-    select("media-chart-title").textContent = portName(port) + " · " + groupNames[group];
-    select("media-chart-subtitle").textContent = dateRange(rows[0][0], rows.at(-1)[0]) + " · " + mediaModels[model];
+    select("media-chart-title").textContent = portName(port) + " · " + t(...groupNames[group]);
+    select("media-chart-subtitle").textContent = dateRange(rows[0][0], rows.at(-1)[0]) + " · " + t(...mediaModels[model]);
     replaceTable("media-daily", rows.map(([day, ...values]) => [day, ...values.map(value => number.format(value))]));
     for (const button of modelChoices) button.setAttribute("aria-pressed", String(button.value === model));
-    setMediaChart(rows);
+    setMediaChart(rows, preserveDate === true);
   }
-  fillOptions("media-round", report.rounds.map(({ number }) => [String(number), roundName(number)]));
-  fillOptions("media-port", portOptions);
-  fillOptions("media-group", Object.entries(groupNames));
-  fillOptions("media-model", Object.entries(mediaModels));
   for (const id of ["media-round", "media-port", "media-group", "media-model"]) {
     select(id).addEventListener("change", renderExperiment);
   }
@@ -333,11 +349,10 @@ if (experiment) {
     "", score.mase.toFixed(3), score.winkler.toFixed(3),
   ]));
   metrics.forEach(([key], index) => {
-    const button = element("button", experiment.labels[key]);
+    const button = localized(document.createElement("button"), ...mediaModels[key]);
     button.type = "button";
     button.className = "model-choice";
     button.value = key;
-    button.append(translation(experiment.labelsEn[key]));
     button.addEventListener("click", () => {
       select("media-model").value = key;
       renderExperiment();
@@ -351,6 +366,7 @@ if (experiment) {
     select("media-scores").rows[bestIndex].cells[index + 1].classList.add("best-score");
   }
   renderExperiment();
+  document.addEventListener("site-language-change", () => renderExperiment(true));
 } else {
   select("multimodal").hidden = true;
 }
