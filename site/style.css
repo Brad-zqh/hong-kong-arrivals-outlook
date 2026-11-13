@@ -92,6 +92,7 @@ html[lang="zh-Hans"] h1 { font-size: clamp(2.18rem, 4vw, 3.65rem); line-height: 
 .content { min-width: 0; padding-block: 48px 74px; }
 .content section + section { margin-top: 62px; padding-top: 42px; border-top: 1px solid var(--line); }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px 24px; margin-bottom: 20px; }
+.rehearsal-page h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.35rem); }
 h2 { color: var(--navy); font-size: clamp(1.65rem, 3vw, 2.45rem); letter-spacing: -.035em; }
 h3 { font-size: clamp(1.06rem, 1.8vw, 1.25rem); letter-spacing: -.016em; }
 .section-heading p, .chart-header p, .source-card p { margin-top: 8px; color: var(--muted); font-size: .89rem; }

@@ -26,7 +26,7 @@ const siteLanguage = (() => {
     }
     for (const link of document.querySelectorAll("a[href]")) {
       const href = link.getAttribute("href");
-      if (!/^(index|methods)\.html(?:\?|#|$)/.test(href)) continue;
+      if (!/^(index|methods|rehearsals)\.html(?:\?|#|$)/.test(href)) continue;
       const target = new URL(href, location.href);
       const explicit = new URL(location.href).searchParams.get("lang");
       if (chinese() || explicit === "en") target.searchParams.set("lang", text("zh", "en"));

@@ -4,6 +4,8 @@ const report = window.REHEARSAL;
 const sourceStatus = window.SOURCES;
 const experiment = window.MULTIMODAL;
 const select = id => document.getElementById(id);
+const hasRehearsals = Boolean(select("forecast"));
+const hasSchedule = Boolean(select("schedule"));
 const t = siteLanguage.text;
 const siteRoot = new URL(".", document.currentScript.src);
 const portNames = {
@@ -202,10 +204,7 @@ function chartControl(canvasId, readoutId, inputId) {
   };
 }
 
-const setHistoricalChart = chartControl("chart", "chart-readout", "chart-day");
-const setMediaChart = chartControl("media-chart", "media-readout", "media-day");
-
-function render(preserveDate) {
+function renderRehearsal(setChart, preserveDate) {
   const round = report.rounds[roundIndex];
   const port = select("port").value;
   const group = select("group").value;
@@ -234,15 +233,17 @@ function render(preserveDate) {
     release.release, release.archiveAt, release.historyThrough, release.scores[model].mase.toFixed(3),
   ]));
   document.querySelectorAll(".round").forEach((button, i) => button.setAttribute("aria-pressed", String(roundIndex === i)));
-  setHistoricalChart(chartRows, preserveDate === true);
+  setChart(chartRows, preserveDate === true);
 }
 
 const ports = [...new Set(report.series.map(([port]) => port))];
 function renderOptions() {
   const portOptions = ports.map(port => [port, portName(port)]);
-  fillOptions("port", portOptions);
-  fillOptions("group", labels(groupNames));
-  fillOptions("model", labels(historicalModels));
+  if (hasRehearsals) {
+    fillOptions("port", portOptions);
+    fillOptions("group", labels(groupNames));
+    fillOptions("model", labels(historicalModels));
+  }
   if (experiment) {
     fillOptions("media-round", report.rounds.map(({ number }) => [String(number), roundName(number)]));
     fillOptions("media-port", portOptions);
@@ -251,21 +252,10 @@ function renderOptions() {
   }
 }
 renderOptions();
-for (const id of ["port", "group", "model"]) select(id).addEventListener("change", render);
-report.rounds.forEach((round, i) => {
-  const button = element("button", "");
-  button.type = "button";
-  button.className = "round";
-  const label = localized(document.createElement("b"), `第 ${round.number} 轮`, `Round ${round.number}`);
-  const date = element("time", round.origin);
-  date.dateTime = round.origin;
-  button.append(label, date);
-  button.addEventListener("click", () => { roundIndex = i; render(); });
-  select("rounds").append(button);
-});
+document.addEventListener("site-language-change", renderOptions);
 
-const templates = new Set(sourceStatus.templateRounds);
 function renderSchedule() {
+  const templates = new Set(sourceStatus.templateRounds);
   select("schedule").replaceChildren(...report.rounds.map(round => {
     const row = document.createElement("tr");
     row.setAttribute("role", "row");
@@ -312,20 +302,36 @@ function renderSchedule() {
     : (sourceStatus.database ? t("训练库已发布", "Training data published") : t("训练库待发布", "Training data pending"))
       + " · " + t("模板", "Templates") + " " + templateCount + "/5";
 }
-renderSchedule();
-render();
-document.addEventListener("site-language-change", () => {
-  renderOptions();
+if (hasSchedule) {
   renderSchedule();
-  render(true);
-});
+  document.addEventListener("site-language-change", renderSchedule);
+}
 
-for (const metric of ["mase", "winkler"]) {
-  const best = report.rounds.map(r => r.scores.chronos_joint_calendar[metric]).sort((a, b) => a - b).slice(0, 4);
-  select("hero-" + metric).textContent = (best.reduce((a, b) => a + b, 0) / 4).toFixed(3);
+if (hasRehearsals) {
+  const setChart = chartControl("chart", "chart-readout", "chart-day");
+  const render = preserveDate => renderRehearsal(setChart, preserveDate);
+  for (const id of ["port", "group", "model"]) select(id).addEventListener("change", render);
+  report.rounds.forEach((round, i) => {
+    const button = element("button", "");
+    button.type = "button";
+    button.className = "round";
+    const label = localized(document.createElement("b"), `第 ${round.number} 轮`, `Round ${round.number}`);
+    const date = element("time", round.origin);
+    date.dateTime = round.origin;
+    button.append(label, date);
+    button.addEventListener("click", () => { roundIndex = i; render(); });
+    select("rounds").append(button);
+  });
+  for (const metric of ["mase", "winkler"]) {
+    const best = report.rounds.map(r => r.scores.chronos_joint_calendar[metric]).sort((a, b) => a - b).slice(0, 4);
+    select("hero-" + metric).textContent = (best.reduce((a, b) => a + b, 0) / 4).toFixed(3);
+  }
+  render();
+  document.addEventListener("site-language-change", () => render(true));
 }
 
 if (experiment) {
+  const setMediaChart = chartControl("media-chart", "media-readout", "media-day");
   const modelChoices = [];
   function renderExperiment(preserveDate) {
     const round = select("media-round").value;
@@ -367,6 +373,6 @@ if (experiment) {
   }
   renderExperiment();
   document.addEventListener("site-language-change", () => renderExperiment(true));
-} else {
+} else if (select("multimodal")) {
   select("multimodal").hidden = true;
 }

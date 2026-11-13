@@ -6,13 +6,13 @@
   <meta name="description" content="Historical tourism forecasts for Hong Kong by Team IKUN, with model comparisons and the official competition schedule.">
   <title>Hong Kong Visitor Arrivals | IKUN</title>
   <link rel="icon" href="assets/ikun-avatar.png" type="image/png">
-  <script src="language.js"></script>
+  <script src="language.js?v=rehearsals"></script>
   <link rel="stylesheet" href="style.css?v=blue-masthead">
   <link rel="stylesheet" href="guide.css">
   <script defer src="rehearsal.js"></script>
   <script defer src="multimodal.js"></script>
   <script defer src="sources.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app.js?v=rehearsals"></script>
 </head>
 <body>
   <a class="skip-link" href="#top"><span class="copy-en">Skip to content</span><span class="copy-zh">跳到正文</span></a>
@@ -26,7 +26,7 @@
         <a href="https://www.polyu.edu.hk/" aria-label="The Hong Kong Polytechnic University" data-zh-aria="香港理工大学"><img class="polyu-mark" src="assets/hong-kong-polytechnic.webp" width="450" height="86" alt=""></a>
       </div>
       <nav aria-label="Main navigation" data-zh-aria="主要导航">
-        <a href="#forecast"><span class="copy-en">Rehearsals</span><span class="copy-zh">历史模拟</span></a>
+        <a href="rehearsals.html"><span class="copy-en">Rehearsals</span><span class="copy-zh">历史模拟</span></a>
         <a href="#multimodal"><span class="copy-en">Multimodal</span><span class="copy-zh">多模态</span></a>
         <a href="#evidence"><span class="copy-en">Evidence</span><span class="copy-zh">数据样例</span></a>
         <a href="methods.html"><span class="copy-en">Methods</span><span class="copy-zh">方法</span></a>
@@ -43,7 +43,7 @@
           <h1 id="page-title"><span class="copy-en">Forecasting<br class="hero-break"> Hong&nbsp;Kong<br class="hero-break"> Visitor Arrivals</span><span class="copy-zh">香港入境客流预测</span></h1>
           <p class="intro"><span class="copy-en">Explore 15-day forecasts of inbound tourism by checkpoint and visitor group, with prediction intervals and observed arrivals.</span><span class="copy-zh">查看香港各口岸的 15 天入境访客预测，比较预测区间和实际客流。</span></p>
           <div class="hero-actions">
-            <a class="button" href="#forecast"><span><span class="copy-en">Explore forecasts</span><span class="copy-zh">探索历史预测</span></span><span aria-hidden="true">↓</span></a>
+            <a class="button" href="rehearsals.html"><span><span class="copy-en">Explore forecasts</span><span class="copy-zh">探索历史预测</span></span><span aria-hidden="true">↗</span></a>
             <a class="button secondary" href="#guide"><span><span class="copy-en">How it works</span><span class="copy-zh">预测怎么做</span></span><span aria-hidden="true">↓</span></a>
           </div>
         </div>
@@ -108,56 +108,6 @@
             <figcaption><a href="https://commons.wikimedia.org/wiki/File:Hong_Kong_West_Kowloon_Station_exterior%EF%BC%88West%EF%BC%892021_08_part2.jpg">Qwer132477</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption>
           </figure>
         </aside>
-      </section>
-      <section id="forecast" aria-labelledby="forecast-title">
-        <div class="section-heading">
-          <div><h2 id="forecast-title"><span class="copy-en">Historical forecasts</span><span class="copy-zh">历史预测</span></h2><p><span class="copy-en">Five rehearsals from December 2025 to April 2026, using 15 archived data releases.</span><span class="copy-zh">2025 年 12 月至 2026 年 4 月的五轮模拟，使用 15 份当日归档。</span></p></div>
-          <a id="workbook" class="button secondary" href="exports/rehearsal-round-1.xlsx" download><span><span class="copy-en">Download round workbook</span><span class="copy-zh">下载本轮练习 Excel</span></span><span aria-hidden="true">↓</span></a>
-        </div>
-        <div class="archive-strip">
-          <span><span class="copy-en">Chronos-2 + calendar</span><span class="copy-zh">Chronos-2 + 日历</span></span>
-          <div class="archive-metrics"><span><span class="copy-en">Best-four mean by metric</span><span class="copy-zh">各指标最佳四轮均值</span></span><span><b id="hero-mase">—</b> MASE</span><span><b id="hero-winkler">—</b> <span><span class="copy-en">Scaled Winkler</span><span class="copy-zh">缩放 Winkler</span></span></span></div>
-        </div>
-        <div class="rounds" id="rounds" role="group" aria-label="Historical rehearsal round" data-zh-aria="历史模拟轮次"></div>
-        <div class="card forecast">
-          <div class="filters">
-            <label><span class="copy-en">Checkpoint</span><span class="copy-zh">口岸</span><select id="port"></select></label>
-            <label><span class="copy-en">Visitor group</span><span class="copy-zh">客群</span><select id="group"></select></label>
-            <label><span class="copy-en">Model</span><span class="copy-zh">模型</span><select id="model"></select></label>
-          </div>
-          <div class="chart-header">
-            <div><h3 id="chart-title"></h3><p id="chart-subtitle" aria-live="polite"></p><p id="chart-data-cutoff" class="data-cutoff"></p></div>
-            <ul class="legend" aria-label="Chart legend" data-zh-aria="图例">
-              <li><i class="forecast-key"></i><span class="copy-en">Forecast</span><span class="copy-zh">预测</span></li>
-              <li><i class="actual-key"></i><span class="copy-en">Observed</span><span class="copy-zh">实况</span></li>
-              <li><i class="interval-key"></i><span class="copy-en">70% interval</span><span class="copy-zh">70% 区间</span></li>
-            </ul>
-          </div>
-          <div class="chart-surface">
-            <div class="chart-readout" id="chart-readout"></div>
-            <canvas id="chart" role="img" aria-label="Observed arrivals, point forecasts and 70% intervals" data-zh-aria="历史实况、点预测和 70% 预测区间"></canvas>
-            <label class="chart-scrubber"><span><span class="copy-en">Inspect date</span><span class="copy-zh">选择日期</span></span><input type="range" id="chart-day" min="0" max="14" value="0" step="1"></label>
-          </div>
-            <p class="caption"><span class="copy-en">The pale vertical band marks day 1. Scoring uses days 2–15.</span><span class="copy-zh">浅色竖带标出第 1 天，评分使用第 2–15 天。</span></p>
-          <div class="score-strip">
-            <p><span class="copy-en">All 20 series in this round</span><span class="copy-zh">本轮全部 20 条序列</span></p>
-            <dl class="scores" id="scores" aria-live="polite"></dl>
-          </div>
-          <p class="caption workbook-note"><span class="copy-en">The practice workbook contains all series for this round from Chronos-2 + calendar.</span><span class="copy-zh">练习工作簿使用 Chronos-2 + 日历，包含本轮全部序列。</span></p>
-          <details>
-            <summary><span class="copy-en">Daily values for the selected series</span><span class="copy-zh">查看所选序列的逐日明细</span></summary>
-            <div class="table-scroll" tabindex="0" role="region" aria-label="Daily values" data-zh-aria="逐日明细">
-              <table><thead><tr><th><span class="copy-en">Date</span><span class="copy-zh">日期</span></th><th><span class="copy-en">Observed</span><span class="copy-zh">实况</span></th><th><span class="copy-en">Point forecast</span><span class="copy-zh">点预测</span></th><th><span class="copy-en">Lower</span><span class="copy-zh">下限</span></th><th><span class="copy-en">Upper</span><span class="copy-zh">上限</span></th></tr></thead><tbody id="daily"></tbody></table>
-            </div>
-          </details>
-          <details>
-            <summary><span class="copy-en">Three simulated data releases for this round</span><span class="copy-zh">查看本轮三次数据发布模拟</span></summary>
-            <p class="caption"><span class="copy-en">Each archive is selected at the noon Beijing time cutoff. All three forecasts cover the same target dates. The third serves as the rehearsal submission.</span><span class="copy-zh">按北京时间 12:00 截点选历史归档，三版预测使用相同目标日期。第三版作为当轮模拟提交。</span></p>
-            <div class="table-scroll" tabindex="0" role="region" aria-label="Three simulated releases" data-zh-aria="三次模拟发布">
-              <table><thead><tr><th><span class="copy-en">Release date</span><span class="copy-zh">模拟发布日</span></th><th><span class="copy-en">Archive timestamp</span><span class="copy-zh">当日归档时间</span></th><th><span class="copy-en">History through</span><span class="copy-zh">历史数据截至</span></th><th>MASE</th></tr></thead><tbody id="releases"></tbody></table>
-            </div>
-          </details>
-        </div>
       </section>
       <section id="multimodal" aria-labelledby="multimodal-title">
         <div class="section-heading">
