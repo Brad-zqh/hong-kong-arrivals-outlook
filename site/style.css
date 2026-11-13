@@ -230,9 +230,10 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 .metric-list dt { font-weight: 710; }
 .metric-list dd { margin-top: 4px; }
 .architecture-figure { overflow: hidden; margin: 0 0 16px; border: 1px solid var(--line); border-radius: var(--radius); }
-.architecture-figure a { display: block; }
+.architecture-image { display: block; }
+.architecture-image:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
 .architecture-figure img { display: block; width: 100%; height: auto; }
-.architecture-figure figcaption { padding: 9px 13px; border-top: 1px solid var(--line); color: var(--muted); font-size: .83rem; }
+.architecture-figure figcaption { display: grid; gap: 5px; padding: 12px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .83rem; line-height: 1.5; }
 
 @media (max-width: 1150px) {
   .experiment-grid { grid-template-columns: minmax(0, 1fr); }

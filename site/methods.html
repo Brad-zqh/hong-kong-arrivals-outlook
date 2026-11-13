@@ -7,7 +7,7 @@
   <title>Forecasting Methods | IKUN</title>
   <link rel="icon" href="assets/ikun-avatar.png" type="image/png">
   <script src="language.js?v=rehearsals"></script>
-  <link rel="stylesheet" href="style.css?v=footer-affiliations">
+  <link rel="stylesheet" href="style.css?v=architecture">
 </head>
 <body>
   <a class="skip-link" href="#top"><span class="copy-en">Skip to content</span><span class="copy-zh">跳到正文</span></a>
@@ -120,8 +120,11 @@
           <a class="text-link" href="index.html#multimodal"><span class="copy-en">View experiment ↗</span><span class="copy-zh">查看实验结果 ↗</span></a>
         </div>
         <figure class="architecture-figure" id="architecture">
-          <a href="assets/mm-portflow-sunburst.webp" aria-label="Open the full-size architecture figure" data-zh-aria="查看完整尺寸的架构图"><img src="assets/mm-portflow-sunburst.webp" alt="Daily arrivals estimate visitor group totals. Separately tested media attention and directed transport graphs adjust checkpoint shares. Totals and shares yield daily predictions and 70% intervals. The event and venue graph is proposed." data-zh-alt="日客流和日历用于估计客群总量。分别回测的多模态注意力和有向交通图调整口岸份额。结合总量与份额生成逐日预测及 70% 区间。活动与场馆图为拟议实验。" width="2048" height="1152" loading="lazy"></a>
-          <figcaption><span class="copy-en">The media and transport graph branches were tested in separate replays. The dashed inset shows the proposed event and venue graph. <a href="assets/mm-portflow-architecture.svg">Vector overview</a> · <a href="assets/forecast-architecture.svg">Attention block in detail</a></span><span class="copy-zh">多模态和交通图分支分别回测。虚线区展示拟议的活动与场馆图。<a href="assets/mm-portflow-architecture.svg">矢量概览</a> · <a href="assets/forecast-architecture.svg">注意力模块细节</a></span></figcaption>
+          <a class="architecture-image" href="assets/mm-portflow-sunburst.webp?v=xiaohongshu" aria-label="Open the full-size architecture figure" data-zh-aria="查看完整尺寸的架构图"><img src="assets/mm-portflow-sunburst.webp?v=xiaohongshu" alt="MM-PortFlow architecture. Arrival history queries time-filtered and location-matched evidence from six platforms. Citywide evidence informs visitor totals. A directed checkpoint graph updates shares to forecast daily counts and intervals." data-zh-alt="MM-PortFlow 架构。历史客流用于查询六个平台中通过时间和地点筛选的证据。全港线索用于估计客群总量，有向口岸图更新各口岸份额，生成每日点预测和区间。" width="2048" height="1152" loading="lazy"></a>
+          <figcaption>
+            <p lang="en"><strong>MM-PortFlow architecture.</strong> (a) Arrival history and six-platform evidence enter the forecast. (b) Attention weighs the available text, photos and video by location, platform, modality and recency. (c) A directed graph updates the checkpoint shares, which are multiplied by the visitor group total.</p>
+            <p lang="zh-Hans"><strong>MM-PortFlow 模型架构。</strong>（a）模型融合历史客流与包括小红书在内的六个平台。（b）注意力按地点、平台、模态和时效加权截点前可用的图文视频。（c）有向图更新各口岸份额，再乘以客群总量。</p>
+          </figcaption>
         </figure>
         <ol class="method-flow">
           <li><strong><span class="copy-en">Encode history</span><span class="copy-zh">时序编码</span></strong><span><span class="copy-en">56 days of arrivals, weekly patterns and the calendar known at cutoff.</span><span class="copy-zh">56 天日客流、周周期及截点已知日历。</span></span></li>
@@ -142,6 +145,11 @@
             <p><span class="copy-en">Cue-masked attention uses the frozen arrivals state to query eligible media roles and learn a bounded residual. In a separate attention experiment with daily training origins, five-round mean MASE was 0.962, compared with 0.959 for arrivals and calendar and 0.971 for early fusion of aligned cues.</span><span class="copy-zh">线索掩码注意力以冻结的客流状态为查询，选择有效模态并学习有界修正。在每日训练起点的独立注意力实验中，五轮平均 MASE 为 0.962，同批客流加日历为 0.959，线索早期融合为 0.971。</span></p>
           </article>
         </div>
+        <article class="card method-card" id="xiaohongshu-ablation">
+          <h3><span class="copy-en">Xiaohongshu ablation</span><span class="copy-zh">小红书消融实验</span></h3>
+          <p><span class="copy-en">Across six historical windows and three seeds, adding Xiaohongshu lowered mean MASE from 1.1052 to 1.1039 (0.12%). With the social branch kept active, MASE moved from 1.1041 to 1.1038 (0.03%). Text plus video showed the largest decrease among the modality combinations.</span><span class="copy-zh">六个历史窗口、三组种子的结果显示，加入小红书后，平均 MASE 由 1.1052 降至 1.1039（0.12%）。固定启用社媒分支时，MASE 由 1.1041 降至 1.1038（0.03%）。图文视频的模态组合中，正文加视频降幅最大。</span></p>
+          <p class="caption"><span class="copy-en">The historical study uses posting and known revision times from notes collected later. It shows no consistent improvement across windows. The prospective trial uses actual collection times and awaits observed arrivals.</span><span class="copy-zh">历史实验使用事后采集笔记的发帖时间和已知编辑时间，各窗口尚未显示一致增益。按实际取得时间生成的前瞻预测等待客流实绩评分。</span></p>
+        </article>
       </section>
       <section id="training-volume" aria-labelledby="volume-title">
         <div class="section-heading">
