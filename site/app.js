@@ -23,7 +23,7 @@ const groupNames = {
   "Other Visitors": t("其他访客", "Other visitors"),
 };
 const historicalModels = {
-  chronos_joint_calendar: t("Chronos-2 + 日历", "Calendar"),
+  chronos_joint_calendar: t("Chronos-2 + 日历", "Chronos-2 + calendar"),
   weekday_mean4: t("四周同星期均值", "Four-week weekday mean"),
 };
 const mediaModels = experiment && Object.fromEntries(Object.entries(experiment.labels)
@@ -39,6 +39,13 @@ function element(tag, content) {
   const node = document.createElement(tag);
   node.textContent = content;
   return node;
+}
+
+function translation(content) {
+  const span = element("span", content);
+  span.className = "translation";
+  span.lang = "en";
+  return span;
 }
 
 function fillOptions(id, entries) {
@@ -63,7 +70,7 @@ function plotStep(span) {
   return [1, 2, 5, 10].find(factor => factor * unit >= rough) * unit;
 }
 
-function drawChart(canvas, chartRows, selected, historical) {
+function drawChart(canvas, chartRows, selected) {
   if (!chartRows.length) return;
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
@@ -76,7 +83,7 @@ function drawChart(canvas, chartRows, selected, historical) {
   const { left, right } = plotInsets(width);
   const top = 12;
   const bottom = height - 28;
-  const values = chartRows.flatMap(row => row.slice(historical ? 1 : 2));
+  const values = chartRows.flatMap(row => row.slice(1));
   const max = Math.max(1, ...values);
   const low = Math.min(...values);
   const span = Math.max(1, max - low);
@@ -86,10 +93,8 @@ function drawChart(canvas, chartRows, selected, historical) {
   const last = chartRows.length - 1;
   const x = i => left + (right - left) * i / last;
   const y = value => bottom - (bottom - top) * (value - min) / (peak - min);
-  if (historical) {
-    ctx.fillStyle = "#e9f0f9";
-    ctx.fillRect(left, top, (right - left) / (2 * last), bottom - top);
-  }
+  ctx.fillStyle = "#e9f0f9";
+  ctx.fillRect(left, top, (right - left) / (2 * last), bottom - top);
   ctx.font = "11px system-ui";
   ctx.fillStyle = "#526477";
   ctx.textAlign = "right";
@@ -103,7 +108,9 @@ function drawChart(canvas, chartRows, selected, historical) {
     ctx.fillText(compact.format(value), left - 6, y(value));
   }
   ctx.textAlign = "center";
-  const ticks = width < 510 ? [0, 4, 9, 14] : [0, 2, 4, 6, 8, 10, 12, 14];
+  const tickStep = width < 510 ? 4 : 2;
+  const ticks = chartRows.map((_, index) => index)
+    .filter(index => index === last || (index % tickStep === 0 && index <= last - tickStep));
   for (const index of ticks) ctx.fillText(chartRows[index][0].slice(5), x(index), bottom + 14);
   ctx.beginPath();
   chartRows.forEach((row, i) => ctx.lineTo(x(i), y(row[4])));
@@ -119,26 +126,26 @@ function drawChart(canvas, chartRows, selected, historical) {
   ctx.lineTo(x(selected), bottom);
   ctx.stroke();
   ctx.setLineDash([]);
-  const columns = [[2, theme.getPropertyValue("--plot-line").trim()]];
-  if (historical) columns.push([1, theme.getPropertyValue("--ink").trim()]);
-  for (const [column, color] of columns) {
+  const columns = [[2, "--plot-line", []], [1, "--ink", [6, 4]]];
+  for (const [column, property, dash] of columns) {
+    const color = theme.getPropertyValue(property).trim();
     ctx.strokeStyle = color;
     ctx.lineWidth = 2.2;
+    ctx.setLineDash(dash);
     ctx.beginPath();
     chartRows.forEach((row, i) => ctx.lineTo(x(i), y(row[column])));
     ctx.stroke();
     ctx.fillStyle = color;
-    chartRows.forEach((row, i) => {
-      ctx.beginPath();
-      ctx.arc(x(i), y(row[column]), i === selected ? 4 : 2.25, 0, 2 * Math.PI);
-      ctx.fill();
-    });
+    ctx.beginPath();
+    ctx.arc(x(selected), y(chartRows[selected][column]), 4, 0, 2 * Math.PI);
+    ctx.fill();
   }
 }
 
-function chartControl(canvasId, readoutId, historical) {
+function chartControl(canvasId, readoutId, inputId) {
   const canvas = select(canvasId);
   const readout = select(readoutId);
+  const input = select(inputId);
   let rows = [];
   let selected = 0;
   function update() {
@@ -146,16 +153,22 @@ function chartControl(canvasId, readoutId, historical) {
     const [day, actual, point, low, high] = rows[selected];
     const date = element("time", day);
     date.dateTime = day;
-    const parts = [[t("预测", "Forecast"), number.format(point)]];
-    if (historical) parts.push([t("实况", "Observed"), number.format(actual)]);
-    parts.push([t("70% 区间", "70% interval"), number.format(low) + "–" + number.format(high)]);
+    const dateItem = element("span", t("日期", "Date"));
+    dateItem.append(date);
+    const parts = [
+      [t("预测", "Forecast"), number.format(point)],
+      [t("实况", "Observed"), number.format(actual)],
+      [t("70% 区间", "70% interval"), number.format(low) + "–" + number.format(high)],
+    ];
     const values = parts.map(([label, value]) => {
       const item = element("span", label);
       item.append(element("strong", value));
       return item;
     });
-    readout.replaceChildren(date, ...values);
-    drawChart(canvas, rows, selected, historical);
+    readout.replaceChildren(dateItem, ...values);
+    input.value = selected;
+    input.setAttribute("aria-valuetext", [day, ...parts.map(([label, value]) => `${label} ${value}`)].join(", "));
+    drawChart(canvas, rows, selected);
   }
   function pointAt(event) {
     if (!rows.length) return;
@@ -166,21 +179,24 @@ function chartControl(canvasId, readoutId, historical) {
     if (next !== selected) { selected = next; update(); }
   }
   canvas.addEventListener("pointerdown", pointAt);
-  canvas.addEventListener("pointermove", event => { if (event.pointerType === "mouse") pointAt(event); });
-  canvas.addEventListener("keydown", event => {
-    if (!rows.length || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-    event.preventDefault();
-    if (event.key === "Home") selected = 0;
-    else if (event.key === "End") selected = rows.length - 1;
-    else selected = Math.max(0, Math.min(rows.length - 1, selected + (event.key === "ArrowRight" ? 1 : -1)));
+  canvas.addEventListener("pointermove", event => {
+    if (event.pointerType === "mouse" || event.buttons === 1) pointAt(event);
+  });
+  input.addEventListener("input", () => {
+    selected = input.valueAsNumber;
     update();
   });
-  new ResizeObserver(update).observe(canvas);
-  return data => { rows = data; selected = 0; update(); };
+  new ResizeObserver(() => drawChart(canvas, rows, selected)).observe(canvas);
+  return data => {
+    rows = data;
+    selected = 0;
+    input.max = rows.length - 1;
+    update();
+  };
 }
 
-const setHistoricalChart = chartControl("chart", "chart-readout", true);
-const setMediaChart = chartControl("media-chart", "media-readout", true);
+const setHistoricalChart = chartControl("chart", "chart-readout", "chart-day");
+const setMediaChart = chartControl("media-chart", "media-readout", "media-day");
 
 function render() {
   const round = report.rounds[roundIndex];
@@ -198,12 +214,14 @@ function render() {
     "Workbook with all 20 series from Chronos-2 + calendar");
   const scores = round.scores[model];
   select("scores").replaceChildren(...[
-    [t("本轮 MASE", "Round MASE"), scores.mase.toFixed(3)],
-    [t("本轮缩放 Winkler", "Round scaled Winkler"), scores.winkler.toFixed(3)],
-    [t("本轮区间覆盖率", "Round interval coverage"), (scores.coverage * 100).toFixed(1) + "%"],
-  ].map(([label, value]) => {
+    ["MASE", "", scores.mase.toFixed(3)],
+    ["缩放 Winkler", "Scaled Winkler", scores.winkler.toFixed(3)],
+    ["区间覆盖率", "Interval coverage", (scores.coverage * 100).toFixed(1) + "%"],
+  ].map(([label, english, value]) => {
     const box = document.createElement("div");
-    box.append(element("dt", label), element("dd", value));
+    const term = element("dt", label);
+    if (english) term.append(translation(english));
+    box.append(term, element("dd", value));
     return box;
   }));
   replaceTable("daily", chartRows.map(([day, ...values]) => [day, ...values.map(value => number.format(value))]));
@@ -225,24 +243,51 @@ report.rounds.forEach((round, i) => {
   button.className = "round";
   button.setAttribute("aria-label", roundName(round.number) + ", " + round.origin);
   const label = element("b", `第 ${round.number} 轮`);
-  const translation = element("span", `Round ${round.number}`);
-  translation.lang = "en";
-  translation.className = "round-translation";
-  label.append(translation);
-  button.append(label, element("span", round.origin));
+  label.append(translation(`Round ${round.number}`));
+  const date = element("time", round.origin);
+  date.dateTime = round.origin;
+  button.append(label, date);
   button.addEventListener("click", () => { roundIndex = i; render(); });
   select("rounds").append(button);
 });
 
 const templates = new Set(sourceStatus.templateRounds);
-replaceTable("schedule", report.rounds.map(round => [
-  roundName(round.number),
-  dateRange(round.officialReleases[0], round.officialReleases[2]),
-  round.official + " 23:59",
-  dateRange(round.official, round.officialEnd),
-  templates.has(round.number) ? t("已发布", "Published") :
-    sourceStatus.organizerError ? t("本次未核实", "Unverified") : t("待发布", "Pending"),
-]));
+select("schedule").replaceChildren(...report.rounds.map(round => {
+  const row = document.createElement("tr");
+  row.setAttribute("role", "row");
+  const heading = element("th", `第 ${round.number} 轮`);
+  heading.scope = "row";
+  heading.setAttribute("role", "rowheader");
+  heading.append(translation(`Round ${round.number}`));
+  row.append(heading);
+  const dates = document.createElement("span");
+  dates.className = "schedule-release";
+  round.officialReleases.forEach(day => {
+    const time = element("time", day);
+    time.dateTime = `${day}T12:00+08:00`;
+    dates.append(time);
+  });
+  const deadline = element("time", round.official + " 23:59");
+  deadline.dateTime = `${round.official}T23:59+08:00`;
+  const forecastDates = document.createElement("span");
+  forecastDates.className = "schedule-window";
+  forecastDates.append(element("time", round.official), " – ", element("time", round.officialEnd));
+  const template = templates.has(round.number) ? t("已发布", "Published") :
+    sourceStatus.organizerError ? t("本次未核实", "Unverified") : t("待发布", "Pending");
+  for (const [label, value] of [
+    [t("数据发布", "Releases"), dates], [t("提交截止", "Deadline"), deadline],
+    [t("预测日期", "Forecast dates"), forecastDates], [t("模板", "Template"), template],
+  ]) {
+    const cell = document.createElement("td");
+    cell.setAttribute("role", "cell");
+    const mobileLabel = element("span", label);
+    mobileLabel.className = "schedule-label";
+    mobileLabel.setAttribute("aria-hidden", "true");
+    cell.append(mobileLabel, value);
+    row.append(cell);
+  }
+  return row;
+}));
 select("checked").textContent = t("更新检查", "Last checked") + " · " + sourceStatus.checkedAt;
 const live = sourceStatus.passengers;
 const coverageDates = dateRange(report.source.first_date, report.source.last_date);
@@ -261,6 +306,7 @@ for (const metric of ["mase", "winkler"]) {
 }
 
 if (experiment) {
+  const modelChoices = [];
   function renderExperiment() {
     const round = select("media-round").value;
     const port = select("media-port").value;
@@ -272,6 +318,7 @@ if (experiment) {
     select("media-chart-title").textContent = portName(port) + " · " + groupNames[group];
     select("media-chart-subtitle").textContent = dateRange(rows[0][0], rows.at(-1)[0]) + " · " + mediaModels[model];
     replaceTable("media-daily", rows.map(([day, ...values]) => [day, ...values.map(value => number.format(value))]));
+    for (const button of modelChoices) button.setAttribute("aria-pressed", String(button.value === model));
     setMediaChart(rows);
   }
   fillOptions("media-round", report.rounds.map(({ number }) => [String(number), roundName(number)]));
@@ -283,8 +330,21 @@ if (experiment) {
   }
   const metrics = Object.entries(experiment.metrics);
   replaceTable("media-scores", metrics.map(([key, score]) => [
-    mediaModels[key], score.mase.toFixed(3), score.winkler.toFixed(3),
+    "", score.mase.toFixed(3), score.winkler.toFixed(3),
   ]));
+  metrics.forEach(([key], index) => {
+    const button = element("button", experiment.labels[key]);
+    button.type = "button";
+    button.className = "model-choice";
+    button.value = key;
+    button.append(translation(experiment.labelsEn[key]));
+    button.addEventListener("click", () => {
+      select("media-model").value = key;
+      renderExperiment();
+    });
+    select("media-scores").rows[index].cells[0].append(button);
+    modelChoices.push(button);
+  });
   for (const [index, metric] of ["mase", "winkler"].entries()) {
     const best = Math.min(...metrics.map(([, scores]) => scores[metric]));
     const bestIndex = metrics.findIndex(([, score]) => score[metric] === best);
