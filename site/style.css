@@ -1,10 +1,3 @@
-@font-face {
-  font-family: Geist;
-  src: url("assets/geist.woff2") format("woff2");
-  font-weight: 100 900;
-  font-display: swap;
-}
-
 :root {
   color-scheme: light;
   --ink: #142640;
@@ -18,7 +11,7 @@
   --plot-band: #2e7cd52b;
   --radius: 12px;
   --panel-shadow: 0 2px 5px #143b6510, 0 12px 28px #143b6508;
-  font-family: Geist, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  font-family: "Times New Roman", Times, "Songti SC", SimSun, "Noto Serif CJK SC", "Liberation Serif", serif;
 }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 90px; }
@@ -62,8 +55,8 @@ html[lang="en"] .copy-zh, html[lang="zh-Hans"] .copy-en { display: none; }
 .project-label { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; color: var(--accent); font-size: .76rem; }
 .project-label strong { font-size: .88rem; font-weight: 750; letter-spacing: .025em; }
 .project-label > span { border-left: 1px solid #9bb6d7; padding-left: 10px; }
-h1 { color: var(--navy); font-size: clamp(2.4rem, 4.25vw, 4.1rem); line-height: 1.07; letter-spacing: -.055em; font-weight: 690; margin-block: 16px 20px; text-wrap: balance; }
-html[lang="zh-Hans"] h1 { font-size: clamp(2.18rem, 4vw, 3.65rem); line-height: 1.18; letter-spacing: -.045em; }
+h1 { color: var(--navy); font-size: clamp(2.4rem, 4.25vw, 4.1rem); line-height: 1.07; letter-spacing: -.035em; font-weight: 690; margin-block: 16px 20px; text-wrap: balance; }
+html[lang="zh-Hans"] h1 { font-size: clamp(2.18rem, 4vw, 3.65rem); line-height: 1.18; letter-spacing: -.02em; }
 .intro { max-width: 44ch; color: #2d4563; font-size: 1.03rem; line-height: 1.65; }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .button { display: inline-flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: white; font-size: .84rem; font-weight: 680; text-decoration: none; line-height: 1.25; }
@@ -235,6 +228,16 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 .architecture-figure img { display: block; width: 100%; height: auto; }
 .architecture-figure figcaption { display: grid; gap: 5px; padding: 12px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .83rem; line-height: 1.5; }
 .architecture-full { display: inline-flex; width: fit-content; flex-wrap: wrap; gap: 4px 12px; }
+.source-figure figcaption { padding: 0; gap: 0; font-size: .9rem; }
+.source-figure-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px; padding-inline: 16px; background: var(--paper); }
+.source-figure-bar .architecture-full { align-items: center; min-height: 44px; }
+.source-figure-bar p { display: flex; flex-wrap: wrap; column-gap: 8px; padding-block: 5px; font-size: .83rem; }
+.source-figure .method-links { margin-top: 8px; }
+.source-key { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1px; margin: 0; border-top: 1px solid var(--line); background: var(--line); }
+.source-key > div { padding: 12px 16px; background: #fff; }
+.source-key dt { color: var(--navy); font-weight: 700; }
+.source-key dd { margin-block-start: 4px; }
+.source-key :is(dt, .method-links a) > span { display: block; }
 .architecture-details { margin-bottom: 16px; }
 .architecture-details summary > span + span { margin-inline-start: 10px; }
 .architecture-details dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; margin: 8px 0 0; }

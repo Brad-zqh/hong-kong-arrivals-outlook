@@ -7,12 +7,12 @@
   <title>Hong Kong Visitor Arrivals | IKUN</title>
   <link rel="icon" href="assets/ikun-avatar.png" type="image/png">
   <script src="language.js?v=rehearsals"></script>
-  <link rel="stylesheet" href="style.css?v=technical-architecture">
+  <link rel="stylesheet" href="style.css?v=times-sources">
   <link rel="stylesheet" href="guide.css?v=white-header">
   <script defer src="rehearsal.js"></script>
   <script defer src="multimodal.js"></script>
   <script defer src="sources.js"></script>
-  <script defer src="app.js?v=rehearsals-2"></script>
+  <script defer src="app.js?v=times-sources"></script>
 </head>
 <body>
   <a class="skip-link" href="#top"><span class="copy-en">Skip to content</span><span class="copy-zh">跳到正文</span></a>
@@ -68,7 +68,7 @@
               <div><dt><span class="copy-en">Dates when travel may pick up</span><span class="copy-zh">未来哪些日期可能更忙</span></dt><dd><span class="copy-en">The baseline uses weekends and holidays. We also test dates and venues from event listings.</span><span class="copy-zh">基础预测使用周末和节假日日历。活动公告的日期和场馆也在测试中。</span></dd></div>
               <div><dt><span class="copy-en">Where visitors plan to go</span><span class="copy-zh">游客计划去哪、怎么去</span></dt><dd><span class="copy-en">We test whether planned dates, places and routes in posts, photos and videos help.</span><span class="copy-zh">我们测试帖子、照片和视频里的行程、地点和交通线索。</span></dd></div>
             </dl>
-            <a href="methods.html#input-title"><span class="copy-en">Data sources and variables</span><span class="copy-zh">查看变量和数据来源</span> <span aria-hidden="true">↗</span></a>
+            <a href="#data-source-map"><span class="copy-en">Explore the data sources</span><span class="copy-zh">查看数据来源图</span> <span aria-hidden="true">↓</span></a>
           </figure>
           <figure class="guide-figure guide-flow">
             <figcaption><strong><span class="copy-en">How does the model forecast arrivals?</span><span class="copy-zh">模型怎么做出预测？</span></strong></figcaption>
@@ -110,7 +110,7 @@
           <a class="text-link" href="methods.html#architecture"><span class="copy-en">Architecture ↗</span><span class="copy-zh">算法流程 ↗</span></a>
         </div>
         <figure class="architecture-figure">
-          <a class="architecture-image" href="methods.html#architecture" aria-label="Explore the MM-PortFlow architecture" data-zh-aria="查看 MM-PortFlow 模型架构"><img src="assets/mm-portflow-sunburst.webp?v=paper" width="2880" height="1920" loading="lazy" alt="The MM-PortFlow architecture shows multimodal encoders, time and location filtering, masked attention, and directed checkpoint routing." data-zh-alt="MM-PortFlow 架构图展示多模态编码、时间截点和地点筛选、掩码注意力及有向口岸分流。"></a>
+          <a class="architecture-image" href="methods.html#architecture" aria-label="Explore the MM-PortFlow architecture" data-zh-aria="查看 MM-PortFlow 模型架构"><img src="assets/mm-portflow-sunburst.webp?v=times" width="2880" height="1920" loading="lazy" alt="The MM-PortFlow architecture shows multimodal encoders, time and location filtering, masked attention, and directed checkpoint routing." data-zh-alt="MM-PortFlow 架构图展示多模态编码、时间截点和地点筛选、掩码注意力及有向口岸分流。"></a>
           <figcaption><p lang="en">MM-PortFlow combines arrival history with evidence from six social platforms.</p><p lang="zh-Hans">MM-PortFlow 将历史客流与包括小红书在内的六个平台数据融合。</p></figcaption>
         </figure>
         <div class="experiment-grid">
@@ -158,10 +158,38 @@
       </section>
       <section id="evidence" aria-labelledby="evidence-title">
         <div class="section-heading">
-          <div><h2 id="evidence-title"><span class="copy-en">Travel signals in a Hong Kong itinerary</span><span class="copy-zh">访港行程中的预测线索</span></h2>
-          <p><span class="copy-en">A cross-border ticket can identify an arrival date and checkpoint. Photos and sightseeing clips can identify an activity or destination.</span><span class="copy-zh">跨境车票可提供入境日期和口岸。景点照片与游览视频可帮助识别活动或目的地。</span></p></div>
-          <a class="text-link" href="methods.html#cue-method"><span class="copy-en">How we encode cues ↗</span><span class="copy-zh">线索如何入模 ↗</span></a>
+          <div><h2 id="evidence-title"><span lang="en">Data sources and travel evidence</span><br><span lang="zh-Hans">数据来源与出行线索</span></h2></div>
+          <a class="text-link" href="methods.html#input-title"><span class="copy-en">Predictors and historical inputs ↗</span><span class="copy-zh">自变量与历史输入 ↗</span></a>
         </div>
+        <figure class="architecture-figure source-figure" id="data-source-map">
+          <a class="architecture-image" href="assets/mm-portflow-sources.webp" aria-label="Open the full-size MM-PortFlow data sources figure" data-zh-aria="查看完整尺寸的 MM-PortFlow 数据来源图"><img src="assets/mm-portflow-sources.webp" width="2880" height="1440" loading="lazy" alt="MM-PortFlow data sources map with three panels. The bilingual key below describes each panel." data-zh-alt="MM-PortFlow 数据来源图分为三部分，图下提供中英双语说明。"></a>
+          <figcaption>
+            <div class="source-figure-bar">
+              <p><span lang="en">Schematic examples</span> <span lang="zh-Hans">图中素材为示意</span></p>
+              <a class="architecture-full" href="assets/mm-portflow-sources.webp" download="MM-PortFlow-data-sources.webp"><span lang="en">Download full-size figure ↓</span><span lang="zh-Hans">下载高清图 ↓</span></a>
+            </div>
+            <dl class="source-key">
+              <div>
+                <dt><span lang="en">(a) Arrivals, calendar and geography</span><span lang="zh-Hans">（a）客流、日历与口岸地理</span></dt>
+                <dd lang="en">Daily arrivals from the Immigration Department supply the history and targets. Hong Kong and mainland calendars mark holidays and make-up workdays. Coordinates give the model distances between checkpoints.</dd>
+                <dd lang="zh-Hans">香港入境处的日入境人次用于训练和验证。香港与内地日历标记假期和调休，口岸坐标用于计算口岸之间的距离。</dd>
+                <dd class="method-links"><a href="https://data.gov.hk/en-data/dataset/hk-immd-set5-statistics-daily-passenger-traffic"><span lang="en">Daily arrivals</span><span lang="zh-Hans">日客流</span></a><a href="https://www.gov.hk/en/about/abouthk/holiday/index.htm"><span lang="en">HK holidays</span><span lang="zh-Hans">香港假期</span></a><a href="https://www.gov.cn/zhengce/zhengceku/202511/content_7047091.htm"><span lang="en">Mainland notice</span><span lang="zh-Hans">内地放假通知</span></a><a href="https://portal.csdi.gov.hk/csdi-webpage/dataset/immd_rcd_1633320081376_19895"><span lang="en">Checkpoint locations</span><span lang="zh-Hans">口岸位置</span></a></dd>
+              </div>
+              <div>
+                <dt><span lang="en">(b) Six social platforms</span><span lang="zh-Hans">（b）六个社交平台</span></dt>
+                <dd lang="en">X, Weibo, Douyin, Instagram, TikTok and Xiaohongshu supply posts and media. Text, photos, covers and video frames are aligned to the forecast cutoff and assigned to a checkpoint when the location is clear. Other records contribute at the citywide level.</dd>
+                <dd lang="zh-Hans">图文视频来自 X、微博、抖音、Instagram、TikTok 和小红书。正文、照片、封面和视频帧按预测截点筛选，能明确定位到口岸的记录进入对应口岸，其余用于全港预测。</dd>
+                <dd class="method-links"><a href="methods.html#cue-method"><span lang="en">How travel cues are encoded</span><span lang="zh-Hans">出行线索如何编码</span></a></dd>
+              </div>
+              <div>
+                <dt><span lang="en">(c) Archived public feeds</span><span lang="zh-Hans">（c）公开归档数据</span></dt>
+                <dd lang="en">We timestamp and archive the Observatory’s nine-day forecast, Immigration Department waiting times, government press releases and Transport Department traffic news for future model tests.</dd>
+                <dd lang="zh-Hans">香港天文台九天天气预报、入境处旅客轮候、政府新闻公报和运输署特别交通消息按实际取得时间归档，供后续预测实验使用。</dd>
+                <dd class="method-links"><a href="https://rss.weather.gov.hk/rsse.html"><span lang="en">Weather</span><span lang="zh-Hans">天气</span></a><a href="https://data.gov.hk/en-data/dataset/hk-immd-set28-land-boundary-control-points-waiting-time"><span lang="en">Waiting times</span><span lang="zh-Hans">轮候</span></a><a href="https://www.info.gov.hk/gia/"><span lang="en">Press releases</span><span lang="zh-Hans">新闻公报</span></a><a href="https://www.td.gov.hk/en/rss/index.html"><span lang="en">Traffic news</span><span lang="zh-Hans">交通消息</span></a></dd>
+              </div>
+            </dl>
+          </figcaption>
+        </figure>
         <article class="itinerary">
           <div class="itinerary-copy">
             <p class="itinerary-label"><span class="copy-en">Illustrative itinerary</span><span class="copy-zh">行程示例</span></p>
@@ -196,7 +224,7 @@
           <div><dt><span class="copy-en">Video embeddings</span><span class="copy-zh">视频聚合向量</span></dt><dd>3,257</dd></div>
           <div><dt><span class="copy-en">Candidate travel cues</span><span class="copy-zh">旅游线索记录</span></dt><dd>166</dd></div>
         </dl>
-        <p class="caption evidence-caption"><span class="copy-en">Corpus sources include X, Weibo, Douyin, Instagram and TikTok.</span><span class="copy-zh">语料来自 X、微博、抖音、Instagram 与 TikTok。</span></p>
+        <p class="caption evidence-caption"><span class="copy-en">These counts describe the five-platform corpus. Xiaohongshu was added in a separate experiment.</span><span class="copy-zh">以上为五平台语料统计。小红书在独立实验中接入。</span></p>
       </section>
       <section id="calendar" aria-labelledby="calendar-title">
         <div class="section-heading">

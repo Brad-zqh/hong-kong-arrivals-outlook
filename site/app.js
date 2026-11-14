@@ -109,7 +109,8 @@ function drawChart(canvas, chartRows, selected) {
   const y = value => bottom - (bottom - top) * (value - min) / (peak - min);
   ctx.fillStyle = "#e9f0f9";
   ctx.fillRect(left, top, (right - left) / (2 * last), bottom - top);
-  ctx.font = "11px system-ui";
+  const theme = getComputedStyle(canvas);
+  ctx.font = `11px ${theme.fontFamily}`;
   ctx.fillStyle = "#526477";
   ctx.textAlign = "right";
   ctx.textBaseline = "middle";
@@ -130,7 +131,6 @@ function drawChart(canvas, chartRows, selected) {
   chartRows.forEach((row, i) => ctx.lineTo(x(i), y(row[4])));
   for (let i = chartRows.length - 1; i >= 0; i--) ctx.lineTo(x(i), y(chartRows[i][3]));
   ctx.closePath();
-  const theme = getComputedStyle(canvas);
   ctx.fillStyle = theme.getPropertyValue("--plot-band").trim();
   ctx.fill();
   ctx.strokeStyle = "#93b2d6";
