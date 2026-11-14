@@ -1,6 +1,7 @@
 """Render the rehearsal checkpoints over a city basemap."""
 
 import argparse
+from copy import copy
 import csv
 from dataclasses import dataclass
 import json
@@ -185,6 +186,17 @@ def graticule(ax: plt.Axes, longitudes: list[float], latitudes: list[float]) -> 
                         ha="right", va="center", color=MUTED, fontsize=7.5)
 
 
+def halo(ax: plt.Axes, artist: plt.Text, colour: str, width: float) -> None:
+    """Draw a narrow halo but keep the foreground glyphs as text in the PDF."""
+    outline = copy(artist)
+    outline.set_path_effects([patheffects.Stroke(linewidth=width, foreground=colour)])
+    outline.set_zorder(artist.get_zorder() - 0.01)
+    if isinstance(outline, matplotlib.text.Annotation):
+        outline.arrow_patch = None
+        outline.arrowprops = None
+    ax.add_artist(outline)
+
+
 def scale(ax: plt.Axes, km: int) -> None:
     """Add a scale bar defined in projected metres."""
     west, east = ax.get_xlim()
@@ -192,16 +204,13 @@ def scale(ax: plt.Axes, km: int) -> None:
     x = west + (east - west) * 0.05
     y = south + (north - south) * 0.08
     height = (north - south) * 0.012
-    plate = Rectangle((x - (east - west) * 0.023, y - (north - south) * 0.05),
-                      km * 1000 + (east - west) * 0.065, (north - south) * 0.085,
-                      facecolor="white", edgecolor="none", alpha=0.87, zorder=7)
-    ax.add_patch(plate)
-    for index, fill in enumerate((INK, "white")):
+    for index, fill in enumerate((INK, "none")):
         ax.add_patch(Rectangle((x + index * km * 500, y), km * 500, height,
                                facecolor=fill, edgecolor=INK, linewidth=0.55, zorder=7))
     for offset, label in ((0, "0"), (km / 2, f"{km / 2:g}"), (km, f"{km} km")):
-        ax.annotate(label, (x + 1000 * offset, y), xytext=(0, -2), textcoords="offset points",
-                    ha="center", va="top", fontsize=8, color=INK, zorder=7)
+        artist = ax.annotate(label, (x + 1000 * offset, y), xytext=(0, -2), textcoords="offset points",
+                             ha="center", va="top", fontsize=8, color=INK, zorder=7)
+        halo(ax, artist, "#e5f0f6", 1.7)
 
 
 def focus_bounds(ax: plt.Axes, child: plt.Axes, label: str) -> None:
@@ -210,16 +219,16 @@ def focus_bounds(ax: plt.Axes, child: plt.Axes, label: str) -> None:
     south, north = child.get_ylim()
     ax.add_patch(Rectangle((west, south), east - west, north - south, fill=False,
                            edgecolor=FOCUS, lw=1.25, linestyle=(0, (4, 2)), zorder=3))
-    ax.annotate(label, (east, south), xytext=(-3, -4), textcoords="offset points",
-                va="top", ha="right", weight="bold", color=FOCUS, fontsize=10,
-                path_effects=[patheffects.withStroke(linewidth=2.8, foreground="white")])
+    artist = ax.annotate(label, (east, south), xytext=(-3, -4), textcoords="offset points",
+                         va="top", ha="right", weight="bold", color=FOCUS, fontsize=10)
+    halo(ax, artist, "white", 2.8)
 
 
 def place(ax: plt.Axes, name: str, lon: float, lat: float, water: bool = False) -> None:
     """Label a geographic feature at a manually chosen display anchor."""
-    ax.text(*PROJECT.transform(lon, lat), name, ha="center", va="center", color=MUTED,
-            fontsize=9, fontstyle="italic" if water else "normal", zorder=2,
-            path_effects=[patheffects.withStroke(linewidth=2.4, foreground=WATER if water else "#f8f5ea")])
+    artist = ax.text(*PROJECT.transform(lon, lat), name, ha="center", va="center", color=MUTED,
+                     fontsize=9, fontstyle="italic" if water else "normal", zorder=2)
+    halo(ax, artist, WATER if water else "#f8f5ea", 2.4)
 
 
 def draw_points(ax: plt.Axes, points: list[Checkpoint], labels: dict[int, tuple[str, float, float]]) -> None:
@@ -231,12 +240,12 @@ def draw_points(ax: plt.Axes, points: list[Checkpoint], labels: dict[int, tuple[
         if point.number not in labels:
             continue
         text, lon, lat = labels[point.number]
-        ax.annotate(f"{point.number}  {text}", (point.x, point.y),
+        artist = ax.annotate(f"{point.number}  {text}", (point.x, point.y),
                     xytext=PROJECT.transform(lon, lat), ha="left", va="center",
                     fontsize=10, weight="bold", color=INK, linespacing=1.0,
-                    bbox=dict(facecolor="white", edgecolor="none", pad=1.6, alpha=0.90),
                     arrowprops=dict(arrowstyle="-", color=colour, shrinkA=1, shrinkB=3.2, lw=0.88),
                     zorder=6)
+        halo(ax, artist, "#f8f7ef", 2.6)
 
 
 def compass(ax: plt.Axes, lon: float, lat: float) -> None:
@@ -278,8 +287,7 @@ def interactive_maps(tiles: Path, city: dict, points: list[Checkpoint], output: 
             compass(ax, 114.212, 22.314)
         scale(ax, 10 if name == "overview" else 2)
         ax.text(0.992, 0.009, "© OpenStreetMap contributors", transform=ax.transAxes, ha="right",
-                va="bottom", fontsize=7, color=MUTED, zorder=10,
-                bbox=dict(facecolor="white", edgecolor="none", alpha=0.88, pad=1))
+                va="bottom", fontsize=7, color=MUTED, zorder=10)
         figure.savefig(output / f"checkpoint-{name}.webp", dpi=180,
                        pil_kwargs={"quality": 93, "method": 6})
         plt.close(figure)
@@ -325,9 +333,9 @@ def render(tiles: Path, osm: Path, output: Path, font: Path) -> None:
     ):
         viewport(ax, extent)
         basemap(ax, tiles, city, resolution, layers)
-        ax.text(0.026, 0.974, title, transform=ax.transAxes, ha="left", va="top",
-                fontsize=13, weight="bold", color=INK, zorder=8,
-                bbox=dict(facecolor="white", alpha=0.90, edgecolor="none", pad=3))
+        artist = ax.text(0.026, 0.974, title, transform=ax.transAxes, ha="left", va="top",
+                         fontsize=13, weight="bold", color=INK, zorder=8)
+        halo(ax, artist, "#f8f7ef", 2.6)
 
     graticule(main, [113.90, 114.00, 114.10, 114.20, 114.30], [22.20, 22.30, 22.40, 22.50, 22.60])
     focus_bounds(regional, main, "b")
@@ -386,8 +394,7 @@ def render(tiles: Path, osm: Path, output: Path, font: Path) -> None:
                 fontsize=8.7, labelcolor=INK, columnspacing=0.9, handlelength=1.6)
     main.text(0.991, 0.009, "© OpenStreetMap contributors", transform=main.transAxes,
               color=MUTED, ha="right", va="bottom", fontsize=6.5, zorder=8,
-              url="https://www.openstreetmap.org/copyright",
-              bbox=dict(facecolor="white", edgecolor="none", pad=1, alpha=0.82))
+              url="https://www.openstreetmap.org/copyright")
 
     stem = output / "hong-kong-checkpoints"
     figure.savefig(stem.with_suffix(".pdf"), dpi=300, metadata={

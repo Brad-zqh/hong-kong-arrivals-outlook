@@ -13,13 +13,70 @@
   const tabs = [...map.querySelectorAll("[data-map-view]")];
   const points = [...overview, ...harbour];
   const t = siteLanguage.text;
-  const names = { Airport: "Hong Kong International Airport", "Hong Kong-Zhuhai-Macao Bridge": "Hong Kong–Zhuhai–Macao Bridge Hong Kong Port" };
+  const names = { Airport: "Hong Kong International Airport", "Hong Kong-Zhuhai-Macao Bridge": "Hong Kong–Zhuhai–Macao Bridge Hong Kong Port", "Express Rail Link West Kowloon": "Hong Kong West Kowloon Station" };
   const modes = { Air: "航空", Road: "公路", Rail: "铁路", Sea: "海路" };
+  const platformNames = { x: "X", instagram: "Instagram", tiktok: "TikTok" };
+  const setForecast = chartControl("checkpoint-chart", "checkpoint-readout", "checkpoint-day");
+  const roundInput = select("checkpoint-round");
+  const groupInput = select("checkpoint-group");
+  const modelInput = select("checkpoint-model");
+  const historyModelKeys = new Set(Object.keys(historicalModels));
   let selected = points[0];
   let view = "overview";
   let zoom = false;
 
   const label = point => t(point.zh, names[point.en] || point.en);
+
+  function renderForecast(preserveDate = false) {
+    const round = report.rounds.find(item => String(item.number) === roundInput.value);
+    const group = groupInput.value;
+    const model = modelInput.value;
+    const history = historyModelKeys.has(model);
+    const data = history ? round.data : experiment.data[round.number];
+    const series = history ? report.series : experiment.series;
+    const index = series.findIndex(([port, visitor]) => port === selected.en && visitor === group);
+    const rows = data.filter(row => row[1] === index)
+      .map(([date, , actual, values]) => [date, actual, ...values[model]]);
+    setForecast(rows, preserveDate === true);
+    const target = new URL(history ? "rehearsals.html" : "index.html#multimodal", location.href);
+    target.searchParams.set("port", selected.en);
+    target.searchParams.set("group", group);
+    target.searchParams.set("round", round.number);
+    target.searchParams.set("model", model);
+    target.searchParams.set("lang", t("zh", "en"));
+    link.href = target.href;
+  }
+
+  function renderEvidence() {
+    const labels = { ...platformNames, weibo: t("微博", "Weibo"), douyin: t("抖音", "Douyin"), xiaohongshu: t("小红书", "Xiaohongshu") };
+    const coverage = window.CHECKPOINT_EVIDENCE;
+    select("checkpoint-evidence-dates").textContent = dateRange(coverage.first, coverage.last);
+    const entries = Object.entries(coverage.ports[selected.id] || {}).sort((left, right) =>
+      right[1].reduce((sum, n) => sum + n, 0) - left[1].reduce((sum, n) => sum + n, 0));
+    select("checkpoint-evidence-empty").hidden = entries.length > 0;
+    replaceTable("checkpoint-evidence-rows", entries.map(([platform, counts]) =>
+      [labels[platform], ...counts.map(value => number.format(value))]));
+    const example = select("checkpoint-open-example");
+    example.replaceChildren();
+    if (selected.id === 8) {
+      const photo = document.createElement("img");
+      photo.src = "assets/west-kowloon.webp";
+      photo.loading = "lazy";
+      photo.alt = t("香港西九龙站西翼入口", "West entrance of West Kowloon Station");
+      photo.width = 1000;
+      photo.height = 750;
+      const caption = element("small", t("口岸照片示例 · ", "Checkpoint photo example · "));
+      const source = element("a", "Qwer132477 · CC BY-SA 4.0");
+      source.href = "https://commons.wikimedia.org/wiki/File:Hong_Kong_West_Kowloon_Station_exterior%EF%BC%88West%EF%BC%892021_08_part2.jpg";
+      caption.append(source, t(" · 缩放及裁切", " · Resized and cropped"));
+      example.append(photo, caption);
+    }
+    if (harbour.includes(selected)) {
+      const clip = element("a", t("附近场景：维港天星小轮视频 ↓", "Nearby scene: Victoria Harbour ferry clip ↓"));
+      clip.href = "#harbour-clip";
+      example.append(clip);
+    }
+  }
 
   function render() {
     const close = view === "harbour";
@@ -33,10 +90,6 @@
     selector.value = String(selected.id);
     name.textContent = label(selected);
     mode.textContent = t(modes[selected.mode], selected.mode);
-    const target = new URL("rehearsals.html", location.href);
-    target.searchParams.set("port", selected.en);
-    target.searchParams.set("lang", t("zh", "en"));
-    link.href = target.href;
     for (const tab of tabs) tab.setAttribute("aria-pressed", String(tab.dataset.mapView === view));
     const visible = close ? harbour : overview;
     markers.replaceChildren(...visible.map(point => {
@@ -71,6 +124,8 @@
     selected = point;
     view = harbour.includes(point) ? "harbour" : "overview";
     render();
+    renderForecast();
+    renderEvidence();
     viewport.scrollLeft = (point.x / 100) * markers.clientWidth - viewport.clientWidth / 2;
     if (focusMarker) markers.querySelector(`[data-point="${point.id}"]`).focus({ preventScroll: true });
   }
@@ -84,7 +139,19 @@
     event.currentTarget.setAttribute("aria-pressed", String(zoom));
     render();
   });
-  document.addEventListener("site-language-change", render);
-  render();
+  function initializeFilters() {
+    fillOptions("checkpoint-round", report.rounds.map(round => [String(round.number), roundName(round.number)]));
+    fillOptions("checkpoint-group", labels(groupNames));
+    fillOptions("checkpoint-model", [...labels(historicalModels), ...labels(mediaModels)]);
+  }
+  for (const control of [roundInput, groupInput, modelInput]) control.addEventListener("change", renderForecast);
+  document.addEventListener("site-language-change", () => {
+    initializeFilters();
+    render();
+    renderForecast(true);
+    renderEvidence();
+  });
+  initializeFilters();
   map.hidden = false;
+  choose(selected);
 })();

@@ -22,3 +22,5 @@ python -B reproduction/maps/render.py --tiles local/gis/tiles --osm local/gis/ci
 ```
 
 The script outputs a 300 dpi PNG and PDF with selectable text, a WebP map, and the backdrops and marker data used in the interactive view. Current street data provide geographic context for all historical rounds.
+
+The interactive map pairs each checkpoint with its historical forecast and aggregate corpus coverage. Generate the coverage with `python -B reproduction/maps/export_checkpoint_evidence.py --index <five-platform-embedding-index.csv> --index <xiaohongshu-embedding-index.csv> --out site/checkpoint-evidence.js`. Counts are distinct posts for each platform and modality, assigned only when that modality matches a single checkpoint. The table covers the archived corpus; individual forecast rounds still use their own cutoffs.

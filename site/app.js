@@ -257,8 +257,23 @@ function renderOptions() {
   }
 }
 renderOptions();
-const requestedPort = new URLSearchParams(location.search).get("port");
-if (hasRehearsals && ports.includes(requestedPort)) select("port").value = requestedPort;
+const requested = new URLSearchParams(location.search);
+if (hasRehearsals) {
+  const requestedRound = report.rounds.findIndex(round => String(round.number) === requested.get("round"));
+  if (requestedRound >= 0) roundIndex = requestedRound;
+  for (const [id, choices] of [["port", ports], ["group", Object.keys(groupNames)], ["model", Object.keys(historicalModels)]]) {
+    const value = requested.get(id);
+    if (choices.includes(value)) select(id).value = value;
+  }
+}
+if (experiment) {
+  const mediaOptions = { round: report.rounds.map(round => String(round.number)), port: ports,
+    group: Object.keys(groupNames), model: Object.keys(mediaModels) };
+  for (const [key, choices] of Object.entries(mediaOptions)) {
+    const value = requested.get(key);
+    if (choices.includes(value)) select(`media-${key}`).value = value;
+  }
+}
 document.addEventListener("site-language-change", renderOptions);
 
 function renderSchedule() {
