@@ -19,6 +19,7 @@ PORTS = {
 def export(inputs: list[Path], output: Path) -> None:
     """Count distinct encoded records per role using its own location evidence."""
     totals = {port: defaultdict(lambda: [set() for _ in ROLES]) for port in PORTS.values()}
+    corpus = defaultdict(lambda: [set() for _ in ROLES])
     days = []
     for path in inputs:
         with path.open(encoding="utf-8-sig", newline="") as handle:
@@ -30,13 +31,23 @@ def export(inputs: list[Path], output: Path) -> None:
                 for index, role in enumerate(ROLES):
                     if not row[f"{role}_available_at_utc"]:
                         continue
-                    matches = json.loads(row.get(f"{role}_port_ids_json", row["port_ids_json"]))
+                    corpus[platform][index].add(row["post_key"])
+                    visual_location = row.get(f"{role}_port_ids_json")
+                    if platform == "xiaohongshu" and role != "text":
+                        matches = json.loads(visual_location or "[]")
+                    else:
+                        matches = json.loads(visual_location or row["port_ids_json"])
                     if len(matches) == 1 and matches[0] in PORTS:
                         totals[PORTS[matches[0]]][platform][index].add(row["post_key"])
     result = {port: {platform: [len(records) for records in counts]
                      for platform, counts in sorted(platforms.items())}
               for port, platforms in totals.items()}
-    summary = {"first": min(days), "last": max(days), "ports": result}
+    posts = set().union(*(records for counts in corpus.values() for records in counts))
+    mention_counts = {port: len(set().union(*(records for counts in platforms.values() for records in counts)))
+                      for port, platforms in totals.items()}
+    summary = {"first": min(days), "last": max(days), "ports": result, "postCount": len(posts),
+               "portPostCounts": mention_counts,
+               "corpus": {platform: [len(records) for records in counts] for platform, counts in sorted(corpus.items())}}
     output.write_text("window.CHECKPOINT_EVIDENCE = " + json.dumps(summary, separators=(",", ":")) + ";\n",
                       encoding="utf-8")
 
