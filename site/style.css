@@ -1,3 +1,16 @@
+@font-face {
+  font-family: Geist;
+  src: url("assets/geist.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("assets/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --ink: #142640;
@@ -11,7 +24,8 @@
   --plot-band: #2e7cd52b;
   --radius: 12px;
   --panel-shadow: 0 2px 5px #143b6510, 0 12px 28px #143b6508;
-  font-family: "Times New Roman", Times, "Songti SC", SimSun, "Noto Serif CJK SC", "Liberation Serif", serif;
+  font-family: Geist, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --display-font: "Bricolage Grotesque", Geist, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 90px; }
@@ -23,6 +37,7 @@ button, select, summary, input[type="range"] { cursor: pointer; }
 [hidden] { display: none !important; }
 h1, h2, h3, p, dd { margin: 0; }
 h1, h2, h3 { line-height: 1.23; }
+h1, h2, .brand, .overview-grid dd { font-family: var(--display-font); font-optical-sizing: auto; }
 dd, time, table { font-variant-numeric: tabular-nums; }
 .wrap { width: min(1200px, calc(100% - 80px)); margin-inline: auto; }
 html[lang="en"] .copy-zh, html[lang="zh-Hans"] .copy-en { display: none; }
@@ -191,7 +206,10 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 .affiliations img { display: block; width: auto; object-fit: contain; }
 .affiliations .zju-mark { height: 27px; }
 .affiliations .surrey-mark { height: 26px; }
-.affiliations .polyu-mark { height: 21px; }
+.affiliations .polyu-link { display: inline-flex; align-items: center; gap: 5px; color: #404045; text-decoration: none; font-size: .61rem; font-weight: 650; line-height: 1.12; }
+.affiliations .polyu-link:hover { text-decoration: underline; }
+.affiliations .polyu-emblem { width: 24px; height: 24px; flex: none; overflow: hidden; }
+.affiliations .polyu-mark { display: block; width: auto; max-width: none; height: 24px; }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
 .footer-links > span { color: var(--navy); font-weight: 650; }
 
@@ -232,6 +250,32 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 .source-figure-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px; padding-inline: 16px; background: var(--paper); }
 .source-figure-bar .architecture-full { align-items: center; min-height: 44px; }
 .source-figure-bar p { display: flex; flex-wrap: wrap; column-gap: 8px; padding-block: 5px; font-size: .83rem; }
+.study-area-key { display: grid; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
+.study-area-key > p:first-child > span { display: block; }
+.study-area-key ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); gap: 3px 20px; margin: 0; padding-inline-start: 22px; }
+.study-area-key .method-links { margin-top: 0; }
+.map-credit { font-size: .77rem; }
+.checkpoint-explorer { overflow: hidden; }
+.checkpoint-toolbar, .checkpoint-selection { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px; padding: 12px 16px; }
+.checkpoint-toolbar { background: var(--paper); }
+.checkpoint-toolbar > div { display: flex; flex-wrap: wrap; gap: 6px; }
+.checkpoint-toolbar label { display: flex; align-items: center; gap: 8px; font-size: .82rem; }
+.checkpoint-toolbar select { width: auto; min-width: 0; max-width: 100%; }
+.checkpoint-toolbar button { min-height: 38px; padding: 5px 9px; color: var(--navy); background: #fff; border: 1px solid #b5c8db; border-radius: 6px; font-size: .82rem; }
+.checkpoint-toolbar button[aria-pressed="true"] { color: #fff; background: var(--accent); border-color: var(--accent); }
+.checkpoint-viewport { overflow: auto; max-height: 600px; background: #c1dfed; }
+.checkpoint-map-canvas { position: relative; width: 100%; }
+.checkpoint-map-canvas.is-zoomed { width: 160%; }
+.checkpoint-map-image { display: block; width: 100%; height: auto; }
+.checkpoint-markers { position: absolute; inset: 0; pointer-events: none; }
+.checkpoint-marker { position: absolute; transform: translate(-50%, -50%); min-width: 26px; height: 26px; padding: 0 3px; background: #24558d; border: 2px solid #fff; border-radius: 16px; color: #fff; font-size: .72rem; font-weight: 700; line-height: 1; box-shadow: 0 1px 4px #17304a70; pointer-events: auto; }
+.checkpoint-marker[data-mode="Air"] { background: #14736c; }
+.checkpoint-marker[data-mode="Road"] { background: #97521d; }
+.checkpoint-marker[data-mode="Sea"] { background: #78476f; }
+.checkpoint-marker[aria-pressed="true"] { outline: 2px solid #112f53; z-index: 1; }
+.checkpoint-marker:focus-visible { outline: 3px solid #102946; z-index: 2; }
+.checkpoint-inset { padding-inline: 7px; background: var(--navy); white-space: nowrap; }
+.checkpoint-mode { color: var(--muted); font-size: .82rem; margin-inline-start: 5px; }
 .source-figure .method-links { margin-top: 8px; }
 .source-key { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1px; margin: 0; border-top: 1px solid var(--line); background: var(--line); }
 .source-key > div { padding: 12px 16px; background: #fff; }
@@ -267,8 +311,12 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
   .affiliations { column-gap: 12px; }
   .language-toggle { min-width: 51px; min-height: 36px; font-size: .76rem; padding-inline: 5px; }
   .language-icon { display: none; }
-  .nav nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; }
+  .nav nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 2px; }
   .nav nav a { display: grid; place-content: center; min-height: 41px; padding: 5px 1px; text-align: center; font-size: .74rem; white-space: normal; }
+  .checkpoint-toolbar label { display: grid; width: 100%; gap: 4px; }
+  .checkpoint-toolbar select { width: 100%; }
+  .checkpoint-map-canvas { min-width: 580px; }
+  .checkpoint-map-canvas.is-zoomed { min-width: 820px; }
   .team-avatar { width: 31px; height: 31px; }
   .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 19px; padding-block: 24px 19px; }
   h1 { font-size: clamp(2.15rem, 9.25vw, 3.25rem); margin-block: 12px; }

@@ -1,0 +1,11 @@
+id,checkpoint,zh,mode,longitude,latitude
+1,Airport,香港国际机场,Air,113.934417,22.315354
+2,Hong Kong-Zhuhai-Macao Bridge,港珠澳大桥香港口岸,Road,113.951084,22.318102
+3,Shenzhen Bay,深圳湾,Road,113.945433,22.493822
+4,Lok Ma Chau Spur Line,落马洲支线,Rail,114.065607,22.514934
+5,Lo Wu,罗湖,Rail,114.113664,22.529477
+6,Man Kam To,文锦渡,Road,114.128792,22.537417
+7,Heung Yuen Wai,香园围,Road,114.153809,22.552296
+8,Express Rail Link West Kowloon,西九龙高铁站,Rail,114.164743,22.304676
+9,China Ferry Terminal,中国客运码头,Sea,114.167307,22.300455
+10,Macau Ferry Terminal,港澳客轮码头,Sea,114.152303,22.288839

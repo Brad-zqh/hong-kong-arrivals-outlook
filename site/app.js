@@ -257,6 +257,8 @@ function renderOptions() {
   }
 }
 renderOptions();
+const requestedPort = new URLSearchParams(location.search).get("port");
+if (hasRehearsals && ports.includes(requestedPort)) select("port").value = requestedPort;
 document.addEventListener("site-language-change", renderOptions);
 
 function renderSchedule() {
