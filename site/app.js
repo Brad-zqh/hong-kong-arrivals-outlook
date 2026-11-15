@@ -36,7 +36,8 @@ const historicalModels = {
 const mediaModels = experiment && Object.fromEntries(Object.entries(experiment.labels)
   .map(([key, label]) => [key, [label, experiment.labelsEn[key]]]));
 const number = new Intl.NumberFormat("en-HK", { maximumFractionDigits: 0 });
-const compact = new Intl.NumberFormat("en-HK", { notation: "compact", maximumFractionDigits: 1 });
+const compactEn = new Intl.NumberFormat("en-HK", { notation: "compact", maximumFractionDigits: 1 });
+const compactZh = new Intl.NumberFormat("zh-CN", { notation: "compact", maximumFractionDigits: 1 });
 const portName = name => t(portNames[name] || name, name === "Airport" ? "Hong Kong International Airport" : name);
 const dateRange = (start, end) => start + " – " + end;
 const roundName = n => t(`第 ${n} 轮`, `Round ${n}`);
@@ -120,7 +121,7 @@ function drawChart(canvas, chartRows, selected) {
     ctx.moveTo(left, y(value));
     ctx.lineTo(right, y(value));
     ctx.stroke();
-    ctx.fillText(compact.format(value), left - 6, y(value));
+    ctx.fillText(t(compactZh, compactEn).format(value), left - 6, y(value));
   }
   ctx.textAlign = "center";
   const tickStep = width < 510 ? 4 : 2;

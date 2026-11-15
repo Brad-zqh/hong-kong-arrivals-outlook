@@ -273,7 +273,6 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 .checkpoint-details .checkpoint-pane { min-width: 0; padding: 16px; margin: 0; border-top: 0; }
 .checkpoint-pane + .checkpoint-pane { border-left: 1px solid var(--line); }
 .checkpoint-pane h3 { margin-bottom: 10px; }
-.checkpoint-pane [lang="zh-Hans"] { margin-inline-start: .4em; }
 .checkpoint-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 9px; }
 .checkpoint-filters label:last-child { grid-column: 1 / -1; }
 .checkpoint-pane .chart-readout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -322,7 +321,6 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 .source-key dd { margin-block-start: 4px; }
 .source-key :is(dt, .method-links a) > span { display: block; }
 .architecture-details { margin-bottom: 16px; }
-.architecture-details summary > span + span { margin-inline-start: 10px; }
 .architecture-details dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; margin: 8px 0 0; }
 .architecture-details dt { display: flex; flex-wrap: wrap; gap: 4px 10px; font-weight: 700; }
 .architecture-details dd { margin: 6px 0 0; color: var(--muted); font-size: .86rem; }

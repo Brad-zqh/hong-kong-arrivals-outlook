@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IKUN · Hong Kong visitor arrivals</title>
   <link rel="canonical" href="../index.html">
-  <script>location.replace("../" + location.search + location.hash);</script>
-  <meta http-equiv="refresh" content="0;url=../">
+  <script>const query = new URLSearchParams(location.search); query.set("lang", "en"); location.replace("../?" + query + location.hash);</script>
+  <meta http-equiv="refresh" content="0;url=../?lang=en">
 </head>
-<body><a href="../">香港入境客流预测 · Hong Kong visitor arrivals</a></body>
+<body><a href="../?lang=en">Hong Kong visitor arrivals</a></body>
 </html>
