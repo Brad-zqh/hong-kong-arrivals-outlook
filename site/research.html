@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-title-en="Forecast evaluation | IKUN" data-title-zh="预测评估 | IKUN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore historical forecast errors, holiday calibration and 41 Hong Kong visitor-arrival replays.">
+  <title>Forecast evaluation | IKUN</title>
+  <link rel="icon" href="assets/ikun-avatar.png" type="image/png">
+  <link rel="stylesheet" href="style.css?v=hero-court">
+  <link rel="stylesheet" href="research.css">
+  <script src="language.js?v=research"></script>
+  <script defer src="research-data/study.js"></script>
+  <script defer src="research.js"></script>
+</head>
+<body class="research-page">
+  <a class="skip-link" href="#top"><span class="copy-en">Skip to content</span><span class="copy-zh">跳到正文</span></a>
+  <header class="masthead">
+    <div class="wrap nav">
+      <a class="brand" aria-label="IKUN" href="index.html"><img class="team-avatar" src="assets/ikun-avatar.png" alt="" width="36" height="36"><span>IKUN</span></a>
+      <nav aria-label="Main navigation" data-zh-aria="主要导航">
+        <a href="index.html"><span class="copy-en">Home</span><span class="copy-zh">首页</span></a>
+        <a href="rehearsals.html"><span class="copy-en">Rehearsals</span><span class="copy-zh">历史模拟</span></a>
+        <a href="research.html" aria-current="page"><span class="copy-en">Forecast evaluation</span><span class="copy-zh">预测评估</span></a>
+        <a href="methods.html"><span class="copy-en">Methods</span><span class="copy-zh">方法</span></a>
+      </nav>
+      <button type="button" class="language-toggle" hidden><span aria-hidden="true">◎</span> <span class="copy-en" lang="zh-Hans">中文</span><span class="copy-zh" lang="en">English</span></button>
+    </div>
+  </header>
+  <main id="top" tabindex="-1" class="wrap research-main">
+    <header class="research-intro">
+      <div><p class="research-kicker"><span class="copy-en">Historical replay · Hong Kong arrivals</span><span class="copy-zh">香港入境客流 · 历史回测</span></p>
+      <h1><span class="copy-en">How do the forecasts hold up?</span><span class="copy-zh">客流预测准不准？</span></h1>
+      <p><span class="copy-en">Compare daily arrivals, forecast errors and holiday interval coverage across 41 historical windows.</span><span class="copy-zh">逐日核对实况，比较 41 个历史窗口的预测误差与假日区间覆盖。</span></p></div>
+      <dl class="research-stat"><div><dt>41</dt><dd><span class="copy-en">forecast windows</span><span class="copy-zh">预测窗口</span></dd></div><div><dt>11,480</dt><dd><span class="copy-en">matched targets</span><span class="copy-zh">配对评分目标</span></dd></div></dl>
+    </header>
+    <section class="replay-panel" aria-labelledby="study-replay">
+      <h2 id="study-replay"><span class="copy-en">Replay an issue date</span><span class="copy-zh">回看任一历史截点</span></h2>
+      <p class="research-caption"><span class="copy-en">Seven archived days precede the issue date. The evaluation covers forecast days 2–15.</span><span class="copy-zh">截点前展示七天归档实况，回测评分覆盖第 2–15 天。</span></p>
+      <div class="research-controls">
+        <label><span class="copy-en">Issue date</span><span class="copy-zh">预测截点</span><select id="research-origin"></select></label>
+        <label><span class="copy-en">Checkpoint</span><span class="copy-zh">口岸</span><select id="research-port"></select></label>
+        <label><span class="copy-en">Visitor group</span><span class="copy-zh">客群</span><select id="research-group"></select></label>
+        <label><span class="copy-en">Forecast model</span><span class="copy-zh">预测模型</span><select id="research-model"></select></label>
+      </div>
+      <div id="research-replay" class="research-chart"></div>
+      <p class="research-caption" id="research-replay-status" role="status" aria-live="polite"></p>
+      <div class="research-day"><label for="research-day"><span class="copy-en">Inspect forecast day</span><span class="copy-zh">查看预测提前期</span></label><input id="research-day" type="range" min="2" max="15" value="9"><output for="research-day" id="research-day-label">9</output></div>
+      <dl class="research-value" id="research-values"></dl>
+      <details class="research-data-details"><summary><span class="copy-en">Daily values</span><span class="copy-zh">逐日数据表</span></summary><div id="research-daily-table"></div></details>
+      <noscript><p>JavaScript is required for the interactive replay. 交互回测需要开启 JavaScript。</p></noscript>
+    </section>
+    <div class="research-grid">
+      <section aria-labelledby="study-error">
+        <h2 id="study-error"><span class="copy-en">Error by forecast lead</span><span class="copy-zh">各提前期的预测误差</span></h2>
+        <p class="research-caption"><span class="copy-en">MASE · 820 common targets per lead · lower is better</span><span class="copy-zh">MASE · 每个提前期 820 个共同目标 · 越低越好</span></p>
+        <div id="research-error" class="research-chart"></div>
+        <details class="research-data-details"><summary><span class="copy-en">Underlying values</span><span class="copy-zh">查看数值</span></summary><div id="research-error-table"></div></details>
+      </section>
+      <section aria-labelledby="study-coverage">
+        <h2 id="study-coverage"><span class="copy-en">Holiday interval coverage</span><span class="copy-zh">假日区间覆盖率</span></h2>
+        <p class="research-caption"><span class="copy-en">Total + shares model · target coverage 70%</span><span class="copy-zh">总量与份额模型 · 目标覆盖率 70%</span></p>
+        <div id="research-cover" class="research-chart"></div>
+        <details class="research-data-details"><summary><span class="copy-en">Coverage and sample sizes</span><span class="copy-zh">覆盖率及样本量</span></summary><div id="research-cover-table"></div></details>
+      </section>
+    </div>
+    <footer class="research-footer"><p><span class="copy-en">Archived historical forecasts from public passenger counts and calendars.</span><span class="copy-zh">历史预测使用公开客流与日历归档。</span></p><a href="methods.html#evaluation-title"><span class="copy-en">Scoring methods ↗</span><span class="copy-zh">查看评分口径 ↗</span></a><a href="https://data.gov.hk/en-data/dataset/hk-immd-set5-statistics-daily-passenger-traffic"><span class="copy-en">Official arrival records ↗</span><span class="copy-zh">入境处原始数据 ↗</span></a></footer>
+  </main>
+</body>
+</html>

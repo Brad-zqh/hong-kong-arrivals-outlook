@@ -1,0 +1,43 @@
+.research-page { --study-ink: #282342; --study-muted: #655d75; --study-border: #e2ddeb; --study-purple: #403990; --study-rust: #a62e38; color: var(--study-ink); background: #f8f7fb; }
+.research-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 1.5rem; padding: clamp(2.25rem, 7vw, 6rem) 0 2rem; }
+.research-intro h1 { font-size: clamp(2.25rem, 5.3vw, 5rem); line-height: .98; max-width: 18ch; margin: .3em 0 .3em; color: var(--study-ink); letter-spacing: -.055em; }
+.research-intro p { max-width: 62ch; }
+.research-kicker, .research-caption { color: var(--study-muted); font-size: .9rem; }
+.research-kicker { font-weight: 650; }
+.research-stat { margin: 0; display: flex; flex-wrap: wrap; gap: 1.35rem; }
+.research-stat > div { border-left: 1px solid #c9bfdc; padding-left: .9rem; }
+.research-stat dt { font-size: clamp(1.4rem, 3.1vw, 2.55rem); color: var(--study-purple); font-weight: 680; letter-spacing: -.045em; line-height: 1; }
+.research-stat dd { margin: .4rem 0 0; font-size: .8rem; color: var(--study-muted); }
+.replay-panel, .research-grid section { min-width: 0; padding: clamp(.85rem, 2.5vw, 2rem); background: #fff; border: 1px solid var(--study-border); border-radius: .75rem; }
+.research-main h2 { margin: 0; font-size: clamp(1.16rem, 2.3vw, 1.75rem); color: var(--study-ink); }
+.research-main h2 + p { margin: .45rem 0 1rem; }
+.research-controls { display: grid; grid-template-columns: 1fr 1.4fr 1fr 1.1fr; gap: .65rem; margin-bottom: .8rem; }
+.research-controls label { font-size: .78rem; color: var(--study-muted); min-width: 0; font-weight: 600; }
+.research-controls select { display: block; width: 100%; min-height: 2.75rem; margin-top: .2rem; padding: .35rem .5rem; border: 1px solid #cbc3da; border-radius: .35rem; background: white; color: var(--study-ink); font: inherit; font-size: .86rem; }
+.research-chart { min-width: 0; }
+.research-chart svg { display: block; width: 100%; overflow: visible; }
+.research-chart svg text { fill: var(--study-muted); font: 11px Geist, system-ui, sans-serif; }
+.research-keys { display: flex; flex-wrap: wrap; gap: .35rem 1.1rem; margin: .25rem 0 .6rem; font-size: .79rem; color: var(--study-muted); }
+.research-keys span { display: inline-flex; align-items: center; gap: .35rem; }
+.research-keys i { display: inline-block; width: 1.15rem; border-bottom: 2px solid var(--line); }
+.research-keys i.dashed { border-bottom-style: dashed; }
+.research-keys i.area { height: .55rem; border: 0; background: var(--line); }
+.research-day { display: grid; grid-template-columns: auto minmax(2rem, 1fr) auto; gap: .65rem; align-items: center; font-size: .86rem; }
+.research-day input { accent-color: var(--study-purple); min-height: 2.5rem; width: 100%; }
+.research-day output { font-variant-numeric: tabular-nums; }
+.research-value { display: grid; grid-template-columns: repeat(4, 1fr); gap: .45rem; padding: .75rem; margin: .4rem 0 0; background: #f3f0f8; border-radius: .45rem; }
+.research-value dt { font-size: .78rem; color: var(--study-muted); }
+.research-value dd { margin: .16rem 0 0; font-weight: 650; font-variant-numeric: tabular-nums; }
+.research-grid { margin: 1.1rem 0 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+.research-data-details { margin-top: .9rem; font-size: .82rem; }
+.research-data-details summary { cursor: pointer; color: var(--study-purple); }
+.research-data-details > div { overflow-x: auto; }
+.research-data-details table { margin-top: .4rem; width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.research-data-details :is(th,td) { border-bottom: 1px solid var(--study-border); text-align: right; padding: .4rem; }
+.research-data-details :is(th,td):first-child { text-align: left; }
+.research-footer { margin: 1.8rem 0 2.6rem; display: flex; gap: .5rem 1.15rem; flex-wrap: wrap; color: var(--study-muted); font-size: .82rem; }
+.research-footer p { margin: 0; }
+@media (max-width: 760px) {
+  .research-intro, .research-grid { grid-template-columns: 1fr; }
+  .research-controls, .research-value { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
