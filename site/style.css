@@ -60,9 +60,6 @@ html[lang="en"] .copy-zh, html[lang="zh-Hans"] .copy-en { display: none; }
 .nav .mast-affiliations .polyu-emblem { width: 20px; height: 20px; }
 .nav .mast-affiliations .polyu-mark { height: 20px; }
 .nav .mast-affiliations .polyu-link { gap: 4px; font-size: .625rem; white-space: nowrap; }
-.mast-court { display: grid; place-items: center; flex: none; width: 65px; height: 46px; border-radius: 6px; }
-.mast-court:hover { background: var(--paper); }
-.mast-court img { display: block; width: 100%; height: auto; }
 .language-toggle { min-width: 74px; min-height: 40px; padding: 6px 9px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: var(--accent); background: #fff; border: 1px solid #becddd; border-radius: 7px; font-size: .83rem; font-weight: 650; white-space: nowrap; }
 .language-toggle:hover { background: var(--tint); border-color: var(--accent); }
 .language-icon { font-size: 1.05rem; }
@@ -76,6 +73,30 @@ html[lang="en"] .copy-zh, html[lang="zh-Hans"] .copy-en { display: none; }
 .hero { background: linear-gradient(135deg, #e8f2ff, #f8fbff 76%); border-bottom: 1px solid var(--line); }
 .hero-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.12fr); align-items: center; gap: clamp(24px, 4.8vw, 70px); padding-block: clamp(36px, 5vw, 72px) clamp(32px, 4.2vw, 58px); }
 .hero-copy { min-width: 0; }
+.hero-heading { display: flow-root; margin-block: 16px 20px; }
+.hero-heading h1 { margin: 0; text-wrap: wrap; }
+.hero-court {
+  float: inline-end;
+  width: clamp(70px, 9.4vw, 132px);
+  aspect-ratio: 1.08;
+  margin-inline-start: 12px;
+}
+.hero-court img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  mask-image: linear-gradient(#000 83%, transparent);
+}
+html[lang="zh-Hans"] .hero-heading {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+}
+html[lang="zh-Hans"] .hero-heading h1 { word-break: keep-all; }
+html[lang="zh-Hans"] .hero-court { flex: none; }
 .project-label { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; color: var(--accent); font-size: .76rem; }
 .project-label strong { font-size: .88rem; font-weight: 750; letter-spacing: .025em; }
 .project-label > span { border-left: 1px solid #9bb6d7; padding-left: 10px; }
@@ -336,9 +357,8 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 }
 @media (max-width: 1190px) {
   html { scroll-padding-top: 105px; }
-  .nav { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 0 8px; padding-block: 4px; }
-  .language-toggle { grid-column: 4; grid-row: 1; }
-  .mast-court { grid-column: 3; grid-row: 1; }
+  .nav { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0 8px; padding-block: 4px; }
+  .language-toggle { grid-column: 3; grid-row: 1; }
   .nav nav { grid-column: 1 / -1; width: 100%; justify-content: center; }
   .nav .mast-affiliations { padding-inline-start: 8px; }
   .method-nav { top: 110px; }
@@ -364,7 +384,6 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
   .nav .mast-affiliations img { height: 15px; }
   .nav .mast-affiliations .polyu-emblem, .nav .mast-affiliations .polyu-mark { height: 17px; }
   .nav .mast-affiliations .polyu-emblem { width: 17px; }
-  .mast-court { width: 49px; height: 42px; }
   .checkpoint-marker:not(.checkpoint-inset) { min-width: 18px; height: 18px; padding: 0 2px; border-width: 1px; font-size: .59rem; }
   .checkpoint-marker[data-point="2"] .checkpoint-marker-label { top: auto; bottom: calc(100% + 4px); left: 50%; transform: translateX(-34%); }
   .checkpoint-marker[data-point="4"] .checkpoint-marker-label { top: calc(100% + 4px); right: 50%; transform: translateX(14%); }
@@ -376,6 +395,8 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
   .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 19px; padding-block: 24px 19px; }
   h1 { font-size: clamp(2.15rem, 9.25vw, 3.25rem); margin-block: 12px; }
   html[lang="zh-Hans"] h1 { font-size: clamp(1.9rem, 7.8vw, 3rem); }
+  .hero-heading { margin-block: 12px; }
+  .hero-court { width: clamp(70px, 20vw, 110px); }
   .hero-figure img { aspect-ratio: 2.05; }
   .hero-figure figcaption { padding: 8px 10px; }
   .hero-actions { margin-top: 16px; }
@@ -416,7 +437,6 @@ footer { background: #fff; border-top: 1px solid var(--line); color: var(--muted
 @media (max-width: 380px) {
   .nav { column-gap: 5px; }
   .nav .mast-affiliations img { height: 13px; }
-  .mast-court { width: 40px; }
   .checkpoint-marker[data-point="3"] .checkpoint-marker-label { top: calc(100% + 4px); right: auto; left: 50%; transform: translateX(-50%); }
   .checkpoint-inset .checkpoint-marker-label { top: calc(100% + 4px); left: 50%; transform: translateX(-50%); }
   .nav nav a { font-size: .7rem; }
